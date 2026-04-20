@@ -1,0 +1,1998 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LedgerAI — Bookkeeping on autopilot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;550;600;700&family=Inter+Tight:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    /* Blue-dominant palette inspired by ValueLink */
+    --bg:        #ffffff;
+    --bg-soft:   #f4f7fc;
+    --bg-panel:  #eef3fb;
+    --ink:       #0a1333;
+    --ink-2:     #2a3558;
+    --ink-3:     #5c6684;
+    --ink-4:     #8d94ab;
+    --line:      #dce4f2;
+    --line-2:    #c3cfe6;
+
+    /* Brand blues */
+    --blue-50:   #eaf1ff;
+    --blue-100:  #d4e2ff;
+    --blue-200:  #a5bdf8;
+    --blue-400:  #4d78ea;
+    --blue-500:  #2a54d6;   /* primary */
+    --blue-600:  #1f41b0;
+    --blue-700:  #18368f;
+    --blue-900:  #0a1b55;
+
+    /* Accent gradient eclipse colors */
+    --accent-violet: #7c5bff;
+    --accent-teal:   #19c7c2;
+    --accent-amber:  #f0b436;
+    --accent-green:  #22a06b;
+    --accent-coral:  #ff6d5a;
+
+    /* Semantic for confidence */
+    --hi:        #148f5e;
+    --hi-bg:     #d8f1e4;
+    --warn:      #c78210;
+    --warn-bg:   #fbecc7;
+    --err:       #c43b2d;
+    --err-bg:    #fbd9d4;
+
+    --serif:     'Inter Tight', 'Inter', -apple-system, sans-serif;
+    --sans:      'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    --mono:      'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans-display: 'Inter Tight', 'Inter', -apple-system, sans-serif;
+
+    --section-py: clamp(80px, 10vw, 140px);
+    --container:  1240px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  img, svg { display: block; }
+
+  .container {
+    width: min(100% - 48px, var(--container));
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* ---------- TYPE ---------- */
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue-600);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 18px; height: 1px;
+    background: var(--blue-600);
+  }
+
+  h1, h2, h3, h4 { margin: 0; font-weight: 600; letter-spacing: -0.025em; font-family: var(--sans-display); }
+
+  .display {
+    font-size: clamp(44px, 6.4vw, 92px);
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+    font-weight: 600;
+    font-family: var(--sans-display);
+  }
+  .display .ital, .h2 .ital, .cta-block h2 .ital, .pricing .t .ital {
+    font-family: var(--sans-display);
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    background: linear-gradient(120deg, var(--blue-500) 0%, var(--accent-violet) 60%, var(--accent-teal) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .h2 {
+    font-size: clamp(32px, 4.2vw, 60px);
+    line-height: 1.0;
+    letter-spacing: -0.035em;
+    font-weight: 600;
+  }
+  .h3 { font-size: 20px; line-height: 1.25; font-weight: 500; letter-spacing: -0.01em; }
+  .lead {
+    font-size: clamp(17px, 1.3vw, 20px);
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 52ch;
+  }
+
+  /* ---------- BUTTONS ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform .15s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+    white-space: nowrap;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--blue-500), var(--blue-700));
+    color: #fff;
+    box-shadow: 0 10px 24px -12px rgba(31, 65, 176, 0.6);
+  }
+  .btn-primary:hover { box-shadow: 0 14px 30px -10px rgba(31, 65, 176, 0.7); }
+  .btn-primary .arrow { transition: transform .2s ease; }
+  .btn-primary:hover .arrow { transform: translateX(3px); }
+  .btn-ghost {
+    background: #fff;
+    color: var(--ink);
+    border-color: var(--line-2);
+  }
+  .btn-ghost:hover { border-color: var(--blue-400); color: var(--blue-600); }
+  .btn-sm { padding: 10px 16px; font-size: 14px; }
+
+  /* ---------- NAV ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in oklab, #fff 85%, transparent);
+    backdrop-filter: saturate(1.2) blur(12px);
+    -webkit-backdrop-filter: saturate(1.2) blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s ease;
+  }
+  .nav.scrolled { border-bottom-color: var(--line); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+  .brand {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-weight: 600; font-size: 18px; letter-spacing: -0.02em;
+  }
+  .brand .mark { width: 30px; height: 30px; }
+  .nav-links { display: flex; gap: 32px; font-size: 14px; color: var(--ink-2); }
+  .nav-links a:hover { color: var(--blue-600); }
+  .nav-cta { display: flex; align-items: center; gap: 10px; }
+  @media (max-width: 860px) { .nav-links { display: none; } }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    padding-top: clamp(48px, 6vw, 80px);
+    padding-bottom: var(--section-py);
+    position: relative;
+    overflow: hidden;
+  }
+  /* Eclipse backgrounds */
+  .eclipse {
+    position: absolute; border-radius: 50%;
+    filter: blur(60px); pointer-events: none; z-index: 0;
+    opacity: 0.55;
+  }
+  .hero .ec-blue   { width: 720px; height: 720px; left: -260px; top: -160px;
+                     background: radial-gradient(circle at 40% 40%, var(--blue-200), transparent 65%); }
+  .hero .ec-violet { width: 560px; height: 560px; right: -140px; top: 80px;
+                     background: radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--accent-violet) 50%, white), transparent 65%); opacity: .4; }
+  .hero .ec-teal   { width: 440px; height: 440px; right: 180px; bottom: -120px;
+                     background: radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--accent-teal) 55%, white), transparent 65%); opacity: .35; }
+  .hero .ec-amber  { width: 360px; height: 360px; left: 260px; bottom: -80px;
+                     background: radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--accent-amber) 55%, white), transparent 65%); opacity: .35; }
+
+  .hero-grid {
+    display: grid; grid-template-columns: 1.05fr 1fr;
+    gap: clamp(40px, 5vw, 72px);
+    align-items: center;
+    position: relative; z-index: 1;
+  }
+  @media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; } }
+
+  .hero-pill {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 5px 14px 5px 6px;
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    font-size: 13px; color: var(--ink-2);
+    background: #fff;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 6px -2px rgba(10, 27, 85, 0.08);
+  }
+  .hero-pill .tag {
+    background: linear-gradient(135deg, var(--blue-500), var(--accent-violet));
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .hero-sub { margin-top: 28px; max-width: 56ch; font-size: clamp(17px, 1.3vw, 19px); color: var(--ink-2); line-height: 1.5; }
+  .hero-cta { display: flex; gap: 12px; margin-top: 36px; flex-wrap: wrap; }
+  .hero-meta { margin-top: 32px; display: flex; gap: 28px; flex-wrap: wrap; color: var(--ink-3); font-size: 13px; }
+  .hero-meta .dot {
+    width: 7px; height: 7px; border-radius: 999px;
+    background: var(--accent-green); display: inline-block;
+    margin-right: 8px; vertical-align: middle;
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent-green) 25%, transparent);
+  }
+
+  /* ---------- HERO VISUAL ---------- */
+  .hero-visual { position: relative; aspect-ratio: 5 / 5.3; width: 100%; }
+
+  .viz-a { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  body[data-hero-visual="dial"] .viz-a { display: none; }
+  body[data-hero-visual="dial"] .viz-b { display: flex; }
+  .viz-b { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; }
+
+  .viz-panel {
+    width: 100%; height: 100%;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 22px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 18px;
+    box-shadow:
+      0 1px 0 rgba(10, 27, 85, 0.02),
+      0 40px 80px -30px rgba(31, 65, 176, 0.25);
+    position: relative;
+    overflow: hidden;
+  }
+  .viz-panel::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 100% 0%, color-mix(in oklab, var(--blue-200) 40%, transparent), transparent 50%);
+    pointer-events: none;
+  }
+  .viz-head {
+    position: relative;
+    display: flex; align-items: center; justify-content: space-between;
+    padding-bottom: 14px; border-bottom: 1px solid var(--line);
+  }
+  .viz-head-l { display: flex; align-items: center; gap: 10px; }
+  .viz-head h4 { font-size: 14px; font-weight: 500; letter-spacing: -0.01em; }
+  .viz-head .sub {
+    font-family: var(--mono); font-size: 11px; color: var(--ink-4);
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+
+  .txn-list { display: flex; flex-direction: column; gap: 10px; overflow: hidden; position: relative; }
+  .txn {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: txnIn .5s cubic-bezier(.2,.7,.2,1) forwards;
+    position: relative;
+  }
+  .txn.hi  { border-left: 3px solid var(--accent-green); }
+  .txn.warn{ border-left: 3px solid var(--accent-amber); }
+  .txn.err { border-left: 3px solid var(--accent-coral); }
+  .txn.hi-blue { border-left: 3px solid var(--blue-500); }
+  .txn .merchant { font-size: 14px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; }
+  .txn .merchant .sec { color: var(--ink-4); font-weight: 400; font-size: 12px; margin-left: 8px; }
+  .txn .amount { font-family: var(--mono); font-size: 13px; color: var(--ink-2); }
+  .txn .cat { font-size: 11px; color: var(--ink-3); font-family: var(--mono); letter-spacing: 0.02em; text-align: right; }
+  .txn .avatar {
+    width: 34px; height: 34px;
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600; font-size: 13px; color: #fff;
+    letter-spacing: -0.01em;
+  }
+  .txn .confidence {
+    grid-column: 1 / -1;
+    margin-top: 4px;
+    height: 4px;
+    background: var(--bg-panel);
+    border-radius: 99px;
+    overflow: hidden;
+    position: relative;
+  }
+  .txn .confidence .bar {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    background: linear-gradient(90deg, var(--blue-500), var(--accent-teal));
+    width: 0;
+    animation: barFill 1.2s cubic-bezier(.2,.7,.2,1) forwards;
+    animation-delay: .15s;
+  }
+  .txn.warn .confidence .bar { background: linear-gradient(90deg, var(--accent-amber), var(--accent-coral)); }
+  .txn.err  .confidence .bar { background: linear-gradient(90deg, var(--accent-coral), var(--err)); }
+  .txn .score {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--mono); font-size: 11px;
+    padding: 4px 9px; border-radius: 6px;
+    background: var(--hi-bg); color: var(--hi);
+  }
+  .txn.warn .score { background: var(--warn-bg); color: var(--warn); }
+  .txn.err  .score { background: var(--err-bg);  color: var(--err); }
+  .txn.hi-blue .score { background: var(--blue-50); color: var(--blue-600); }
+  .txn .score .d { width: 5px; height: 5px; border-radius: 99px; background: currentColor; }
+
+  @keyframes txnIn { to { opacity: 1; transform: translateY(0); } }
+  @keyframes barFill { to { width: var(--w, 96%); } }
+
+  .viz-foot {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 14px; border-top: 1px solid var(--line);
+    font-size: 12px; color: var(--ink-3);
+    position: relative;
+  }
+  .viz-foot .progress { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); }
+  .viz-foot .dot-pulse {
+    width: 8px; height: 8px; border-radius: 99px;
+    background: var(--accent-green);
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent-green) 50%, transparent);
+    animation: pulse 1.6s ease-out infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent-green) 60%, transparent); }
+    100% { box-shadow: 0 0 0 12px transparent; }
+  }
+
+  /* Dial */
+  .dial-wrap { flex: 1; display: grid; place-items: center; position: relative; }
+  .dial { width: 82%; aspect-ratio: 1; max-width: 340px; animation: dialSpin 40s linear infinite; }
+  @keyframes dialSpin { to { transform: rotate(360deg); } }
+  .dial-center {
+    position: absolute; inset: 0;
+    display: grid; place-items: center; text-align: center;
+    pointer-events: none;
+  }
+  .dial-center .num {
+    font-size: 72px; letter-spacing: -0.04em; font-weight: 500; line-height: 1;
+    background: linear-gradient(135deg, var(--blue-500), var(--accent-violet));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .dial-center .num .pct {
+    font-family: var(--serif); font-style: italic;
+    font-size: 40px; color: var(--ink-3);
+    margin-left: 2px;
+    -webkit-text-fill-color: var(--ink-3);
+  }
+  .dial-center .lbl {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-3); margin-top: 6px;
+  }
+  .dial-legend {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; padding-top: 14px; border-top: 1px solid var(--line);
+    position: relative;
+  }
+  .dial-legend .cell { display: flex; flex-direction: column; gap: 4px; }
+  .dial-legend .cell .k {
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .dial-legend .cell .k::before {
+    content: ""; width: 8px; height: 8px; border-radius: 99px; background: var(--blue-500);
+  }
+  .dial-legend .cell:nth-child(2) .k::before { background: var(--accent-amber); }
+  .dial-legend .cell:nth-child(3) .k::before { background: var(--accent-coral); }
+  .dial-legend .cell .v { font-size: 20px; font-weight: 500; letter-spacing: -0.02em; }
+  .dial-legend .cell .v .u { font-size: 12px; color: var(--ink-4); margin-left: 4px; }
+
+  /* ---------- LOGOS STRIP ---------- */
+  .logos-wrap {
+    padding: 36px 0 12px;
+    border-top: 1px solid var(--line);
+    background: linear-gradient(180deg, #fff, var(--bg-soft));
+  }
+  .logos-head {
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 24px;
+  }
+  .logos-marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    padding: 8px 0;
+  }
+  .logos-track {
+    display: flex; gap: 56px;
+    width: max-content;
+    animation: slide 40s linear infinite;
+  }
+  @keyframes slide { to { transform: translateX(-50%); } }
+  .logo-cell {
+    flex: 0 0 auto;
+    display: flex; align-items: center; gap: 10px;
+    color: var(--ink-2);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    font-size: 18px;
+    opacity: 0.7;
+    transition: opacity .2s ease;
+  }
+  .logo-cell:hover { opacity: 1; }
+  .logo-cell svg { flex-shrink: 0; }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: var(--section-py) 0; position: relative; }
+  .section-head {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 48px; align-items: end;
+    margin-bottom: 56px;
+    position: relative;
+  }
+  @media (max-width: 860px) { .section-head { grid-template-columns: 1fr; gap: 20px; } }
+  .section-head .lead { justify-self: end; max-width: 48ch; }
+  @media (max-width: 860px) { .section-head .lead { justify-self: start; } }
+
+  /* ---------- PROBLEM ---------- */
+  .problem { background: var(--bg-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; }
+  .problem .ec-violet {
+    width: 600px; height: 600px; right: -200px; top: -200px; opacity: 0.3;
+    background: radial-gradient(circle, color-mix(in oklab, var(--accent-violet) 50%, white), transparent 65%);
+  }
+  .problem-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    position: relative;
+  }
+  @media (max-width: 860px) { .problem-grid { grid-template-columns: 1fr; } }
+  .problem-cell {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 32px;
+    display: flex; flex-direction: column; gap: 14px;
+    min-height: 260px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .problem-cell:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -20px rgba(31, 65, 176, 0.15); }
+  .problem-cell::before {
+    content: ""; position: absolute; top: -80px; right: -80px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, var(--blue-100), transparent 70%);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  .problem-cell:nth-child(2)::before { background: radial-gradient(circle, color-mix(in oklab, var(--accent-violet) 30%, white), transparent 70%); }
+  .problem-cell:nth-child(3)::before { background: radial-gradient(circle, color-mix(in oklab, var(--accent-amber) 30%, white), transparent 70%); }
+  .problem-cell .idx {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--blue-600);
+    letter-spacing: 0.12em;
+    position: relative;
+  }
+  .problem-cell .t {
+    font-family: var(--serif); font-style: italic;
+    font-size: 30px; line-height: 1.05;
+    color: var(--ink); letter-spacing: -0.02em; font-weight: 400;
+    position: relative;
+  }
+  .problem-cell .d { color: var(--ink-2); font-size: 15px; line-height: 1.5; position: relative; }
+  .problem-cell .stat {
+    margin-top: auto;
+    font-family: var(--mono); font-size: 12px;
+    color: var(--blue-700);
+    letter-spacing: 0.04em;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    position: relative;
+  }
+
+  /* ---------- HOW IT WORKS ---------- */
+  .pipe-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    position: relative;
+  }
+  @media (max-width: 960px) { .pipe-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .pipe-grid { grid-template-columns: 1fr; } }
+
+  .pipe-step {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex; flex-direction: column; gap: 14px;
+    min-height: 300px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  }
+  .pipe-step:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -20px rgba(31, 65, 176, 0.2);
+    border-color: var(--blue-200);
+  }
+  .pipe-step .n {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.12em; color: var(--ink-3);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .pipe-step .n .bullet {
+    width: 22px; height: 22px; border-radius: 99px;
+    background: linear-gradient(135deg, var(--blue-500), var(--accent-violet));
+    color: #fff;
+    display: grid; place-items: center;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0;
+  }
+  .pipe-step:nth-child(2) .n .bullet { background: linear-gradient(135deg, var(--accent-violet), var(--accent-coral)); }
+  .pipe-step:nth-child(3) .n .bullet { background: linear-gradient(135deg, var(--accent-teal), var(--blue-500)); }
+  .pipe-step:nth-child(4) .n .bullet { background: linear-gradient(135deg, var(--accent-amber), var(--accent-green)); }
+  .pipe-step .t { font-size: 20px; font-weight: 500; letter-spacing: -0.02em; }
+  .pipe-step .d { font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+  .pipe-step .ill {
+    margin-top: auto;
+    height: 130px;
+    background: linear-gradient(180deg, var(--bg-soft), #fff);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px;
+    display: flex; flex-direction: column; justify-content: center;
+    overflow: hidden; position: relative;
+  }
+  .brand-chip {
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+    background: #fff;
+    border: 1px solid var(--line);
+    box-shadow: 0 2px 6px -2px rgba(10, 27, 85, 0.12);
+    overflow: hidden;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .brand-chip:hover { transform: translateY(-2px); box-shadow: 0 8px 16px -6px rgba(10, 27, 85, 0.25); }
+  .brand-chip img { width: 18px; height: 18px; object-fit: contain; display: block; }
+  .brand-more {
+    width: 30px; height: 30px; border-radius: 8px;
+    display: grid; place-items: center; flex-shrink: 0;
+    background: var(--bg-panel); border: 1px solid var(--line);
+    font-family: var(--mono); font-size: 9px; color: var(--ink-3);
+    letter-spacing: -0.02em; font-weight: 600;
+  }
+  .brand-rail { display: flex; gap: 5px; align-items: center; justify-content: center; height: 100%; flex-wrap: wrap; padding: 2px; }
+
+  /* ---------- FEATURES ---------- */
+  .features-sec { background: var(--bg-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; }
+  .features-sec .ec-blue {
+    width: 500px; height: 500px; left: -150px; top: 20%;
+    background: radial-gradient(circle, var(--blue-200), transparent 65%);
+    opacity: 0.4;
+  }
+  .feat-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; position: relative; }
+  .feat {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 28px;
+    display: flex; flex-direction: column; gap: 12px;
+    min-height: 220px;
+    position: relative; overflow: hidden;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .feat:hover { transform: translateY(-3px); box-shadow: 0 16px 32px -16px rgba(31, 65, 176, 0.18); }
+  .feat .ico {
+    width: 40px; height: 40px;
+    display: grid; place-items: center;
+    border-radius: 10px;
+    color: #fff;
+    background: linear-gradient(135deg, var(--blue-500), var(--blue-700));
+    box-shadow: 0 6px 14px -6px rgba(31, 65, 176, 0.5);
+    margin-bottom: 4px;
+  }
+  .feat:nth-child(2) .ico { background: linear-gradient(135deg, var(--accent-violet), var(--blue-500)); box-shadow: 0 6px 14px -6px color-mix(in oklab, var(--accent-violet) 70%, transparent); }
+  .feat:nth-child(3) .ico { background: linear-gradient(135deg, var(--accent-teal), var(--blue-500)); }
+  .feat:nth-child(4) .ico { background: linear-gradient(135deg, var(--accent-amber), var(--accent-coral)); }
+  .feat:nth-child(5) .ico { background: linear-gradient(135deg, var(--accent-green), var(--accent-teal)); }
+  .feat:nth-child(6) .ico { background: linear-gradient(135deg, var(--blue-600), var(--accent-violet)); }
+  .feat:nth-child(7) .ico { background: linear-gradient(135deg, var(--accent-coral), var(--accent-violet)); }
+
+  .feat .t { font-size: 18px; font-weight: 500; letter-spacing: -0.015em; }
+  .feat .d { font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+  .feat.span-6 { grid-column: span 6; }
+  .feat.span-4 { grid-column: span 4; }
+  .feat.span-8 { grid-column: span 8; }
+  .feat.span-12 { grid-column: span 12; }
+  @media (max-width: 860px) {
+    .feat.span-6, .feat.span-4, .feat.span-8, .feat.span-12 { grid-column: span 12; }
+  }
+  .feat.dark {
+    background: linear-gradient(135deg, var(--blue-900), var(--blue-700) 60%, var(--accent-violet));
+    color: #fff; border-color: transparent;
+    position: relative;
+  }
+  .feat.dark::after {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 100% 100%, color-mix(in oklab, var(--accent-teal) 40%, transparent), transparent 50%);
+    pointer-events: none;
+  }
+  .feat.dark .d { color: color-mix(in oklab, #fff 75%, transparent); }
+  .feat.dark .ico {
+    background: rgba(255,255,255,0.12);
+    box-shadow: none;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  /* ---------- CONFIDENCE DEEP DIVE ---------- */
+  .cd-grid {
+    display: grid; grid-template-columns: 1fr 1.1fr;
+    gap: clamp(32px, 4vw, 64px);
+    align-items: center;
+  }
+  @media (max-width: 960px) { .cd-grid { grid-template-columns: 1fr; } }
+  .cd-list { display: flex; flex-direction: column; }
+  .cd-item {
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 20px; align-items: start;
+  }
+  .cd-item:last-child { border-bottom: 1px solid var(--line); }
+  .cd-item .lbl {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .cd-item:nth-child(1) .lbl { color: var(--hi); }
+  .cd-item:nth-child(2) .lbl { color: var(--warn); }
+  .cd-item:nth-child(3) .lbl { color: var(--err); }
+  .cd-item .t { font-size: 20px; font-weight: 500; letter-spacing: -0.015em; margin-bottom: 4px; }
+  .cd-item .d { font-size: 14px; color: var(--ink-2); max-width: 46ch; line-height: 1.5; }
+  .cd-item .pill {
+    font-family: var(--mono); font-size: 11px;
+    padding: 5px 11px; border-radius: 99px;
+    letter-spacing: 0.06em; white-space: nowrap; font-weight: 500;
+  }
+  .cd-item .pill.hi   { background: var(--hi-bg);   color: var(--hi); }
+  .cd-item .pill.warn { background: var(--warn-bg); color: var(--warn); }
+  .cd-item .pill.err  { background: var(--err-bg);  color: var(--err); }
+
+  .cd-viz {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 26px;
+    display: flex; flex-direction: column; gap: 18px;
+    box-shadow: 0 30px 60px -30px rgba(31, 65, 176, 0.18);
+    position: relative;
+    overflow: hidden;
+  }
+  .cd-viz::before {
+    content: ""; position: absolute; top: 0; right: 0;
+    width: 240px; height: 240px; border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in oklab, var(--accent-violet) 18%, transparent), transparent 60%);
+    pointer-events: none;
+  }
+  .cd-viz .head {
+    position: relative;
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 14px; border-bottom: 1px solid var(--line);
+    font-family: var(--mono); font-size: 12px;
+    color: var(--ink-3);
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .cd-row {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 16px; align-items: center; position: relative;
+  }
+  .cd-row .name { font-size: 14px; font-weight: 500; letter-spacing: -0.01em; }
+  .cd-row .desc { font-size: 12px; color: var(--ink-4); margin-top: 2px; }
+  .cd-bar {
+    height: 7px; width: 100%;
+    background: var(--bg-panel);
+    border-radius: 99px;
+    overflow: hidden; margin-top: 8px;
+    position: relative;
+  }
+  .cd-bar .fill {
+    height: 100%; border-radius: 99px;
+    background: linear-gradient(90deg, var(--blue-500), var(--accent-teal));
+    transform-origin: left;
+  }
+  .cd-row.warn .cd-bar .fill { background: linear-gradient(90deg, var(--accent-amber), var(--accent-coral)); }
+  .cd-row.err  .cd-bar .fill { background: linear-gradient(90deg, var(--accent-coral), var(--err)); }
+  .cd-row .num {
+    font-family: var(--mono); font-size: 13px; color: var(--ink-2);
+  }
+
+  /* ---------- STATS ---------- */
+  .stats-sec { padding-bottom: 0; }
+  .stats {
+    background:
+      radial-gradient(ellipse at 0% 0%, color-mix(in oklab, var(--accent-violet) 35%, transparent), transparent 50%),
+      radial-gradient(ellipse at 100% 100%, color-mix(in oklab, var(--accent-teal) 30%, transparent), transparent 50%),
+      linear-gradient(135deg, var(--blue-900), var(--blue-700));
+    color: #fff;
+    border-radius: 24px;
+    padding: clamp(48px, 6vw, 88px) clamp(32px, 4vw, 64px);
+    position: relative;
+    overflow: hidden;
+  }
+  .stats .stats-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 56px; align-items: end;
+    position: relative;
+  }
+  @media (max-width: 860px) { .stats .stats-inner { grid-template-columns: 1fr; gap: 32px; } }
+  .stats .eyebrow { color: color-mix(in oklab, #fff 65%, transparent); }
+  .stats .eyebrow::before { background: color-mix(in oklab, #fff 65%, transparent); }
+  .stats h2 { color: #fff; }
+  .stats .h2 .ital {
+    background: linear-gradient(120deg, #fff, color-mix(in oklab, var(--accent-teal) 80%, white));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px 32px; }
+  .stat {
+    display: flex; flex-direction: column; gap: 6px;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255,255,255,0.18);
+    position: relative;
+  }
+  .stat .n {
+    font-size: clamp(44px, 5vw, 64px);
+    letter-spacing: -0.035em; line-height: 0.95;
+    font-weight: 500;
+  }
+  .stat .n .u {
+    font-family: var(--serif); font-style: italic;
+    color: color-mix(in oklab, var(--accent-teal) 70%, white);
+    font-size: 0.55em; margin-left: 4px;
+  }
+  .stat .k { font-size: 13px; color: color-mix(in oklab, #fff 65%, transparent); max-width: 24ch; }
+
+  /* ---------- COMPARE ---------- */
+  .compare-sec { background: var(--bg-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-top: var(--section-py); overflow: hidden; }
+  .compare-sec .ec-amber {
+    width: 500px; height: 500px; right: -150px; bottom: -150px; opacity: 0.3;
+    background: radial-gradient(circle, color-mix(in oklab, var(--accent-amber) 50%, white), transparent 65%);
+  }
+  .compare {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px -20px rgba(31, 65, 176, 0.12);
+    position: relative;
+  }
+  .compare table { width: 100%; border-collapse: collapse; }
+  .compare th, .compare td {
+    text-align: left;
+    padding: 18px 22px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: middle;
+  }
+  .compare thead th {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-3); font-weight: 500;
+    background: var(--bg-soft);
+  }
+  .compare thead th.us {
+    color: #fff;
+    background: linear-gradient(135deg, var(--blue-500), var(--blue-700));
+  }
+  .compare tbody tr:last-child td { border-bottom: none; }
+  .compare td.feat-name { font-weight: 500; color: var(--ink); width: 32%; }
+  .compare td.us { background: var(--blue-50); font-weight: 500; color: var(--blue-700); }
+  .compare .yes, .compare .no, .compare .mid {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 12px;
+  }
+  .compare .yes  { color: var(--hi); }
+  .compare .no   { color: var(--ink-4); }
+  .compare .mid  { color: var(--warn); }
+  .compare .dot { width: 8px; height: 8px; border-radius: 99px; background: currentColor; }
+  @media (max-width: 760px) {
+    .compare { overflow-x: auto; }
+    .compare table { min-width: 640px; }
+  }
+
+  /* ---------- PRICING ---------- */
+  .pricing {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: clamp(32px, 4vw, 56px);
+    align-items: center;
+    box-shadow: 0 30px 60px -30px rgba(31, 65, 176, 0.18);
+    position: relative; overflow: hidden;
+  }
+  .pricing::before {
+    content: ""; position: absolute; top: -100px; left: -100px;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in oklab, var(--blue-200) 70%, transparent), transparent 65%);
+    pointer-events: none;
+  }
+  @media (max-width: 860px) { .pricing { grid-template-columns: 1fr; } }
+  .pricing > * { position: relative; }
+  .pricing .t { font-size: clamp(28px, 3vw, 40px); letter-spacing: -0.03em; font-weight: 500; line-height: 1.05; }
+  .pricing ul { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 10px; }
+  .pricing li { display: flex; gap: 10px; align-items: center; font-size: 14px; color: var(--ink-2); }
+  .pricing li svg { flex-shrink: 0; }
+  .pricing .card {
+    background: linear-gradient(135deg, var(--bg-soft), #fff);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 28px;
+    display: flex; flex-direction: column; gap: 16px;
+    position: relative; overflow: hidden;
+  }
+  .pricing .card::before {
+    content: ""; position: absolute; bottom: -60px; right: -60px;
+    width: 160px; height: 160px; border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in oklab, var(--accent-violet) 25%, transparent), transparent 65%);
+  }
+  .pricing .card .label {
+    font-family: var(--mono); font-size: 11px; color: var(--blue-600);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    position: relative;
+  }
+  .pricing .card .quote {
+    font-family: var(--serif); font-style: italic;
+    font-size: 24px; line-height: 1.25;
+    color: var(--ink); letter-spacing: -0.01em; font-weight: 400;
+    position: relative;
+  }
+  .pricing .card .meta {
+    font-size: 13px; color: var(--ink-3);
+    border-top: 1px solid var(--line); padding-top: 14px;
+    position: relative;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-grid {
+    display: grid; grid-template-columns: 1fr 1.4fr;
+    gap: clamp(32px, 4vw, 64px);
+  }
+  @media (max-width: 860px) { .faq-grid { grid-template-columns: 1fr; } }
+  .faq-list { border-top: 1px solid var(--line); }
+  details.q { border-bottom: 1px solid var(--line); padding: 20px 0; }
+  details.q summary {
+    list-style: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px;
+    font-size: 18px; font-weight: 500; letter-spacing: -0.015em;
+    color: var(--ink);
+    transition: color .2s ease;
+  }
+  details.q summary:hover { color: var(--blue-600); }
+  details.q summary::-webkit-details-marker { display: none; }
+  details.q summary .plus {
+    width: 28px; height: 28px; border-radius: 99px;
+    background: var(--blue-50); color: var(--blue-600);
+    position: relative; flex-shrink: 0;
+    transition: all .25s ease;
+  }
+  details.q[open] summary .plus { background: var(--blue-500); color: #fff; transform: rotate(45deg); }
+  details.q summary .plus::before,
+  details.q summary .plus::after {
+    content: ""; position: absolute; background: currentColor;
+    left: 50%; top: 50%; transform: translate(-50%, -50%);
+  }
+  details.q summary .plus::before { width: 12px; height: 1.6px; }
+  details.q summary .plus::after  { width: 1.6px; height: 12px; }
+  details.q .a {
+    padding-top: 14px;
+    font-size: 15px; color: var(--ink-2);
+    max-width: 60ch; line-height: 1.55;
+  }
+
+  /* ---------- CTA ---------- */
+  .cta-block {
+    background:
+      radial-gradient(ellipse at 0% 100%, color-mix(in oklab, var(--accent-violet) 40%, transparent), transparent 50%),
+      radial-gradient(ellipse at 100% 0%, color-mix(in oklab, var(--accent-teal) 35%, transparent), transparent 50%),
+      linear-gradient(135deg, var(--blue-900), var(--blue-700));
+    color: #fff;
+    border-radius: 24px;
+    padding: clamp(56px, 8vw, 100px) clamp(32px, 5vw, 80px);
+    position: relative;
+    overflow: hidden;
+    display: grid; grid-template-columns: 1.1fr 1fr;
+    gap: 56px; align-items: center;
+  }
+  @media (max-width: 860px) { .cta-block { grid-template-columns: 1fr; gap: 32px; } }
+  .cta-block h2 {
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.0; letter-spacing: -0.035em;
+    color: #fff; font-weight: 500;
+  }
+  .cta-block h2 .ital {
+    background: linear-gradient(120deg, color-mix(in oklab, var(--accent-teal) 80%, white), #fff);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .cta-block .sub {
+    margin-top: 20px;
+    font-size: 17px; color: color-mix(in oklab, #fff 78%, transparent);
+    max-width: 44ch;
+  }
+  .cta-block .form {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex; flex-direction: column; gap: 12px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .cta-block .form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .cta-block input, .cta-block select {
+    width: 100%;
+    background: rgba(0,0,0,0.22);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+    font-family: var(--sans); font-size: 14px;
+    padding: 13px 14px;
+    border-radius: 10px; outline: none;
+    transition: border-color .2s ease;
+  }
+  .cta-block input::placeholder { color: rgba(255,255,255,0.45); }
+  .cta-block input:focus, .cta-block select:focus { border-color: var(--accent-teal); }
+  .cta-block select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='white' stroke-opacity='0.6' fill='none' stroke-width='1.5'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+  }
+  .cta-block .btn-light {
+    background: linear-gradient(135deg, #fff, color-mix(in oklab, var(--accent-teal) 15%, white));
+    color: var(--blue-700);
+    width: 100%; justify-content: center;
+    font-weight: 600;
+  }
+  .cta-block .fine {
+    font-size: 12px; color: color-mix(in oklab, #fff 55%, transparent);
+    text-align: center;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer { padding: 64px 0 40px; border-top: 1px solid var(--line); background: var(--bg-soft); position: relative; overflow: hidden; }
+  footer .ec-blue {
+    width: 600px; height: 600px; left: -200px; bottom: -300px; opacity: 0.35;
+    background: radial-gradient(circle, var(--blue-200), transparent 65%);
+  }
+  .foot-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px; margin-bottom: 56px; position: relative;
+  }
+  @media (max-width: 860px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+  .foot-col h5 {
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 500; margin: 0 0 14px;
+  }
+  .foot-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .foot-col a { color: var(--ink-2); font-size: 14px; }
+  .foot-col a:hover { color: var(--blue-600); }
+  .foot-brand .d { color: var(--ink-3); font-size: 14px; margin-top: 14px; max-width: 36ch; line-height: 1.5; }
+  .foot-base {
+    border-top: 1px solid var(--line); padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 13px; color: var(--ink-3);
+    font-family: var(--mono); letter-spacing: 0.04em;
+    position: relative;
+  }
+  .foot-lockup {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(56px, 12vw, 180px);
+    line-height: 1; letter-spacing: -0.04em;
+    margin-top: 56px; text-align: center;
+    background: linear-gradient(120deg, var(--blue-500), var(--accent-violet), var(--accent-teal));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+  }
+
+  /* ---------- TWEAKS PANEL ---------- */
+  .tweaks {
+    position: fixed; right: 20px; bottom: 20px; z-index: 100;
+    width: 280px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 20px 40px -20px rgba(10, 27, 85, 0.25);
+    padding: 16px;
+    display: none;
+  }
+  .tweaks.open { display: block; }
+  .tweaks h6 {
+    font-family: var(--mono); font-size: 11px; color: var(--blue-600);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin: 0 0 12px; font-weight: 500;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .tweaks h6 .close { cursor: pointer; padding: 4px; color: var(--ink-3); }
+  .tweaks .group { margin-bottom: 14px; }
+  .tweaks .group:last-child { margin-bottom: 0; }
+  .tweaks label { display: block; font-size: 12px; color: var(--ink-3); margin-bottom: 6px; }
+  .tweaks .seg {
+    display: flex;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 2px; gap: 2px;
+  }
+  .tweaks .seg button {
+    flex: 1; border: none; background: transparent;
+    padding: 7px 8px; font-size: 12px;
+    font-family: var(--sans); color: var(--ink-2);
+    border-radius: 6px; cursor: pointer;
+    transition: background .15s ease, color .15s ease;
+  }
+  .tweaks .seg button.active {
+    background: linear-gradient(135deg, var(--blue-500), var(--blue-700));
+    color: #fff;
+  }
+
+  body[data-density="compact"]  { --section-py: clamp(56px, 6vw, 96px); }
+  body[data-density="spacious"] { --section-py: clamp(120px, 14vw, 200px); }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+</style>
+</head>
+<body data-density="regular" data-hero-visual="list" data-hero-copy="autopilot">
+
+<!-- ================= NAV ================= -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#">
+      <svg class="mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="markGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#2a54d6"/>
+            <stop offset="1" stop-color="#7c5bff"/>
+          </linearGradient>
+        </defs>
+        <rect x="1" y="1" width="30" height="30" rx="8" fill="url(#markGrad)"/>
+        <path d="M9 10h14M9 16h14M9 22h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="22.5" cy="22" r="2.5" fill="#fff"/>
+      </svg>
+      LedgerAI
+    </a>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#confidence">Confidence</a>
+      <a href="#compare">Compare</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#demo" class="btn btn-ghost btn-sm">Sign in</a>
+      <a href="#demo" class="btn btn-primary btn-sm">Book a demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="eclipse ec-blue"></div>
+  <div class="eclipse ec-violet"></div>
+  <div class="eclipse ec-teal"></div>
+  <div class="eclipse ec-amber"></div>
+
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <div class="hero-pill">
+        <span class="tag">New</span>
+        Closing the books in hours, not weeks · v2.4
+      </div>
+
+      <h1 class="display" id="hero-headline">
+        <span>Bookkeeping</span><br>
+        <span>on </span><span class="ital">autopilot.</span>
+      </h1>
+
+      <p class="hero-sub" id="hero-sub">
+        Read your books nightly, categorize every transaction, reconcile every
+        statement, and deliver month-end reports the moment the month ends.
+        Your team reviews — not keys in.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#demo" class="btn btn-primary">
+          Book a demo
+          <svg class="arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#how" class="btn btn-ghost">See how it works</a>
+      </div>
+
+      <div class="hero-meta">
+        <span><span class="dot"></span>SOC 2 Type II</span>
+        <span><span class="dot"></span>Bank-grade encryption</span>
+        <span><span class="dot"></span>Read-only by default</span>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <!-- Visual A: transactions -->
+      <div class="viz-a">
+        <div class="viz-panel">
+          <div class="viz-head">
+            <div class="viz-head-l">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="1" y="1" width="18" height="18" rx="5" fill="url(#markGrad)"/><path d="M6 7h8M6 10h8M6 13h5" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/></svg>
+              <h4>Ledger — April 2026</h4>
+            </div>
+            <span class="sub">Live · 1,284 txns</span>
+          </div>
+
+          <div class="txn-list" id="txnList"></div>
+
+          <div class="viz-foot">
+            <span class="progress"><span class="dot-pulse"></span>Processing · <span id="autoPct">94</span>% auto-categorized</span>
+            <span>Queue · <span id="queueN">12</span> to review</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual B: dial -->
+      <div class="viz-b">
+        <div class="viz-panel" style="grid-template-rows: auto 1fr auto;">
+          <div class="viz-head">
+            <div class="viz-head-l">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#2a54d6" stroke-width="1.4"/><path d="M10 4v6l4 2" stroke="#2a54d6" stroke-width="1.4" stroke-linecap="round"/></svg>
+              <h4>Confidence · April 2026</h4>
+            </div>
+            <span class="sub">1,284 txns</span>
+          </div>
+          <div class="dial-wrap">
+            <svg class="dial" viewBox="0 0 120 120">
+              <defs>
+                <linearGradient id="dialGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#2a54d6"/>
+                  <stop offset="0.5" stop-color="#7c5bff"/>
+                  <stop offset="1" stop-color="#19c7c2"/>
+                </linearGradient>
+              </defs>
+              <circle cx="60" cy="60" r="48" fill="none" stroke="#eef3fb" stroke-width="10"/>
+              <circle id="dialCirc" cx="60" cy="60" r="48" fill="none"
+                      stroke="url(#dialGrad)" stroke-width="10" stroke-linecap="round"
+                      transform="rotate(-90 60 60)"
+                      stroke-dasharray="301.6"
+                      stroke-dashoffset="301.6"/>
+            </svg>
+            <div class="dial-center">
+              <div class="num">94<span class="pct">%</span></div>
+              <div class="lbl">Auto-booked ≥95% conf.</div>
+            </div>
+          </div>
+          <div class="dial-legend">
+            <div class="cell"><span class="k">Auto</span><span class="v">1,208<span class="u">txn</span></span></div>
+            <div class="cell"><span class="k">Review</span><span class="v">64<span class="u">txn</span></span></div>
+            <div class="cell"><span class="k">Flagged</span><span class="v">12<span class="u">txn</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= LOGOS STRIP ================= -->
+<section class="logos-wrap" style="padding: 48px 0;">
+  <div class="container">
+    <div class="logos-head">Trusted by 300+ bookkeeping firms</div>
+    <div class="logos-marquee">
+      <div class="logos-track" id="logoTrack"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROBLEM ================= -->
+<section class="problem" id="problem">
+  <div class="eclipse ec-violet"></div>
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Why now</div>
+        <h2 class="h2" style="margin-top: 16px; max-width: 14ch;">
+          Bookkeeping is <span class="ital">drowning</span> in transactions.
+        </h2>
+      </div>
+      <p class="lead">
+        Firms are taking on more clients than ever, but the work per client
+        hasn't shrunk. The bottleneck is the same three things, every month.
+      </p>
+    </div>
+
+    <div class="problem-grid">
+      <div class="problem-cell reveal">
+        <span class="idx">01 / Categorization</span>
+        <div class="t">Every&nbsp;transaction gets a manual second-look.</div>
+        <div class="d">Rules break the moment a vendor renames itself. Staff rebuild the same mental map for every client, every month.</div>
+        <div class="stat">~38% of a bookkeeper's week</div>
+      </div>
+      <div class="problem-cell reveal">
+        <span class="idx">02 / Reconciliation</span>
+        <div class="t">Bank&nbsp;feeds go stale, statements don't tie.</div>
+        <div class="d">A two-day close turns into a two-week hunt for a 4-cent variance. The client doesn't care — they want a number.</div>
+        <div class="stat">~11 days median close</div>
+      </div>
+      <div class="problem-cell reveal">
+        <span class="idx">03 / Month-end</span>
+        <div class="t">Reports&nbsp;are copy-pasted out of four tools.</div>
+        <div class="d">Formatting the P&amp;L eats the window where you could have done advisory work — the actual billable piece.</div>
+        <div class="stat">3–6 hrs per client, per month</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section id="how">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">How it works</div>
+        <h2 class="h2" style="margin-top: 16px; max-width: 16ch;">
+          One pipeline, from bank feed to <span class="ital">finished statement.</span>
+        </h2>
+      </div>
+      <p class="lead">
+        LedgerAI reads the same data you do — bank feeds, receipts, invoices —
+        and runs it through a supervised pipeline with a human check at exactly
+        the point where it matters.
+      </p>
+    </div>
+
+    <div class="pipe-grid">
+      <div class="pipe-step reveal">
+        <div class="n"><span class="bullet">01</span> INGEST</div>
+        <div class="t">Connect the source.</div>
+        <div class="d">Secure read-only connections to 12,000+ banks, Stripe, Square, Shopify, AP inboxes, and QBO / Xero ledgers.</div>
+        <div class="ill">
+          <div class="brand-rail">
+            <div class="brand-chip" title="Chase"><img src="https://www.google.com/s2/favicons?domain=chase.com&sz=64" alt="Chase"></div>
+            <div class="brand-chip" title="Bank of America"><img src="https://www.google.com/s2/favicons?domain=bankofamerica.com&sz=64" alt="Bank of America"></div>
+            <div class="brand-chip" title="Wells Fargo"><img src="https://www.google.com/s2/favicons?domain=wellsfargo.com&sz=64" alt="Wells Fargo"></div>
+            <div class="brand-chip" title="Citi"><img src="https://www.google.com/s2/favicons?domain=citi.com&sz=64" alt="Citi"></div>
+            <div class="brand-chip" title="Capital One"><img src="https://www.capitalone.com/assets/shell/apple-touch-icon.png" alt="Capital One"></div>
+            <div class="brand-chip" title="Stripe"><img src="https://www.google.com/s2/favicons?domain=stripe.com&sz=64" alt="Stripe"></div>
+            <div class="brand-chip" title="PayPal"><img src="https://www.google.com/s2/favicons?domain=paypal.com&sz=64" alt="PayPal"></div>
+            <div class="brand-chip" title="Square"><img src="https://www.google.com/s2/favicons?domain=squareup.com&sz=64" alt="Square"></div>
+            <div class="brand-chip" title="Shopify"><img src="https://www.google.com/s2/favicons?domain=shopify.com&sz=64" alt="Shopify"></div>
+            <div class="brand-chip" title="QuickBooks"><img src="https://www.google.com/s2/favicons?domain=quickbooks.intuit.com&sz=64" alt="QuickBooks"></div>
+            <div class="brand-chip" title="Xero"><img src="https://www.google.com/s2/favicons?domain=xero.com&sz=64" alt="Xero"></div>
+            <div class="brand-more" title="12,000+ integrations">+12k</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pipe-step reveal">
+        <div class="n"><span class="bullet">02</span> CLASSIFY</div>
+        <div class="t">Categorize with a score.</div>
+        <div class="d">Every transaction is mapped to your COA with a confidence score derived from merchant, memo, history, and peer firms.</div>
+        <div class="ill">
+          <div style="display:grid; grid-template-columns: 1fr auto; gap: 7px; font-family: var(--mono); font-size: 10px; color: #2a3558; align-items:center;">
+            <span>Starbucks #482</span><span style="color:#148f5e; font-weight:600;">98%</span>
+            <span>AWS us-east-1</span><span style="color:#148f5e; font-weight:600;">97%</span>
+            <span>UNKNOWN LLC</span><span style="color:#c78210; font-weight:600;">62%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pipe-step reveal">
+        <div class="n"><span class="bullet">03</span> RECONCILE</div>
+        <div class="t">Match &amp; balance.</div>
+        <div class="d">Continuous reconciliation against bank statements. Duplicates collapse, transfers pair, variances surface immediately.</div>
+        <div class="ill">
+          <svg width="100%" height="72" viewBox="0 0 220 72" fill="none">
+            <defs><linearGradient id="recLine" x1="0" x2="1"><stop offset="0" stop-color="#2a54d6"/><stop offset="1" stop-color="#19c7c2"/></linearGradient></defs>
+            <rect x="4" y="10" width="70" height="20" rx="4" fill="#eaf1ff" stroke="#2a54d6" stroke-opacity=".3"/>
+            <rect x="4" y="42" width="70" height="20" rx="4" fill="#eaf1ff" stroke="#2a54d6" stroke-opacity=".3"/>
+            <rect x="146" y="10" width="70" height="20" rx="4" fill="#e4f8f7" stroke="#19c7c2" stroke-opacity=".4"/>
+            <rect x="146" y="42" width="70" height="20" rx="4" fill="#e4f8f7" stroke="#19c7c2" stroke-opacity=".4"/>
+            <text x="39" y="24" text-anchor="middle" fill="#2a54d6" font-family="JetBrains Mono" font-weight="600" font-size="9">LEDGER</text>
+            <text x="39" y="56" text-anchor="middle" fill="#2a54d6" font-family="JetBrains Mono" font-weight="600" font-size="9">LEDGER</text>
+            <text x="181" y="24" text-anchor="middle" fill="#0f8c87" font-family="JetBrains Mono" font-weight="600" font-size="9">BANK</text>
+            <text x="181" y="56" text-anchor="middle" fill="#0f8c87" font-family="JetBrains Mono" font-weight="600" font-size="9">BANK</text>
+            <path d="M74 20 C 100 20, 120 20, 146 20" stroke="url(#recLine)" stroke-width="1.6" fill="none"/>
+            <path d="M74 52 C 100 52, 120 52, 146 52" stroke="url(#recLine)" stroke-width="1.6" fill="none"/>
+            <circle cx="110" cy="20" r="3.5" fill="#148f5e"/>
+            <circle cx="110" cy="52" r="3.5" fill="#148f5e"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="pipe-step reveal">
+        <div class="n"><span class="bullet">04</span> CLOSE</div>
+        <div class="t">Ship the statements.</div>
+        <div class="d">One-click P&amp;L, Balance Sheet, and Cash Flow — in your firm's template, ready for the client portal or Drive folder.</div>
+        <div class="ill">
+          <svg width="100%" height="72" viewBox="0 0 220 72" fill="none">
+            <rect x="8" y="6" width="120" height="60" rx="6" fill="#fff" stroke="#dce4f2"/>
+            <rect x="16" y="14" width="60" height="5" rx="1.5" fill="#2a54d6"/>
+            <rect x="16" y="24" width="90" height="3" rx="1" fill="#dce4f2"/>
+            <rect x="16" y="32" width="80" height="3" rx="1" fill="#dce4f2"/>
+            <rect x="16" y="40" width="70" height="3" rx="1" fill="#dce4f2"/>
+            <rect x="16" y="50" width="50" height="8" rx="2" fill="#7c5bff" opacity="0.7"/>
+            <rect x="138" y="6" width="70" height="60" rx="6" fill="#eaf1ff" stroke="#dce4f2"/>
+            <path d="M150 30 L165 42 L195 18" stroke="#148f5e" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEATURES ================= -->
+<section class="features-sec" id="features">
+  <div class="eclipse ec-blue"></div>
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Features</div>
+        <h2 class="h2" style="margin-top: 16px; max-width: 16ch;">
+          Built for firms that serve <span class="ital">real</span> businesses.
+        </h2>
+      </div>
+      <p class="lead">
+        Every feature is designed to remove a specific manual step — not to be
+        flashy. Turn on what you need, roll it across your entire book of
+        business in a day.
+      </p>
+    </div>
+
+    <div class="feat-grid">
+      <div class="feat span-6 dark reveal">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M2 8l4 4 8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="t">Confidence-gated autopilot</div>
+        <div class="d">Auto-book anything scoring above the threshold you set — 95%, 98%, or human-only. Everything below goes to a review queue with reasoning attached.</div>
+      </div>
+
+      <div class="feat span-6 reveal">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.8"/><path d="M8 5v3l2 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <div class="t">Continuous reconciliation</div>
+        <div class="d">Bank feeds and ledger reconcile daily, not monthly. By the time the 1st rolls around, the books are already closed.</div>
+      </div>
+
+      <div class="feat span-4 reveal">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M5 7h6M5 10h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <div class="t">Firm-wide COA templates</div>
+        <div class="d">Define how categorization works once, apply it across every client — with per-client overrides.</div>
+      </div>
+
+      <div class="feat span-4 reveal">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M2 8l2 2 4-4 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="t">Anomaly detection</div>
+        <div class="d">Flags duplicate charges, vendor changes, categorization drift, and amounts out of character for the account.</div>
+      </div>
+
+      <div class="feat span-4 reveal">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M2 6h12M6 2v12" stroke="currentColor" stroke-width="1.8"/></svg></div>
+        <div class="t">Client portal &amp; approvals</div>
+        <div class="d">Flagged items get pushed to a client portal with one-tap categorization — no email threads, no screenshots.</div>
+      </div>
+
+      <div class="feat span-8 reveal">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M2 12V4a1 1 0 011-1h6l4 4v5a1 1 0 01-1 1H3a1 1 0 01-1-1z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 3v4h4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+        <div class="t">Two-way QuickBooks &amp; Xero sync</div>
+        <div class="d">LedgerAI writes directly to your existing GL. Keep the tools your firm already runs on — your clients never need to migrate, and your reports come out of the software they know.</div>
+      </div>
+
+      <div class="feat span-4 reveal">
+        <div class="ico"><svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M4 6l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="t">Auditable by design</div>
+        <div class="d">Every booking has a reason, a source, and a model version. Export a full audit log to CSV in one click.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONFIDENCE DEEP DIVE ================= -->
+<section id="confidence">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Confidence scoring</div>
+        <h2 class="h2" style="margin-top: 16px; max-width: 18ch;">
+          An <span class="ital">honest</span> score on every entry.
+        </h2>
+      </div>
+      <p class="lead">
+        We don't hide behind "AI magic." Every categorization is accompanied by
+        a score and the factors that produced it. When the model isn't sure,
+        we tell you — so your time goes to the handful of entries that
+        actually need judgment.
+      </p>
+    </div>
+
+    <div class="cd-grid">
+      <div class="cd-list">
+        <div class="cd-item">
+          <div>
+            <div class="lbl">≥ 95% confidence</div>
+            <div class="t">Auto-book, reviewable later</div>
+            <div class="d">Posted straight to the GL. Your team can sample at any time — nothing is locked.</div>
+          </div>
+          <span class="pill hi">Auto</span>
+        </div>
+        <div class="cd-item">
+          <div>
+            <div class="lbl">70–95% confidence</div>
+            <div class="t">Queued for one-tap review</div>
+            <div class="d">LedgerAI proposes a category with its reasoning and two alternatives. Reviewer taps accept or corrects — the model learns immediately.</div>
+          </div>
+          <span class="pill warn">Review</span>
+        </div>
+        <div class="cd-item">
+          <div>
+            <div class="lbl">&lt; 70% confidence</div>
+            <div class="t">Flagged to client, no guesses</div>
+            <div class="d">For unfamiliar vendors or unusual amounts, we ask the client directly via the portal rather than inventing a category.</div>
+          </div>
+          <span class="pill err">Flag</span>
+        </div>
+      </div>
+
+      <div class="cd-viz reveal">
+        <div class="head">
+          <span>Txn · 2404-1184</span>
+          <span>UNION SQ HARDWARE · $248.17</span>
+        </div>
+
+        <div>
+          <div class="cd-row">
+            <div>
+              <div class="name">Merchant match</div>
+              <div class="desc">Name normalized to "Union Sq Hardware"</div>
+              <div class="cd-bar"><div class="fill" style="width:94%"></div></div>
+            </div>
+            <div class="num">0.94</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="cd-row">
+            <div>
+              <div class="name">Amount pattern</div>
+              <div class="desc">Consistent with 6 prior bookings</div>
+              <div class="cd-bar"><div class="fill" style="width:88%"></div></div>
+            </div>
+            <div class="num">0.88</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="cd-row warn">
+            <div>
+              <div class="name">Memo signal</div>
+              <div class="desc">"SUPPLIES/2404" — ambiguous vs. "Repairs"</div>
+              <div class="cd-bar"><div class="fill" style="width:62%"></div></div>
+            </div>
+            <div class="num">0.62</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="cd-row">
+            <div>
+              <div class="name">Peer firm consensus</div>
+              <div class="desc">92% of peers book this merchant to 5400 · Supplies</div>
+              <div class="cd-bar"><div class="fill" style="width:92%"></div></div>
+            </div>
+            <div class="num">0.92</div>
+          </div>
+        </div>
+
+        <div style="border-top: 1px solid var(--line); padding-top: 14px; display: flex; justify-content: space-between; align-items: center; position: relative;">
+          <div>
+            <div style="font-family: var(--mono); font-size: 11px; color: var(--ink-3); letter-spacing: 0.08em; text-transform: uppercase;">Final score</div>
+            <div style="font-size: 22px; font-weight: 500; letter-spacing: -0.02em; margin-top: 2px;">0.89 → <span style="color: var(--warn)">Review</span></div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-family: var(--mono); font-size: 11px; color: var(--ink-3); letter-spacing: 0.08em; text-transform: uppercase;">Proposed</div>
+            <div style="font-size: 14px; font-weight: 500; margin-top: 2px;">5400 · Supplies &amp; Materials</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STATS ================= -->
+<section class="stats-sec">
+  <div class="container">
+    <div class="stats">
+      <div class="stats-inner">
+        <div>
+          <div class="eyebrow">Target market</div>
+          <h2 class="h2" style="margin-top: 16px; color: #fff;">
+            Where the <span class="ital">money</span> is.
+          </h2>
+          <p class="lead" style="color: color-mix(in oklab, #fff 72%, transparent); margin-top: 20px;">
+            Bookkeeping is a $60B+ service industry still priced by the hour.
+            LedgerAI converts that hour into software margin — for both the firm
+            and the client.
+          </p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat"><div class="n">$60<span class="u">B+</span></div><div class="k">US bookkeeping &amp; accounting services market</div></div>
+          <div class="stat"><div class="n">33<span class="u">M</span></div><div class="k">US small businesses needing monthly books</div></div>
+          <div class="stat"><div class="n">82<span class="u">%</span></div><div class="k">of firms name staffing as their #1 constraint</div></div>
+          <div class="stat"><div class="n">11<span class="u">d</span></div><div class="k">median time-to-close today — we target under 24h</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPARE ================= -->
+<section class="compare-sec" id="compare">
+  <div class="eclipse ec-amber"></div>
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Compare</div>
+        <h2 class="h2" style="margin-top: 16px; max-width: 18ch;">
+          Not another <span class="ital">GL.</span> Not another rules engine.
+        </h2>
+      </div>
+      <p class="lead">
+        LedgerAI sits on top of the ledger you already use, and goes further
+        than legacy rule-based tools like Dext or Keeper on the dimensions
+        that matter for throughput.
+      </p>
+    </div>
+
+    <div class="compare">
+      <table>
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th class="us">LedgerAI</th>
+            <th>Rule-based tools</th>
+            <th>GL only (QBO / Xero)</th>
+            <th>In-house staff</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feat-name">Auto-categorization</td>
+            <td class="us"><span class="yes"><span class="dot"></span>AI + confidence score</span></td>
+            <td><span class="mid"><span class="dot"></span>Rules break on rename</span></td>
+            <td><span class="mid"><span class="dot"></span>Memorized suggestions</span></td>
+            <td><span class="no"><span class="dot"></span>Manual</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Continuous reconciliation</td>
+            <td class="us"><span class="yes"><span class="dot"></span>Daily, automated</span></td>
+            <td><span class="no"><span class="dot"></span>—</span></td>
+            <td><span class="mid"><span class="dot"></span>Manual match</span></td>
+            <td><span class="no"><span class="dot"></span>Monthly sprint</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Audit trail &amp; reasoning</td>
+            <td class="us"><span class="yes"><span class="dot"></span>Per-entry explanation</span></td>
+            <td><span class="mid"><span class="dot"></span>Rule matched</span></td>
+            <td><span class="no"><span class="dot"></span>—</span></td>
+            <td><span class="mid"><span class="dot"></span>Analyst memory</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Scales with clients added</td>
+            <td class="us"><span class="yes"><span class="dot"></span>Near-zero marginal hours</span></td>
+            <td><span class="mid"><span class="dot"></span>Linear setup</span></td>
+            <td><span class="no"><span class="dot"></span>Linear labor</span></td>
+            <td><span class="no"><span class="dot"></span>Linear headcount</span></td>
+          </tr>
+          <tr>
+            <td class="feat-name">Typical month-end close</td>
+            <td class="us"><span class="yes"><span class="dot"></span>&lt; 24 hours</span></td>
+            <td><span class="mid"><span class="dot"></span>5–8 days</span></td>
+            <td><span class="no"><span class="dot"></span>7–14 days</span></td>
+            <td><span class="no"><span class="dot"></span>7–14 days</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Pricing</div>
+        <h2 class="h2" style="margin-top: 16px; max-width: 16ch;">
+          Priced for <span class="ital">firms</span>, not per seat.
+        </h2>
+      </div>
+      <p class="lead">
+        We quote by book of business — number of clients, transaction volume,
+        and the depth of integration. No per-user nickel-and-diming.
+      </p>
+    </div>
+
+    <div class="pricing">
+      <div>
+        <div class="t">Built for the firm's <span class="ital">whole</span> book, not a single client.</div>
+        <ul>
+          <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#eaf1ff"/><path d="M5 9l3 3 5-6" stroke="#2a54d6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Volume pricing — margins scale with you</li>
+          <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#eaf1ff"/><path d="M5 9l3 3 5-6" stroke="#2a54d6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Unlimited internal seats, unlimited client portal users</li>
+          <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#eaf1ff"/><path d="M5 9l3 3 5-6" stroke="#2a54d6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> White-label option for firms with &gt; 100 clients</li>
+          <li><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#eaf1ff"/><path d="M5 9l3 3 5-6" stroke="#2a54d6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Migration from Dext, Keeper, or homegrown rules — included</li>
+        </ul>
+        <a href="#demo" class="btn btn-primary" style="margin-top: 28px;">
+          Talk to sales
+          <svg class="arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="card">
+        <span class="label">From the field</span>
+        <div class="quote">
+          "We stopped selling bookkeeping by the hour six months in.
+          LedgerAI turned our bottom quartile of clients into the most
+          profitable ones."
+        </div>
+        <div class="meta">— Managing partner · 34-client firm · name on file during pilot</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq" style="background: var(--bg-soft); border-top: 1px solid var(--line);">
+  <div class="container">
+    <div class="faq-grid">
+      <div>
+        <div class="eyebrow">FAQ</div>
+        <h2 class="h2" style="margin-top: 16px; max-width: 14ch;">
+          Questions we <span class="ital">hear</span> every week.
+        </h2>
+        <p class="lead" style="margin-top: 20px;">Didn't find what you need? The team replies within a business day.</p>
+      </div>
+
+      <div class="faq-list">
+        <details class="q"><summary>Do my clients have to switch off QuickBooks or Xero? <span class="plus"></span></summary><div class="a">No. LedgerAI is additive — it reads from and writes back to the GL your clients already use. Nothing migrates, nothing breaks.</div></details>
+        <details class="q"><summary>What happens when the model gets something wrong? <span class="plus"></span></summary><div class="a">Every entry is reversible with one click and leaves an audit trail. Corrections feed the model back immediately — we retrain on your firm's data nightly, not quarterly.</div></details>
+        <details class="q"><summary>Is our client data used to train models for other firms? <span class="plus"></span></summary><div class="a">No. Per-firm data stays in per-firm scope. Only aggregate, anonymized patterns are shared as optional peer signals, and you can opt out.</div></details>
+        <details class="q"><summary>How long does onboarding take? <span class="plus"></span></summary><div class="a">Most firms are running on 10 pilot clients within a week, and rolled out to the full book within a month. The migration team handles data import from Dext, Keeper, or your existing rule library.</div></details>
+        <details class="q"><summary>What about security and compliance? <span class="plus"></span></summary><div class="a">SOC 2 Type II, bank-grade encryption at rest and in transit, read-only bank connections by default, and granular role-based access. Full security whitepaper available on request.</div></details>
+        <details class="q"><summary>Will this replace my bookkeepers? <span class="plus"></span></summary><div class="a">No — it replaces the part of their job they like least. Teams typically redeploy the reclaimed hours into advisory work, which is where the real client value (and firm margin) lives.</div></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section id="demo">
+  <div class="container">
+    <div class="cta-block">
+      <div>
+        <h2><span>See your </span><span class="ital">close</span><br><span>in under </span><span class="ital">24 hours.</span></h2>
+        <p class="sub">Book a 30-minute demo. We'll run LedgerAI against a sample month of your actual data and show you the confidence map before you commit to anything.</p>
+      </div>
+
+      <form class="form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Thanks — we\\'ll be in touch.'; this.querySelector('button').disabled=true;">
+        <div class="row">
+          <input type="text" placeholder="First name" required>
+          <input type="text" placeholder="Last name" required>
+        </div>
+        <input type="email" placeholder="Work email" required>
+        <input type="text" placeholder="Firm name" required>
+        <select required>
+          <option value="">Clients under management</option>
+          <option>1–10</option>
+          <option>11–50</option>
+          <option>51–200</option>
+          <option>200+</option>
+        </select>
+        <button type="submit" class="btn btn-light">
+          Book demo
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="fine">30-min call · No commitment · We'll run a sample close on your data</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="eclipse ec-blue"></div>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-col foot-brand">
+        <a class="brand" href="#">
+          <svg class="mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="1" y="1" width="30" height="30" rx="8" fill="url(#markGrad)"/>
+            <path d="M9 10h14M9 16h14M9 22h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="22.5" cy="22" r="2.5" fill="#fff"/>
+          </svg>
+          LedgerAI
+        </a>
+        <div class="d">AI-native bookkeeping for firms that want to scale without hiring.</div>
+      </div>
+      <div class="foot-col"><h5>Product</h5><ul>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#confidence">Confidence</a></li>
+        <li><a href="#compare">Compare</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul></div>
+      <div class="foot-col"><h5>Firm</h5><ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Customer stories</a></li>
+        <li><a href="#">Changelog</a></li>
+      </ul></div>
+      <div class="foot-col"><h5>Resources</h5><ul>
+        <li><a href="#">Security</a></li>
+        <li><a href="#">Trust center</a></li>
+        <li><a href="#">API docs</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul></div>
+    </div>
+
+    <div class="foot-base">
+      <span>© 2026 LedgerAI, Inc.</span>
+      <span>Built for bookkeepers · San Francisco</span>
+    </div>
+
+    <div class="foot-lockup">Ledger<em>AI</em>.</div>
+  </div>
+</footer>
+
+<!-- ================= TWEAKS PANEL ================= -->
+<div class="tweaks" id="tweaks">
+  <h6>
+    Tweaks
+    <svg class="close" id="tweaksClose" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </h6>
+  <div class="group"><label>Hero copy</label>
+    <div class="seg" data-key="hero-copy">
+      <button data-val="roi">Scale 10×</button>
+      <button data-val="autopilot" class="active">Autopilot</button>
+      <button data-val="accuracy">Accuracy</button>
+    </div>
+  </div>
+  <div class="group"><label>Hero visual</label>
+    <div class="seg" data-key="hero-visual">
+      <button data-val="list" class="active">Ledger</button>
+      <button data-val="dial">Confidence dial</button>
+    </div>
+  </div>
+  <div class="group"><label>Density</label>
+    <div class="seg" data-key="density">
+      <button data-val="compact">Compact</button>
+      <button data-val="regular" class="active">Regular</button>
+      <button data-val="spacious">Spacious</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "heroCopy": "autopilot",
+  "heroVisual": "list",
+  "density": "regular"
+}/*EDITMODE-END*/;
+
+const heroCopyVariants = {
+  roi: {
+    headline: '<span>Scale your firm </span><span class="ital">10×</span><span>,</span><br><span>not your headcount.</span>',
+    sub: 'LedgerAI automates transaction categorization, bank reconciliation and month-end statements for bookkeeping firms — with a confidence score on every entry so your team only touches what actually needs a human.'
+  },
+  autopilot: {
+    headline: '<span>Bookkeeping</span><br><span>on </span><span class="ital">autopilot.</span>',
+    sub: 'Read your books nightly, categorize every transaction, reconcile every statement, and deliver month-end reports the moment the month ends. Your team reviews — not keys in.'
+  },
+  accuracy: {
+    headline: '<span>Garbage in,</span><br><span class="ital">never</span><span> out.</span>',
+    sub: 'Every entry LedgerAI posts comes with a confidence score and its reasoning. Auto-book what\'s certain, review what\'s not, and flag the rest to the client — no silent mistakes compounding to year-end.'
+  }
+};
+
+function applyTweaks(state) {
+  document.body.dataset.heroCopy = state.heroCopy;
+  document.body.dataset.heroVisual = state.heroVisual;
+  document.body.dataset.density = state.density;
+  const v = heroCopyVariants[state.heroCopy] || heroCopyVariants.autopilot;
+  document.getElementById('hero-headline').innerHTML = v.headline;
+  document.getElementById('hero-sub').textContent = v.sub;
+  document.querySelectorAll('.tweaks .seg').forEach(seg => {
+    const key = seg.dataset.key;
+    const stateKey = key === 'hero-copy' ? 'heroCopy' : key === 'hero-visual' ? 'heroVisual' : 'density';
+    seg.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.val === state[stateKey]));
+  });
+}
+
+let tweakState = { ...TWEAK_DEFAULTS };
+applyTweaks(tweakState);
+
+document.querySelectorAll('.tweaks .seg').forEach(seg => {
+  const key = seg.dataset.key;
+  seg.addEventListener('click', e => {
+    const btn = e.target.closest('button[data-val]');
+    if (!btn) return;
+    const val = btn.dataset.val;
+    const stateKey = key === 'hero-copy' ? 'heroCopy' : key === 'hero-visual' ? 'heroVisual' : 'density';
+    tweakState[stateKey] = val;
+    applyTweaks(tweakState);
+    try { window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { [stateKey]: val } }, '*'); } catch (e) {}
+  });
+});
+
+document.getElementById('tweaksClose').addEventListener('click', () => {
+  document.getElementById('tweaks').classList.remove('open');
+});
+
+window.addEventListener('message', (e) => {
+  if (!e.data || typeof e.data !== 'object') return;
+  if (e.data.type === '__activate_edit_mode') document.getElementById('tweaks').classList.add('open');
+  else if (e.data.type === '__deactivate_edit_mode') document.getElementById('tweaks').classList.remove('open');
+});
+window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+
+// ---------- Nav scroll ----------
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 8));
+
+// ---------- Logo marquee ----------
+const brandLogos = [
+  { name: 'Keystone',   color: '#2a54d6', icon: 'square' },
+  { name: 'Northwind',  color: '#7c5bff', icon: 'triangle' },
+  { name: 'Axis & Co.', color: '#19c7c2', icon: 'circle' },
+  { name: 'Meridian',   color: '#148f5e', icon: 'diamond' },
+  { name: 'Foundry 42', color: '#c78210', icon: 'hex' },
+  { name: 'Brightline', color: '#c43b2d', icon: 'star' },
+  { name: 'Lattice',    color: '#2a54d6', icon: 'bars' },
+  { name: 'Heron',      color: '#7c5bff', icon: 'arc' },
+];
+function iconSvg(type, color) {
+  const c = color;
+  switch (type) {
+    case 'square':   return `<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="2" width="18" height="18" rx="4" fill="${c}"/><rect x="6" y="6" width="10" height="10" rx="2" fill="#fff"/></svg>`;
+    case 'triangle': return `<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2l9 17H2z" fill="${c}"/></svg>`;
+    case 'circle':   return `<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" fill="${c}"/><circle cx="11" cy="11" r="4" fill="#fff"/></svg>`;
+    case 'diamond':  return `<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2l9 9-9 9-9-9z" fill="${c}"/></svg>`;
+    case 'hex':      return `<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2l8 4.5v9L11 20l-8-4.5v-9z" fill="${c}"/></svg>`;
+    case 'star':     return `<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2l2.6 6.3 6.8.5-5.2 4.4 1.7 6.6L11 16.3 5.1 19.8l1.7-6.6L1.6 8.8l6.8-.5z" fill="${c}"/></svg>`;
+    case 'bars':     return `<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="10" width="3" height="9" fill="${c}"/><rect x="9" y="6" width="3" height="13" fill="${c}"/><rect x="15" y="2" width="3" height="17" fill="${c}"/></svg>`;
+    case 'arc':      return `<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 18a8 8 0 0116 0" stroke="${c}" stroke-width="3" stroke-linecap="round"/><circle cx="11" cy="18" r="2.5" fill="${c}"/></svg>`;
+  }
+}
+const track = document.getElementById('logoTrack');
+const pool = [...brandLogos, ...brandLogos]; // duplicate for seamless loop
+pool.forEach(l => {
+  const el = document.createElement('div');
+  el.className = 'logo-cell';
+  el.innerHTML = `${iconSvg(l.icon, l.color)}<span>${l.name}</span>`;
+  track.appendChild(el);
+});
+
+// ---------- Hero transactions ----------
+const txns = [
+  { m: 'Stripe',            sec: 'payout',      a: '+ $12,840.00', cat: 'INCOME · 4010',   conf: 99, cls: 'hi-blue', init: 'S', av: 'linear-gradient(135deg,#2a54d6,#7c5bff)' },
+  { m: 'AWS',               sec: 'us-east-1',   a: '– $842.19',    cat: 'HOSTING · 5210',  conf: 97, cls: 'hi',      init: 'A', av: 'linear-gradient(135deg,#19c7c2,#2a54d6)' },
+  { m: 'Gusto',              sec: 'payroll run', a: '– $28,104.50', cat: 'PAYROLL · 6100',  conf: 98, cls: 'hi',      init: 'G', av: 'linear-gradient(135deg,#148f5e,#19c7c2)' },
+  { m: 'Union Sq Hardware',  sec: 'ch.2404',     a: '– $248.17',    cat: 'REVIEW · 5400',   conf: 62, cls: 'warn',    init: 'U', av: 'linear-gradient(135deg,#f0b436,#ff6d5a)' },
+  { m: 'Figma',              sec: 'team seats',  a: '– $180.00',    cat: 'SOFTWARE · 5220', conf: 96, cls: 'hi-blue', init: 'F', av: 'linear-gradient(135deg,#7c5bff,#2a54d6)' },
+  { m: 'UNKNOWN LLC',        sec: 'wire',        a: '– $4,200.00',  cat: 'FLAGGED',         conf: 38, cls: 'err',     init: '?', av: 'linear-gradient(135deg,#ff6d5a,#c43b2d)' },
+];
+const txnList = document.getElementById('txnList');
+function renderTxns() {
+  txnList.innerHTML = '';
+  txns.forEach((t, i) => {
+    const el = document.createElement('div');
+    el.className = 'txn ' + t.cls;
+    el.style.animationDelay = (i * 0.08) + 's';
+    el.innerHTML = `
+      <div class="avatar" style="background:${t.av}">${t.init}</div>
+      <div class="merchant">${t.m}<span class="sec">${t.sec}</span></div>
+      <div class="amount">${t.a}</div>
+      <div class="cat">${t.cat}</div>
+      <div class="score"><span class="d"></span>${t.conf}%</div>
+      <div class="confidence"><div class="bar" style="--w:${t.conf}%; animation-delay:${0.4 + i * 0.08}s"></div></div>
+    `;
+    txnList.appendChild(el);
+  });
+}
+renderTxns();
+let cycle = 0;
+setInterval(() => {
+  cycle++;
+  const qn = document.getElementById('queueN');
+  if (qn) qn.textContent = 12 + (cycle % 7) - 3;
+  const ap = document.getElementById('autoPct');
+  if (ap) ap.textContent = 93 + (cycle % 3);
+}, 2800);
+
+// ---------- Dial ----------
+const dial = document.getElementById('dialCirc');
+const circ = 2 * Math.PI * 48;
+function animateDial(pct) {
+  if (!dial) return;
+  const target = circ * (1 - pct/100);
+  dial.animate([{ strokeDashoffset: circ }, { strokeDashoffset: target }],
+    { duration: 1400, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'forwards' });
+}
+const vizB = document.querySelector('.viz-b');
+const vObs = new IntersectionObserver((entries) => {
+  entries.forEach(en => { if (en.isIntersecting) { animateDial(94); vObs.disconnect(); } });
+});
+if (vizB) vObs.observe(vizB);
+const bodyObs = new MutationObserver(() => {
+  if (document.body.dataset.heroVisual === 'dial') animateDial(94);
+});
+bodyObs.observe(document.body, { attributes: true, attributeFilter: ['data-hero-visual'] });
+
+// ---------- Confidence bars reveal ----------
+const cdBars = document.querySelectorAll('.cd-bar .fill');
+cdBars.forEach(b => { const w = b.style.width; b.style.width = '0%'; b.dataset.target = w; });
+const cdObs = new IntersectionObserver((entries) => {
+  entries.forEach(en => {
+    if (en.isIntersecting) {
+      en.target.style.transition = 'width 1.1s cubic-bezier(.2,.7,.2,1)';
+      requestAnimationFrame(() => { en.target.style.width = en.target.dataset.target; });
+      cdObs.unobserve(en.target);
+    }
+  });
+}, { threshold: 0.4 });
+cdBars.forEach(b => cdObs.observe(b));
+
+// ---------- Generic reveal on scroll ----------
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(en => {
+    if (en.isIntersecting) {
+      en.target.classList.add('in');
+      revealObs.unobserve(en.target);
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// Stagger reveal for siblings
+document.querySelectorAll('.problem-grid, .pipe-grid, .feat-grid').forEach(grid => {
+  [...grid.children].forEach((child, i) => { child.style.transitionDelay = (i * 80) + 'ms'; });
+});
+</script>
+</body>
+</html>
