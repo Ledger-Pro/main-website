@@ -1,7 +1,7 @@
 const QUESTIONS: { q: string; a: string }[] = [
   {
     q: "Do my clients have to switch off QuickBooks or Xero?",
-    a: "No. LedgerAI is additive — it reads from and writes back to the GL your clients already use. Nothing migrates, nothing breaks.",
+    a: "No. Ledge is additive — it reads from and writes back to the GL your clients already use. Nothing migrates, nothing breaks.",
   },
   {
     q: "What happens when the model gets something wrong?",
@@ -29,7 +29,7 @@ export function Faq() {
   return (
     <section
       id="faq"
-      style={{ background: "var(--bg-soft)", borderTop: "1px solid var(--line)" }}
+      style={{ background: "var(--brand-bone)", borderTop: "1px solid var(--brand-stone)" }}
     >
       <div className="container">
         <div className="faq-grid">

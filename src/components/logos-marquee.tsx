@@ -4,28 +4,33 @@ type IconType = "square" | "triangle" | "circle" | "diamond" | "hex" | "star" | 
 
 interface BrandLogo {
   name: string;
-  color: string;
   icon: IconType;
 }
 
+/* Per docs/brand/DESIGN.md §5.5: real partner logos use partner colors;
+   fictional/placeholder marks render in a single neutral so they read as
+   stand-ins, not real brands. We use Forest 700 uniformly. */
+const FICTIONAL_MARK_COLOR = "#1F5443";
+
 const LOGOS: BrandLogo[] = [
-  { name: "Keystone", color: "#2a54d6", icon: "square" },
-  { name: "Northwind", color: "#7c5bff", icon: "triangle" },
-  { name: "Axis & Co.", color: "#19c7c2", icon: "circle" },
-  { name: "Meridian", color: "#148f5e", icon: "diamond" },
-  { name: "Foundry 42", color: "#c78210", icon: "hex" },
-  { name: "Brightline", color: "#c43b2d", icon: "star" },
-  { name: "Lattice", color: "#2a54d6", icon: "bars" },
-  { name: "Heron", color: "#7c5bff", icon: "arc" },
+  { name: "Keystone", icon: "square" },
+  { name: "Northwind", icon: "triangle" },
+  { name: "Axis & Co.", icon: "circle" },
+  { name: "Meridian", icon: "diamond" },
+  { name: "Foundry 42", icon: "hex" },
+  { name: "Brightline", icon: "star" },
+  { name: "Lattice", icon: "bars" },
+  { name: "Heron", icon: "arc" },
 ];
 
-function LogoIcon({ type, color }: { type: IconType; color: string }) {
+function LogoIcon({ type }: { type: IconType }) {
+  const color = FICTIONAL_MARK_COLOR;
   switch (type) {
     case "square":
       return (
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
           <rect x="2" y="2" width="18" height="18" rx="4" fill={color} />
-          <rect x="6" y="6" width="10" height="10" rx="2" fill="#fff" />
+          <rect x="6" y="6" width="10" height="10" rx="2" fill="#FAFAF7" />
         </svg>
       );
     case "triangle":
@@ -38,7 +43,7 @@ function LogoIcon({ type, color }: { type: IconType; color: string }) {
       return (
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
           <circle cx="11" cy="11" r="9" fill={color} />
-          <circle cx="11" cy="11" r="4" fill="#fff" />
+          <circle cx="11" cy="11" r="4" fill="#FAFAF7" />
         </svg>
       );
     case "diamond":
@@ -90,7 +95,7 @@ export function LogosMarquee() {
           <div className="logos-track">
             {pool.map((l, i) => (
               <div className="logo-cell" key={`${l.name}-${i}`}>
-                <LogoIcon type={l.icon} color={l.color} />
+                <LogoIcon type={l.icon} />
                 <span>{l.name}</span>
               </div>
             ))}

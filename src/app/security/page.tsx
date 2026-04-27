@@ -4,7 +4,7 @@ import { PageHero } from "@/components/page-hero";
 export const metadata: Metadata = {
   title: "Security",
   description:
-    "LedgerAI is SOC 2 Type II compliant, uses bank-grade encryption, and connects to financial data read-only by default.",
+    "Ledge is SOC 2 Type II compliant, uses bank-grade encryption, and connects to financial data read-only by default.",
 };
 
 interface Pillar {
@@ -24,7 +24,7 @@ const PILLARS: Pillar[] = [
     kicker: "Access",
     title: "Read-only bank connections by default",
     body:
-      "We connect to financial institutions via Plaid, Teller, and direct OFX/API feeds — all read-only. LedgerAI can pull transactions; it cannot move money, ever.",
+      "We connect to financial institutions via Plaid, Teller, and direct OFX/API feeds — all read-only. Ledge can pull transactions; it cannot move money, ever.",
   },
   {
     kicker: "Isolation",
@@ -59,7 +59,7 @@ export default function SecurityPage() {
         eyebrow="Security"
         title="Built for firms that handle"
         italic="other people's money."
-        lead="LedgerAI touches the same data your clients trust you with. Our security posture is the only way the product is allowed to exist — so we invest in it the way a bank does."
+        lead="Ledge touches the same data your clients trust you with. Our security posture is the only way the product is allowed to exist — so we invest in it the way a bank does."
       />
 
       <section className="prose-section">
@@ -78,13 +78,13 @@ export default function SecurityPage() {
 
       <section
         className="prose-section"
-        style={{ background: "var(--bg-soft)", borderTop: "1px solid var(--line)" }}
+        style={{ background: "var(--brand-bone)", borderTop: "1px solid var(--brand-stone)" }}
       >
         <div className="container prose-grid">
           <h2>Incident response &amp; uptime</h2>
           <div className="prose-body">
             <p>
-              LedgerAI runs on AWS across two regions with automated failover. Our SLA for
+              Ledge runs on AWS across two regions with automated failover. Our SLA for
               paid plans is <strong>99.9% monthly uptime</strong>, and our public status page
               (coming soon) reports real-time availability for every component.
             </p>
@@ -95,8 +95,8 @@ export default function SecurityPage() {
             </p>
             <p>
               To request the full security whitepaper, SOC 2 report, or a mutual NDA, email{" "}
-              <a href="mailto:security@ledgerai.com" style={{ color: "var(--blue-600)", fontWeight: 500 }}>
-                security@ledgerai.com
+              <a href="mailto:security@getledge.ai" style={{ color: "var(--brand-forest-700)", fontWeight: 500 }}>
+                security@getledge.ai
               </a>
               .
             </p>

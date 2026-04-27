@@ -4,10 +4,8 @@ import { HeroVisual } from "./hero-visual";
 export function Hero() {
   return (
     <header className="hero">
-      <div className="eclipse ec-blue" />
-      <div className="eclipse ec-violet" />
-      <div className="eclipse ec-teal" />
-      <div className="eclipse ec-amber" />
+      <div className="eclipse ec-forest-1" />
+      <div className="eclipse ec-forest-2" />
 
       <div className="container hero-grid">
         <div className="hero-copy">
@@ -17,15 +15,15 @@ export function Hero() {
           </div>
 
           <h1 className="display">
-            <span>Bookkeeping</span>
+            <span>The ledger,</span>
             <br />
-            <span>on </span>
-            <span className="ital">autopilot.</span>
+            <span className="ital">leveled.</span>
           </h1>
 
           <p className="hero-sub">
-            Read your books nightly, categorize every transaction, reconcile every statement, and
-            deliver month-end reports the moment the month ends. Your team reviews — not keys in.
+            AI bookkeeping for firms — not instead of them. Read every statement,
+            categorize every transaction, reconcile every account, and deliver
+            month-end the moment the month ends. Your team reviews, never keys in.
           </p>
 
           <div className="hero-cta">

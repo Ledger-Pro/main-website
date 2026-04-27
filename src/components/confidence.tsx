@@ -108,7 +108,7 @@ export function Confidence() {
                 <div className="lbl">70–95% confidence</div>
                 <div className="t">Queued for one-tap review</div>
                 <div className="d">
-                  LedgerAI proposes a category with its reasoning and two alternatives. Reviewer
+                  Ledge proposes a category with its reasoning and two alternatives. Reviewer
                   taps accept or corrects — the model learns immediately.
                 </div>
               </div>

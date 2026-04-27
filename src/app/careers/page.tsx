@@ -4,7 +4,7 @@ import { PageHero } from "@/components/page-hero";
 export const metadata: Metadata = {
   title: "Careers",
   description:
-    "LedgerAI hires senior engineering, design, and go-to-market talent out of Houston, TX. No public listings today — we recruit by introduction.",
+    "Ledge hires senior engineering, design, and go-to-market talent out of Houston, TX. No public listings today — we recruit by introduction.",
 };
 
 export default function CareersPage() {
@@ -34,8 +34,8 @@ export default function CareersPage() {
             </p>
             <p>
               Send a short note with what you&apos;ve built to{" "}
-              <a href="mailto:careers@ledgerai.com" style={{ color: "var(--blue-600)", fontWeight: 500 }}>
-                careers@ledgerai.com
+              <a href="mailto:careers@getledge.ai" style={{ color: "var(--brand-forest-700)", fontWeight: 500 }}>
+                careers@getledge.ai
               </a>
               . We reply within a week, always.
             </p>

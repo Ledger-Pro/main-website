@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "LedgerAI is building the AI bookkeeping layer for accounting firms — so firms can serve more clients without hiring more staff.",
+    "Ledge is building the AI bookkeeping layer for accounting firms — so firms can serve more clients without hiring more staff.",
 };
 
 export default function AboutPage() {
@@ -14,7 +15,7 @@ export default function AboutPage() {
         eyebrow="About"
         title="Building the bookkeeping layer"
         italic="for every accounting firm."
-        lead="We started LedgerAI because bookkeeping is the most labor-intensive, lowest-leverage part of accounting — and the one most ready for AI. Our goal is a firm where a single partner can profitably serve 200 clients."
+        lead="We started Ledge because bookkeeping is the most labor-intensive, lowest-leverage part of accounting — and the one most ready for AI. Our goal is a firm where a single partner can profitably serve 200 clients."
       />
 
       <section className="prose-section">
@@ -31,13 +32,13 @@ export default function AboutPage() {
               The model quality is finally there. Foundation models can read bank memos, match merchants,
               and reason about a chart of accounts with <strong>98%+ accuracy on typical transactions</strong>.
               The remaining 2% is the judgment call — exactly where a bookkeeper&apos;s expertise is most
-              valuable. LedgerAI turns that 2% into the entire job, and the firm&apos;s margin follows.
+              valuable. Ledge turns that 2% into the entire job, and the firm&apos;s margin follows.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="prose-section" style={{ background: "var(--bg-soft)", borderTop: "1px solid var(--line)", borderBottom: "1px solid var(--line)" }}>
+      <section className="prose-section" style={{ background: "var(--brand-bone)", borderTop: "1px solid var(--brand-stone)", borderBottom: "1px solid var(--brand-stone)" }}>
         <div className="container prose-grid">
           <h2>What we&apos;re building toward</h2>
           <div className="prose-body">
@@ -47,7 +48,7 @@ export default function AboutPage() {
               not data entry.
             </p>
             <p>
-              LedgerAI sits on top of QuickBooks and Xero rather than replacing them — because forcing a
+              Ledge sits on top of QuickBooks and Xero rather than replacing them — because forcing a
               migration on 30 clients at once isn&apos;t realistic. The firm keeps the tools it knows, and the
               automation works quietly underneath.
             </p>
@@ -63,7 +64,7 @@ export default function AboutPage() {
               <div className="tile-kicker">01</div>
               <div className="tile-title">Never a black box</div>
               <div className="tile-body">
-                Every entry LedgerAI posts comes with a confidence score and the factors that produced it.
+                Every entry Ledge posts comes with a confidence score and the factors that produced it.
                 If we&apos;re not sure, we say so — and we don&apos;t guess.
               </div>
             </div>
@@ -97,7 +98,7 @@ export default function AboutPage() {
             </p>
             <p>
               If your firm is the kind of place where the partner still knows every client&apos;s chart of
-              accounts by heart — we&apos;d love to meet you. <a href="/#demo">Book a demo</a>.
+              accounts by heart — we&apos;d love to meet you. <Link href="/#demo">Book a demo</Link>.
             </p>
           </div>
         </div>

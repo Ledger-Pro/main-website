@@ -3,10 +3,10 @@ import { ArrowRight } from "./icons/arrow";
 function Check() {
   return (
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-      <circle cx="9" cy="9" r="9" fill="#eaf1ff" />
+      <circle cx="9" cy="9" r="9" fill="#D8E5DF" />
       <path
         d="M5 9l3 3 5-6"
-        stroke="#2a54d6"
+        stroke="#0F2D24"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -62,7 +62,7 @@ export function Pricing() {
           <div className="card">
             <span className="label">From the field</span>
             <div className="quote">
-              &ldquo;We stopped selling bookkeeping by the hour six months in. LedgerAI turned our
+              &ldquo;We stopped selling bookkeeping by the hour six months in. Ledge turned our
               bottom quartile of clients into the most profitable ones.&rdquo;
             </div>
             <div className="meta">— Managing partner · 34-client firm · name on file during pilot</div>

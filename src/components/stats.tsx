@@ -6,17 +6,17 @@ export function Stats() {
           <div className="stats-inner">
             <div>
               <div className="eyebrow">Target market</div>
-              <h2 className="h2" style={{ marginTop: 16, color: "#fff" }}>
+              <h2 className="h2" style={{ marginTop: 16 }}>
                 Where the <span className="ital">money</span> is.
               </h2>
               <p
                 className="lead"
                 style={{
-                  color: "color-mix(in oklab, #fff 72%, transparent)",
+                  color: "color-mix(in oklab, var(--brand-cream) 72%, transparent)",
                   marginTop: 20,
                 }}
               >
-                Bookkeeping is a $60B+ service industry still priced by the hour. LedgerAI converts
+                Bookkeeping is a $60B+ service industry still priced by the hour. Ledge converts
                 that hour into software margin — for both the firm and the client.
               </p>
             </div>

@@ -31,7 +31,7 @@ export function HowItWorks() {
             </h2>
           </div>
           <p className="lead">
-            LedgerAI reads the same data you do — bank feeds, receipts, invoices — and runs it
+            Ledge reads the same data you do — bank feeds, receipts, invoices — and runs it
             through a supervised pipeline with a human check at exactly the point where it matters.
           </p>
         </div>
@@ -83,16 +83,16 @@ export function HowItWorks() {
                   gap: "7px",
                   fontFamily: "var(--mono)",
                   fontSize: "10px",
-                  color: "#2a3558",
+                  color: "var(--brand-charcoal)",
                   alignItems: "center",
                 }}
               >
                 <span>Starbucks #482</span>
-                <span style={{ color: "#148f5e", fontWeight: 600 }}>98%</span>
+                <span style={{ color: "var(--brand-success)", fontWeight: 600 }}>98%</span>
                 <span>AWS us-east-1</span>
-                <span style={{ color: "#148f5e", fontWeight: 600 }}>97%</span>
+                <span style={{ color: "var(--brand-success)", fontWeight: 600 }}>97%</span>
                 <span>UNKNOWN LLC</span>
-                <span style={{ color: "#c78210", fontWeight: 600 }}>62%</span>
+                <span style={{ color: "var(--brand-warning)", fontWeight: 600 }}>62%</span>
               </div>
             </div>
           </div>
@@ -107,25 +107,26 @@ export function HowItWorks() {
               pair, variances surface immediately.
             </div>
             <div className="ill">
-              <svg width="100%" height="72" viewBox="0 0 220 72" fill="none">
+              <svg width="100%" height="72" viewBox="0 0 220 72" fill="none" aria-hidden="true">
                 <defs>
+                  {/* Within-family Forest tonal — no multi-hue. */}
                   <linearGradient id="recLine" x1="0" x2="1">
-                    <stop offset="0" stopColor="#2a54d6" />
-                    <stop offset="1" stopColor="#19c7c2" />
+                    <stop offset="0" stopColor="#1F5443" />
+                    <stop offset="1" stopColor="#3F8770" />
                   </linearGradient>
                 </defs>
-                <rect x="4" y="10" width="70" height="20" rx="4" fill="#eaf1ff" stroke="#2a54d6" strokeOpacity=".3" />
-                <rect x="4" y="42" width="70" height="20" rx="4" fill="#eaf1ff" stroke="#2a54d6" strokeOpacity=".3" />
-                <rect x="146" y="10" width="70" height="20" rx="4" fill="#e4f8f7" stroke="#19c7c2" strokeOpacity=".4" />
-                <rect x="146" y="42" width="70" height="20" rx="4" fill="#e4f8f7" stroke="#19c7c2" strokeOpacity=".4" />
-                <text x="39" y="24" textAnchor="middle" fill="#2a54d6" fontFamily="JetBrains Mono" fontWeight="600" fontSize="9">LEDGER</text>
-                <text x="39" y="56" textAnchor="middle" fill="#2a54d6" fontFamily="JetBrains Mono" fontWeight="600" fontSize="9">LEDGER</text>
-                <text x="181" y="24" textAnchor="middle" fill="#0f8c87" fontFamily="JetBrains Mono" fontWeight="600" fontSize="9">BANK</text>
-                <text x="181" y="56" textAnchor="middle" fill="#0f8c87" fontFamily="JetBrains Mono" fontWeight="600" fontSize="9">BANK</text>
+                <rect x="4" y="10" width="70" height="20" rx="4" fill="#D8E5DF" stroke="#1F5443" strokeOpacity=".3" />
+                <rect x="4" y="42" width="70" height="20" rx="4" fill="#D8E5DF" stroke="#1F5443" strokeOpacity=".3" />
+                <rect x="146" y="10" width="70" height="20" rx="4" fill="#FBEFD2" stroke="#B98221" strokeOpacity=".35" />
+                <rect x="146" y="42" width="70" height="20" rx="4" fill="#FBEFD2" stroke="#B98221" strokeOpacity=".35" />
+                <text x="39" y="24" textAnchor="middle" fill="#0F2D24" fontFamily="ui-monospace" fontWeight="600" fontSize="9">LEDGER</text>
+                <text x="39" y="56" textAnchor="middle" fill="#0F2D24" fontFamily="ui-monospace" fontWeight="600" fontSize="9">LEDGER</text>
+                <text x="181" y="24" textAnchor="middle" fill="#6B4D14" fontFamily="ui-monospace" fontWeight="600" fontSize="9">BANK</text>
+                <text x="181" y="56" textAnchor="middle" fill="#6B4D14" fontFamily="ui-monospace" fontWeight="600" fontSize="9">BANK</text>
                 <path d="M74 20 C 100 20, 120 20, 146 20" stroke="url(#recLine)" strokeWidth="1.6" fill="none" />
                 <path d="M74 52 C 100 52, 120 52, 146 52" stroke="url(#recLine)" strokeWidth="1.6" fill="none" />
-                <circle cx="110" cy="20" r="3.5" fill="#148f5e" />
-                <circle cx="110" cy="52" r="3.5" fill="#148f5e" />
+                <circle cx="110" cy="20" r="3.5" fill="#2A6D58" />
+                <circle cx="110" cy="52" r="3.5" fill="#2A6D58" />
               </svg>
             </div>
           </div>
@@ -140,15 +141,15 @@ export function HowItWorks() {
               for the client portal or Drive folder.
             </div>
             <div className="ill">
-              <svg width="100%" height="72" viewBox="0 0 220 72" fill="none">
-                <rect x="8" y="6" width="120" height="60" rx="6" fill="#fff" stroke="#dce4f2" />
-                <rect x="16" y="14" width="60" height="5" rx="1.5" fill="#2a54d6" />
-                <rect x="16" y="24" width="90" height="3" rx="1" fill="#dce4f2" />
-                <rect x="16" y="32" width="80" height="3" rx="1" fill="#dce4f2" />
-                <rect x="16" y="40" width="70" height="3" rx="1" fill="#dce4f2" />
-                <rect x="16" y="50" width="50" height="8" rx="2" fill="#7c5bff" opacity="0.7" />
-                <rect x="138" y="6" width="70" height="60" rx="6" fill="#eaf1ff" stroke="#dce4f2" />
-                <path d="M150 30 L165 42 L195 18" stroke="#148f5e" strokeWidth="2.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+              <svg width="100%" height="72" viewBox="0 0 220 72" fill="none" aria-hidden="true">
+                <rect x="8" y="6" width="120" height="60" rx="6" fill="#FAFAF7" stroke="#B5B0A6" />
+                <rect x="16" y="14" width="60" height="5" rx="1.5" fill="#0F2D24" />
+                <rect x="16" y="24" width="90" height="3" rx="1" fill="#B5B0A6" />
+                <rect x="16" y="32" width="80" height="3" rx="1" fill="#B5B0A6" />
+                <rect x="16" y="40" width="70" height="3" rx="1" fill="#B5B0A6" />
+                <rect x="16" y="50" width="50" height="8" rx="2" fill="#E5A934" />
+                <rect x="138" y="6" width="70" height="60" rx="6" fill="#D8E5DF" stroke="#B5B0A6" />
+                <path d="M150 30 L165 42 L195 18" stroke="#0F2D24" strokeWidth="2.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
           </div>

@@ -5,7 +5,7 @@ import { DemoForm } from "@/components/demo-form";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Talk to the LedgerAI team — sales, security, press, and general questions.",
+    "Talk to the Ledge team — sales, security, press, and general questions.",
 };
 
 export default function ContactPage() {
@@ -27,28 +27,28 @@ export default function ContactPage() {
             <div className="contact-list">
               <div className="contact-card">
                 <h3>Sales &amp; demos</h3>
-                <a href="mailto:sales@ledgerai.com">sales@ledgerai.com</a>
+                <a href="mailto:sales@getledge.ai">sales@getledge.ai</a>
                 <div className="tile-body">
                   Pricing, pilots, multi-client rollouts. The form on this page routes here too.
                 </div>
               </div>
               <div className="contact-card">
                 <h3>Customer support</h3>
-                <a href="mailto:support@ledgerai.com">support@ledgerai.com</a>
+                <a href="mailto:support@getledge.ai">support@getledge.ai</a>
                 <div className="tile-body">
                   Active-customer issues — response within 4 business hours, 1 hour on Enterprise.
                 </div>
               </div>
               <div className="contact-card">
                 <h3>Security &amp; trust</h3>
-                <a href="mailto:security@ledgerai.com">security@ledgerai.com</a>
+                <a href="mailto:security@getledge.ai">security@getledge.ai</a>
                 <div className="tile-body">
                   Whitepaper, SOC 2 report, vulnerability disclosure, DPA / BAA requests.
                 </div>
               </div>
               <div className="contact-card">
                 <h3>Press</h3>
-                <a href="mailto:press@ledgerai.com">press@ledgerai.com</a>
+                <a href="mailto:press@getledge.ai">press@getledge.ai</a>
                 <div className="tile-body">
                   Media kit, executive interviews, customer introductions.
                 </div>
@@ -68,11 +68,11 @@ export default function ContactPage() {
             <div
               style={{
                 background:
-                  "radial-gradient(ellipse at 0% 100%, color-mix(in oklab, var(--blue-400) 30%, transparent), transparent 50%), linear-gradient(135deg, var(--blue-900), var(--blue-700))",
-                color: "#fff",
+                  "radial-gradient(ellipse at 0% 100%, color-mix(in oklab, var(--brand-forest-500) 35%, transparent), transparent 55%), linear-gradient(135deg, var(--brand-forest-950), var(--brand-forest))",
+                color: "var(--brand-cream)",
                 borderRadius: 18,
                 padding: 28,
-                boxShadow: "0 30px 60px -30px rgba(31, 65, 176, 0.4)",
+                boxShadow: "0 30px 60px -30px rgba(15, 45, 36, 0.4)",
               }}
             >
               <div

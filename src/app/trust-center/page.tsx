@@ -4,7 +4,7 @@ import { PageHero } from "@/components/page-hero";
 export const metadata: Metadata = {
   title: "Trust center",
   description:
-    "Where LedgerAI stores data, how long we keep it, and what happens when you ask us to delete it.",
+    "Where Ledge stores data, how long we keep it, and what happens when you ask us to delete it.",
 };
 
 interface Row {
@@ -34,12 +34,12 @@ const ROWS: Row[] = [
     a: "Per-firm data is used to improve that firm's personalized model and nothing else. Cross-firm peer signals are aggregate, anonymized, and require opt-in. Your clients' data is never used to train for another firm.",
   },
   {
-    q: "What sub-processors does LedgerAI use?",
+    q: "What sub-processors does Ledge use?",
     a: "The canonical list — vendor, purpose, region, and data category — is published at /trust-center/subprocessors. Categories today include infrastructure, billing, transactional email, error tracking, bank data aggregation, and model inference (on zero-retention endpoints). We give firms 30 days' written notice before adding or replacing any sub-processor.",
   },
   {
     q: "Can I get a DPA / BAA?",
-    a: "DPAs are available to every customer at signup. HIPAA BAAs are available on the Enterprise plan. Email legal@ledgerai.com to request either.",
+    a: "DPAs are available to every customer at signup. HIPAA BAAs are available on the Enterprise plan. Email legal@getledge.ai to request either.",
   },
   {
     q: "What frameworks are you audited against?",
@@ -74,7 +74,7 @@ export default function TrustCenterPage() {
 
       <section
         className="prose-section"
-        style={{ background: "var(--bg-soft)", borderTop: "1px solid var(--line)" }}
+        style={{ background: "var(--brand-bone)", borderTop: "1px solid var(--brand-stone)" }}
       >
         <div className="container">
           <div className="tile-grid">
@@ -83,8 +83,8 @@ export default function TrustCenterPage() {
               <div className="tile-title">SOC 2 Type II</div>
               <div className="tile-body">
                 Request the report with a signed NDA at{" "}
-                <a href="mailto:security@ledgerai.com" style={{ color: "var(--blue-600)" }}>
-                  security@ledgerai.com
+                <a href="mailto:security@getledge.ai" style={{ color: "var(--brand-forest-700)" }}>
+                  security@getledge.ai
                 </a>
                 .
               </div>
@@ -94,8 +94,8 @@ export default function TrustCenterPage() {
               <div className="tile-title">DPA / BAA</div>
               <div className="tile-body">
                 Email{" "}
-                <a href="mailto:legal@ledgerai.com" style={{ color: "var(--blue-600)" }}>
-                  legal@ledgerai.com
+                <a href="mailto:legal@getledge.ai" style={{ color: "var(--brand-forest-700)" }}>
+                  legal@getledge.ai
                 </a>
                 {" "}— counter-signed within 5 business days.
               </div>
@@ -105,8 +105,8 @@ export default function TrustCenterPage() {
               <div className="tile-title">Vulnerability reports</div>
               <div className="tile-body">
                 Responsible disclosure at{" "}
-                <a href="mailto:security@ledgerai.com" style={{ color: "var(--blue-600)" }}>
-                  security@ledgerai.com
+                <a href="mailto:security@getledge.ai" style={{ color: "var(--brand-forest-700)" }}>
+                  security@getledge.ai
                 </a>
                 . We respond within 72 hours.
               </div>

@@ -73,7 +73,7 @@ export function Compare() {
             </h2>
           </div>
           <p className="lead">
-            LedgerAI sits on top of the ledger you already use, and goes further than legacy
+            Ledge sits on top of the ledger you already use, and goes further than legacy
             rule-based tools like Dext or Keeper on the dimensions that matter for throughput.
           </p>
         </div>
@@ -83,7 +83,7 @@ export function Compare() {
             <thead>
               <tr>
                 <th>Capability</th>
-                <th className="us">LedgerAI</th>
+                <th className="us">Ledge</th>
                 <th>Rule-based tools</th>
                 <th>GL only (QBO / Xero)</th>
                 <th>In-house staff</th>

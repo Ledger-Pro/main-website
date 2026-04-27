@@ -4,7 +4,7 @@ import { PageHero } from "@/components/page-hero";
 export const metadata: Metadata = {
   title: "Changelog",
   description:
-    "What's shipped recently in LedgerAI — models, integrations, reviewer tools, and API updates.",
+    "What's shipped recently in Ledge — models, integrations, reviewer tools, and API updates.",
 };
 
 interface Entry {

@@ -13,7 +13,7 @@ const ROUTES: { path: string; priority: number; changeFrequency: MetadataRoute.S
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://ledgerai.com";
+  const base = "https://getledge.ai";
   const now = new Date();
   return ROUTES.map((r) => ({
     url: `${base}${r.path}`,

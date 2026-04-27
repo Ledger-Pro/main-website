@@ -68,9 +68,9 @@ export function HeroVisual() {
         <div className="viz-panel">
           <div className="viz-head">
             <div className="viz-head-l">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <rect x="1" y="1" width="18" height="18" rx="5" fill="url(#markGrad)" />
-                <path d="M6 7h8M6 10h8M6 13h5" stroke="#fff" strokeWidth="1.3" strokeLinecap="round" />
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <rect x="1" y="1" width="18" height="18" rx="5" fill="#0F2D24" />
+                <rect x="7" y="7" width="6" height="6" fill="#E5A934" />
               </svg>
               <h4>Ledger — April 2026</h4>
             </div>
@@ -161,9 +161,9 @@ function HeroDial() {
       <div className="viz-panel" style={{ gridTemplateRows: "auto 1fr auto" }}>
         <div className="viz-head">
           <div className="viz-head-l">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <circle cx="10" cy="10" r="8" stroke="#2a54d6" strokeWidth="1.4" />
-              <path d="M10 4v6l4 2" stroke="#2a54d6" strokeWidth="1.4" strokeLinecap="round" />
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <circle cx="10" cy="10" r="8" stroke="#0F2D24" strokeWidth="1.4" />
+              <path d="M10 4v6l4 2" stroke="#0F2D24" strokeWidth="1.4" strokeLinecap="round" />
             </svg>
             <h4>Confidence · April 2026</h4>
           </div>
@@ -172,13 +172,14 @@ function HeroDial() {
         <div className="dial-wrap">
           <svg className="dial" viewBox="0 0 120 120">
             <defs>
+              {/* Single-family Forest tonal — within-brand gradient, no multi-hue. */}
               <linearGradient id="dialGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stopColor="#2a54d6" />
-                <stop offset="0.5" stopColor="#7c5bff" />
-                <stop offset="1" stopColor="#19c7c2" />
+                <stop offset="0" stopColor="#081B15" />
+                <stop offset="0.5" stopColor="#1F5443" />
+                <stop offset="1" stopColor="#3F8770" />
               </linearGradient>
             </defs>
-            <circle cx="60" cy="60" r="48" fill="none" stroke="#eef3fb" strokeWidth="10" />
+            <circle cx="60" cy="60" r="48" fill="none" stroke="#D8E5DF" strokeWidth="10" />
             <circle
               ref={circRef}
               cx="60"

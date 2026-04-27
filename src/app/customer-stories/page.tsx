@@ -4,7 +4,7 @@ import { PageHero } from "@/components/page-hero";
 export const metadata: Metadata = {
   title: "Customer stories",
   description:
-    "How accounting and bookkeeping firms use LedgerAI to close the books faster, take on more clients, and reclaim partner time.",
+    "How accounting and bookkeeping firms use Ledge to close the books faster, take on more clients, and reclaim partner time.",
 };
 
 interface Story {
@@ -22,7 +22,7 @@ const STORIES: Story[] = [
     size: "34 clients · 6 staff",
     vertical: "E-commerce & SaaS",
     quote:
-      "We stopped selling bookkeeping by the hour six months in. LedgerAI turned our bottom quartile of clients into the most profitable ones — we closed three straight months in under 48 hours each.",
+      "We stopped selling bookkeeping by the hour six months in. Ledge turned our bottom quartile of clients into the most profitable ones — we closed three straight months in under 48 hours each.",
     author: "Managing Partner",
     metrics: [
       { label: "Avg close time", value: "11d → 22h" },
@@ -35,7 +35,7 @@ const STORIES: Story[] = [
     size: "120 clients · 18 staff",
     vertical: "Services & retail",
     quote:
-      "Categorization was eating our associates alive. Rolling LedgerAI across the full book took 11 days. Our associates now spend their mornings on advisory calls — which we weren't even billing for before.",
+      "Categorization was eating our associates alive. Rolling Ledge across the full book took 11 days. Our associates now spend their mornings on advisory calls — which we weren't even billing for before.",
     author: "Director of Operations",
     metrics: [
       { label: "Hours reclaimed / wk", value: "~220" },
@@ -48,7 +48,7 @@ const STORIES: Story[] = [
     size: "8 clients · solo",
     vertical: "Construction & trades",
     quote:
-      "Solo practice, high volume per client. LedgerAI is effectively my second bookkeeper. I onboarded eight new clients in a quarter without hiring — that used to cap at two.",
+      "Solo practice, high volume per client. Ledge is effectively my second bookkeeper. I onboarded eight new clients in a quarter without hiring — that used to cap at two.",
     author: "Founder",
     metrics: [
       { label: "Clients added", value: "2 → 10" },
@@ -74,11 +74,11 @@ export default function CustomerStoriesPage() {
             <article
               key={s.firm}
               style={{
-                background: "#fff",
-                border: "1px solid var(--line)",
+                background: "var(--brand-cream)",
+                border: "1px solid var(--brand-stone)",
                 borderRadius: 18,
                 padding: "clamp(28px, 4vw, 48px)",
-                boxShadow: "0 20px 40px -24px rgba(31, 65, 176, 0.12)",
+                boxShadow: "0 20px 40px -24px rgba(15, 45, 36, 0.16)",
                 display: "grid",
                 gridTemplateColumns: "1.2fr 1fr",
                 gap: "clamp(28px, 5vw, 56px)",
@@ -89,13 +89,13 @@ export default function CustomerStoriesPage() {
                 <div className="eyebrow">{s.vertical}</div>
                 <div
                   style={{
-                    fontFamily: "var(--serif)",
-                    fontStyle: "italic",
+                    fontFamily: "var(--sans)",
+                    fontWeight: 500,
                     fontSize: "clamp(22px, 2.4vw, 30px)",
-                    lineHeight: 1.3,
-                    letterSpacing: "-0.01em",
+                    lineHeight: 1.35,
+                    letterSpacing: "-0.015em",
                     marginTop: 16,
-                    color: "var(--ink)",
+                    color: "var(--brand-ink)",
                   }}
                 >
                   &ldquo;{s.quote}&rdquo;
@@ -104,7 +104,7 @@ export default function CustomerStoriesPage() {
                   style={{
                     marginTop: 24,
                     fontSize: 14,
-                    color: "var(--ink-3)",
+                    color: "var(--brand-slate)",
                     fontFamily: "var(--mono)",
                     letterSpacing: "0.04em",
                   }}
@@ -115,8 +115,8 @@ export default function CustomerStoriesPage() {
 
               <div
                 style={{
-                  background: "var(--bg-soft)",
-                  border: "1px solid var(--line)",
+                  background: "var(--brand-bone)",
+                  border: "1px solid var(--brand-stone)",
                   borderRadius: 14,
                   padding: 24,
                   display: "grid",
@@ -130,7 +130,7 @@ export default function CustomerStoriesPage() {
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "baseline",
-                      borderBottom: "1px solid var(--line)",
+                      borderBottom: "1px solid var(--brand-stone)",
                       paddingBottom: 14,
                     }}
                   >
@@ -138,7 +138,7 @@ export default function CustomerStoriesPage() {
                       style={{
                         fontFamily: "var(--mono)",
                         fontSize: 11,
-                        color: "var(--ink-3)",
+                        color: "var(--brand-slate)",
                         letterSpacing: "0.08em",
                         textTransform: "uppercase",
                       }}
@@ -150,7 +150,8 @@ export default function CustomerStoriesPage() {
                         fontSize: 22,
                         fontWeight: 500,
                         letterSpacing: "-0.02em",
-                        color: "var(--blue-700)",
+                        color: "var(--brand-forest)",
+                        fontVariantNumeric: "tabular-nums",
                       }}
                     >
                       {m.value}

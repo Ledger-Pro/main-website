@@ -41,7 +41,7 @@ export function DemoForm() {
         <div
           className="fine"
           role="alert"
-          style={{ color: "color-mix(in oklab, #fff 85%, transparent)" }}
+          style={{ color: "color-mix(in oklab, var(--brand-cream) 85%, transparent)" }}
         >
           {state.error}
         </div>

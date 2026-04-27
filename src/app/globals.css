@@ -3,10 +3,13 @@
 /* =================================================================
    LEDGE BRAND TOKENS
    Source of truth: docs/brand/DESIGN.md §4
-   Forest / Cream / Gold / Ink — five core, plus Forest scale + neutrals.
-   Legacy aliases (--blue-*, --bg, --ink-*, --line, --accent-*) are kept
-   pointing at brand colors so existing section CSS keeps rendering.
-   Phase 2 will retire the legacy aliases once components migrate.
+   Forest / Cream / Gold / Ink — four core, plus Forest scale, Gold scale,
+   warm neutrals (Charcoal/Slate/Stone/Bone), and a small semantic palette.
+
+   Section CSS still references a small set of legacy short names
+   (--bg, --ink-2, --line, --hi, --warn, --err, --bg-panel, --hi-bg, --warn-bg, --err-bg)
+   re-aliased onto brand tokens — these are the only legacy aliases left
+   and exist only to keep section CSS short.
    ================================================================= */
 :root {
   /* Brand core */
@@ -40,7 +43,7 @@
   --brand-error:      #B23A2D;
   --brand-info:       #2D5A87;
 
-  /* ----- Legacy alias layer (Phase 1 only — retired in Phase 2) ----- */
+  /* ----- Short-name aliases used by section CSS ----- */
   --bg:        var(--brand-cream);
   --bg-soft:   var(--brand-bone);
   --bg-panel:  var(--brand-forest-100);
@@ -50,23 +53,6 @@
   --ink-4:     var(--brand-stone);
   --line:      var(--brand-stone);
   --line-2:    var(--brand-slate);
-
-  /* Blue scale was the old primary; map onto Gold/Forest so legacy
-     gradients remain visible until Phase 2 strips them. */
-  --blue-50:   #FBEFD2; /* gold tint */
-  --blue-100:  var(--brand-forest-100);
-  --blue-200:  var(--brand-forest-100);
-  --blue-400:  var(--brand-gold);
-  --blue-500:  var(--brand-gold);
-  --blue-600:  var(--brand-forest-700);
-  --blue-700:  var(--brand-forest);
-  --blue-900:  var(--brand-forest-950);
-
-  --accent-violet: var(--brand-forest-700);
-  --accent-teal:   var(--brand-forest-500);
-  --accent-amber:  var(--brand-gold);
-  --accent-green:  var(--brand-success);
-  --accent-coral:  var(--brand-error);
 
   --hi:        var(--brand-success);
   --hi-bg:     var(--brand-forest-100);
@@ -250,17 +236,20 @@ footer .brand { color: var(--brand-ink); }
 @media (max-width: 860px) { .nav-links { display: none; } }
 
 /* =================================================================
-   HERO
+   HERO — Forest dark surface, Cream type, one Gold highlight word.
+   Source of truth: docs/brand/DESIGN.md §8.7 (marketing hero).
    ================================================================= */
 .hero {
-  padding-top: clamp(48px, 6vw, 80px);
+  padding-top: clamp(64px, 7vw, 96px);
   padding-bottom: var(--section-py);
   position: relative;
   overflow: hidden;
+  background: var(--brand-forest);
+  color: var(--brand-cream);
 }
 .eclipse {
   position: absolute; border-radius: 50%;
-  filter: blur(80px); pointer-events: none; z-index: 0;
+  filter: blur(100px); pointer-events: none; z-index: 0;
   opacity: 0.55;
 }
 .hero .ec-blue,
@@ -268,14 +257,42 @@ footer .brand { color: var(--brand-ink); }
 .hero .ec-teal,
 .hero .ec-amber { display: none; }
 .hero .ec-forest-1 {
-  width: 720px; height: 720px; left: -260px; top: -160px;
-  background: radial-gradient(circle at 40% 40%, var(--brand-forest-100), transparent 70%);
-  opacity: 0.6;
+  width: 760px; height: 760px; left: -260px; top: -200px;
+  background: radial-gradient(circle at 40% 40%, color-mix(in oklab, var(--brand-forest-500) 55%, var(--brand-forest)), transparent 70%);
+  opacity: 0.5;
 }
 .hero .ec-forest-2 {
-  width: 520px; height: 520px; right: -140px; bottom: -120px;
-  background: radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--brand-forest-500) 30%, var(--brand-cream)), transparent 70%);
-  opacity: 0.35;
+  width: 560px; height: 560px; right: -160px; bottom: -160px;
+  background: radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--brand-forest-700) 80%, var(--brand-forest-950)), transparent 70%);
+  opacity: 0.7;
+}
+
+/* On the Forest hero, the display headline is Cream and the highlighted
+   word is the one Gold accent that anchors the brand. */
+.hero .display { color: var(--brand-cream); }
+.hero .display .ital {
+  background: none;
+  -webkit-text-fill-color: var(--brand-gold);
+  color: var(--brand-gold);
+}
+.hero .hero-sub { color: color-mix(in oklab, var(--brand-cream) 78%, transparent); }
+.hero .hero-meta { color: color-mix(in oklab, var(--brand-cream) 60%, transparent); }
+.hero .hero-meta .dot { background: var(--brand-forest-500); box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand-forest-500) 30%, transparent); }
+.hero .hero-pill {
+  background: rgba(241, 236, 224, 0.05);
+  border-color: rgba(241, 236, 224, 0.18);
+  color: color-mix(in oklab, var(--brand-cream) 82%, transparent);
+  box-shadow: none;
+}
+.hero .btn-ghost {
+  background: transparent;
+  color: var(--brand-cream);
+  border-color: rgba(241, 236, 224, 0.30);
+}
+.hero .btn-ghost:hover {
+  border-color: var(--brand-cream);
+  color: var(--brand-cream);
+  background: rgba(241, 236, 224, 0.06);
 }
 
 .hero-grid {

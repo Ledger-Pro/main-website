@@ -73,7 +73,7 @@ const FEATURES: Feature[] = [
       </svg>
     ),
     title: "Two-way QuickBooks & Xero sync",
-    body: "LedgerAI writes directly to your existing GL. Keep the tools your firm already runs on — your clients never need to migrate, and your reports come out of the software they know.",
+    body: "Ledge writes directly to your existing GL. Keep the tools your firm already runs on — your clients never need to migrate, and your reports come out of the software they know.",
   },
   {
     span: 4,
