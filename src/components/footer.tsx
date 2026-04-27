@@ -35,16 +35,15 @@ const COLS: { title: string; links: { label: string; href: string }[] }[] = [
 export function Footer() {
   return (
     <footer>
-      <div className="eclipse ec-blue" />
       <div className="container">
         <div className="foot-grid">
           <div className="foot-col foot-brand">
             <Link className="brand" href="/">
               <BrandMark className="mark" />
-              LedgerAI
+              ledge
             </Link>
             <div className="d">
-              AI-native bookkeeping for firms that want to scale without hiring.
+              AI-native bookkeeping for firms — not instead of them.
             </div>
           </div>
           {COLS.map((c) => (
@@ -62,12 +61,12 @@ export function Footer() {
         </div>
 
         <div className="foot-base">
-          <span>© {new Date().getFullYear()} LedgerAI, Inc.</span>
-          <span>Built for bookkeepers · Houston, TX</span>
+          <span>© {new Date().getFullYear()} Ledge, Inc.</span>
+          <span>getledge.ai · Built for bookkeepers</span>
         </div>
 
         <div className="foot-lockup">
-          Ledger<em>AI</em>.
+          ledge<span className="foot-lockup-mark" aria-hidden="true" />
         </div>
       </div>
     </footer>

@@ -1,40 +1,39 @@
 import type { Metadata, Viewport } from "next";
-import { inter, interTight, jetbrainsMono } from "@/lib/fonts";
+import { geistSans, geistMono, inter } from "@/lib/fonts";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ledgerai.com"),
+  metadataBase: new URL("https://getledge.ai"),
   title: {
-    default: "LedgerAI — Bookkeeping on autopilot",
-    template: "%s · LedgerAI",
+    default: "Ledge — The ledger, leveled.",
+    template: "%s · Ledge",
   },
   description:
-    "AI-native bookkeeping for firms that want to scale without hiring. Auto-categorize, reconcile, and close the books in under 24 hours — with a confidence score on every entry.",
+    "AI bookkeeping for firms — not instead of them. Auto-categorize, reconcile, and close client books with a confidence score on every entry.",
   keywords: [
     "bookkeeping automation",
     "AI bookkeeping",
-    "accounting software",
+    "bookkeeping firm software",
     "QuickBooks automation",
     "Xero automation",
     "month-end close",
     "reconciliation",
   ],
-  authors: [{ name: "LedgerAI" }],
+  authors: [{ name: "Ledge" }],
   openGraph: {
     type: "website",
-    url: "https://ledgerai.com",
-    title: "LedgerAI — Bookkeeping on autopilot",
+    url: "https://getledge.ai",
+    title: "Ledge — The ledger, leveled.",
     description:
-      "AI-native bookkeeping for firms that want to scale without hiring. Close the books in under 24 hours with a confidence score on every entry.",
-    siteName: "LedgerAI",
+      "AI bookkeeping for firms — not instead of them. Close client books with a confidence score on every entry.",
+    siteName: "Ledge",
   },
   twitter: {
     card: "summary_large_image",
-    title: "LedgerAI — Bookkeeping on autopilot",
-    description:
-      "AI-native bookkeeping for firms that want to scale without hiring.",
+    title: "Ledge — The ledger, leveled.",
+    description: "AI bookkeeping for firms — not instead of them.",
   },
   icons: {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
@@ -44,14 +43,14 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#2a54d6",
+  themeColor: "#0F2D24",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${interTight.variable} ${jetbrainsMono.variable}`}
+      className={`${geistSans.variable} ${geistMono.variable} ${inter.variable}`}
     >
       <body>
         <Nav />

@@ -1,63 +1,98 @@
 @import "tailwindcss";
 
 /* =================================================================
-   DESIGN TOKENS — ported from main-website/Landing Page.html :root
+   LEDGE BRAND TOKENS
+   Source of truth: docs/brand/DESIGN.md §4
+   Forest / Cream / Gold / Ink — five core, plus Forest scale + neutrals.
+   Legacy aliases (--blue-*, --bg, --ink-*, --line, --accent-*) are kept
+   pointing at brand colors so existing section CSS keeps rendering.
+   Phase 2 will retire the legacy aliases once components migrate.
    ================================================================= */
 :root {
-  --bg:        #ffffff;
-  --bg-soft:   #f4f7fc;
-  --bg-panel:  #eef3fb;
-  --ink:       #0a1333;
-  --ink-2:     #2a3558;
-  --ink-3:     #5c6684;
-  --ink-4:     #8d94ab;
-  --line:      #dce4f2;
-  --line-2:    #c3cfe6;
+  /* Brand core */
+  --brand-forest:     #0F2D24;
+  --brand-cream:      #F1ECE0;
+  --brand-gold:       #E5A934;
+  --brand-ink:        #0F0F0E;
 
-  --blue-50:   #eaf1ff;
-  --blue-100:  #d4e2ff;
-  --blue-200:  #a5bdf8;
-  --blue-400:  #4d78ea;
-  --blue-500:  #2a54d6;
-  --blue-600:  #1f41b0;
-  --blue-700:  #18368f;
-  --blue-900:  #0a1b55;
+  /* Forest scale */
+  --brand-forest-950: #081B15;
+  --brand-forest-700: #1F5443;
+  --brand-forest-500: #3F8770;
+  --brand-forest-100: #D8E5DF;
 
-  --accent-violet: #7c5bff;
-  --accent-teal:   #19c7c2;
-  --accent-amber:  #f0b436;
-  --accent-green:  #22a06b;
-  --accent-coral:  #ff6d5a;
+  /* Neutrals */
+  --brand-charcoal:   #2C2C2A;
+  --brand-slate:      #5F5E5A;
+  --brand-stone:      #B5B0A6;
+  --brand-bone:       #FAFAF7;
 
-  --hi:        #148f5e;
-  --hi-bg:     #d8f1e4;
-  --warn:      #c78210;
-  --warn-bg:   #fbecc7;
-  --err:       #c43b2d;
-  --err-bg:    #fbd9d4;
+  /* Semantic */
+  --brand-success:    #2A6D58;
+  --brand-warning:    #C7901F;
+  --brand-error:      #B23A2D;
+  --brand-info:       #2D5A87;
 
-  --serif:        var(--font-display), -apple-system, sans-serif;
-  --sans:         var(--font-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+  /* ----- Legacy alias layer (Phase 1 only — retired in Phase 2) ----- */
+  --bg:        var(--brand-cream);
+  --bg-soft:   var(--brand-bone);
+  --bg-panel:  var(--brand-forest-100);
+  --ink:       var(--brand-ink);
+  --ink-2:     var(--brand-charcoal);
+  --ink-3:     var(--brand-slate);
+  --ink-4:     var(--brand-stone);
+  --line:      var(--brand-stone);
+  --line-2:    var(--brand-slate);
+
+  /* Blue scale was the old primary; map onto Gold/Forest so legacy
+     gradients remain visible until Phase 2 strips them. */
+  --blue-50:   #FBEFD2; /* gold tint */
+  --blue-100:  var(--brand-forest-100);
+  --blue-200:  var(--brand-forest-100);
+  --blue-400:  var(--brand-gold);
+  --blue-500:  var(--brand-gold);
+  --blue-600:  var(--brand-forest-700);
+  --blue-700:  var(--brand-forest);
+  --blue-900:  var(--brand-forest-950);
+
+  --accent-violet: var(--brand-forest-700);
+  --accent-teal:   var(--brand-forest-500);
+  --accent-amber:  var(--brand-gold);
+  --accent-green:  var(--brand-success);
+  --accent-coral:  var(--brand-error);
+
+  --hi:        var(--brand-success);
+  --hi-bg:     var(--brand-forest-100);
+  --warn:      var(--brand-warning);
+  --warn-bg:   #FBEFD2;
+  --err:       var(--brand-error);
+  --err-bg:    #F5E0DC;
+
+  /* Type stacks */
+  --sans:         var(--font-sans), 'Söhne', 'Inter Display', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
   --mono:         var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
-  --sans-display: var(--font-display), var(--font-sans), -apple-system, sans-serif;
+  --serif:        var(--font-sans), -apple-system, sans-serif;
+  --sans-display: var(--font-sans), -apple-system, sans-serif;
 
   --section-py: clamp(80px, 10vw, 140px);
   --container:  1240px;
 }
 
 @theme inline {
-  --color-bg: var(--bg);
-  --color-bg-soft: var(--bg-soft);
-  --color-ink: var(--ink);
-  --color-ink-2: var(--ink-2);
-  --color-ink-3: var(--ink-3);
-  --color-line: var(--line);
-  --color-blue-500: var(--blue-500);
-  --color-blue-600: var(--blue-600);
-  --color-blue-700: var(--blue-700);
-  --color-blue-900: var(--blue-900);
-  --color-accent-violet: var(--accent-violet);
-  --color-accent-teal: var(--accent-teal);
+  --color-bg: var(--brand-cream);
+  --color-bg-soft: var(--brand-bone);
+  --color-ink: var(--brand-ink);
+  --color-ink-2: var(--brand-charcoal);
+  --color-ink-3: var(--brand-slate);
+  --color-line: var(--brand-stone);
+  --color-forest: var(--brand-forest);
+  --color-cream: var(--brand-cream);
+  --color-gold: var(--brand-gold);
+  --color-bone: var(--brand-bone);
+  --color-forest-950: var(--brand-forest-950);
+  --color-forest-700: var(--brand-forest-700);
+  --color-forest-500: var(--brand-forest-500);
+  --color-forest-100: var(--brand-forest-100);
   --font-sans: var(--sans);
   --font-mono: var(--mono);
   --font-display: var(--sans-display);
@@ -188,9 +223,15 @@ h1, h2, h3, h4 { margin: 0; font-weight: 600; letter-spacing: -0.025em; font-fam
 .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
 .brand {
   display: inline-flex; align-items: center; gap: 10px;
-  font-weight: 600; font-size: 18px; letter-spacing: -0.02em;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: -0.045em;
+  text-transform: lowercase;
+  color: var(--brand-ink);
 }
-.brand .mark { width: 30px; height: 30px; }
+.brand .mark { width: 28px; height: 28px; flex-shrink: 0; }
+footer .brand { color: var(--brand-ink); }
 .nav-links { display: flex; gap: 32px; font-size: 14px; color: var(--ink-2); }
 .nav-links a:hover { color: var(--blue-600); }
 .nav-cta { display: flex; align-items: center; gap: 10px; }
@@ -1077,17 +1118,27 @@ footer .ec-blue {
   position: relative;
 }
 .foot-lockup {
-  font-family: var(--serif); font-style: italic;
-  font-size: clamp(56px, 12vw, 180px);
-  line-height: 1.2;
-  letter-spacing: -0.04em;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: clamp(72px, 14vw, 220px);
+  line-height: 1;
+  letter-spacing: -0.06em;
   margin-top: 56px;
   padding: 0.12em 0;
   text-align: center;
-  background: linear-gradient(135deg, var(--blue-400), var(--blue-600) 55%, var(--blue-700));
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent;
+  text-transform: lowercase;
+  color: var(--brand-forest);
   position: relative;
+  display: flex; align-items: center; justify-content: center;
+  gap: 0.18em;
+}
+.foot-lockup-mark {
+  display: inline-block;
+  width: 0.36em;
+  height: 0.36em;
+  background: var(--brand-gold);
+  align-self: center;
+  margin-bottom: 0.06em;
 }
 
 /* =================================================================

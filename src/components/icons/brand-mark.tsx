@@ -1,40 +1,56 @@
 export interface BrandMarkProps {
   className?: string;
   size?: number;
+  /**
+   * Visual variant of the mark.
+   *  - `tile`   (default) — Forest tile with Gold square (favicon / nav register)
+   *  - `square` — Standalone Gold square on transparent (use on solid surfaces)
+   * Both render at the requested `size` in logical pixels.
+   */
+  variant?: "tile" | "square";
+  /** Kept for API compatibility with prior gradient mark; no-op now. */
   includeDefs?: boolean;
 }
 
 /**
- * The LedgerAI brand mark. The gradient is defined once (in the Nav) via
- * `includeDefs`; other instances reuse it through `fill="url(#markGrad)"`.
+ * The Ledge brand mark.
+ *
+ * Source of truth: `docs/brand/DESIGN.md` §3.5.
+ * The mark is a single Gold square `#E5A934`. The Gold never changes color.
+ * - `variant="tile"`   places it on a Forest `#0F2D24` rounded tile (default).
+ * - `variant="square"` renders just the square on transparent.
  */
-export function BrandMark({ className, size = 30, includeDefs = false }: BrandMarkProps) {
+export function BrandMark({
+  className,
+  size = 30,
+  variant = "tile",
+}: BrandMarkProps) {
+  if (variant === "square") {
+    return (
+      <svg
+        className={className}
+        viewBox="0 0 32 32"
+        width={size}
+        height={size}
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <rect x="8" y="8" width="16" height="16" fill="#E5A934" />
+      </svg>
+    );
+  }
+
   return (
     <svg
       className={className}
       viewBox="0 0 32 32"
       width={size}
       height={size}
-      fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
-      {includeDefs && (
-        <defs>
-          <linearGradient id="markGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#2a54d6" />
-            <stop offset="1" stopColor="#7c5bff" />
-          </linearGradient>
-        </defs>
-      )}
-      <rect x="1" y="1" width="30" height="30" rx="8" fill="url(#markGrad)" />
-      <path
-        d="M9 10h14M9 16h14M9 22h8"
-        stroke="#fff"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      <circle cx="22.5" cy="22" r="2.5" fill="#fff" />
+      <rect width="32" height="32" rx="7" fill="#0F2D24" />
+      <rect x="11" y="11" width="10" height="10" fill="#E5A934" />
     </svg>
   );
 }

@@ -18,8 +18,8 @@ export function Nav() {
     <nav className={`nav${scrolled ? " scrolled" : ""}`} id="nav">
       <div className="container nav-inner">
         <Link className="brand" href="/">
-          <BrandMark className="mark" includeDefs />
-          LedgerAI
+          <BrandMark className="mark" />
+          ledge
         </Link>
         <div className="nav-links">
           <Link href="/#how">How it works</Link>
