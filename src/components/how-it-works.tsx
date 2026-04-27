@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { faviconUrl } from "@/lib/faviconUrl";
 import { Reveal } from "./reveal";
 
 const INTEGRATIONS: { name: string; domain: string }[] = [
@@ -14,10 +15,6 @@ const INTEGRATIONS: { name: string; domain: string }[] = [
   { name: "QuickBooks", domain: "quickbooks.intuit.com" },
   { name: "Xero", domain: "xero.com" },
 ];
-
-function faviconUrl(domain: string) {
-  return `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
-}
 
 export function HowItWorks() {
   return (

@@ -1,23 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import {
-  StripeLogo,
-  ShopifyLogo,
-  AwsLogo,
-  GustoLogo,
-  FigmaLogo,
-  SlackLogo,
-  GithubLogo,
-  NotionLogo,
-  GoogleAdsLogo,
-  VercelLogo,
-  LinkedInLogo,
-  RampLogo,
-  MercuryLogo,
-  HardwareLogo,
-  UnknownLogo,
-} from "@/components/icons/brand-logos";
+import { faviconUrl } from "@/lib/faviconUrl";
+import { HardwareLogo, UnknownLogo } from "@/components/icons/brand-logos";
 
 type TxnClass = "hi" | "warn" | "err" | "hi-blue";
 type Direction = "in" | "out";
@@ -30,25 +16,28 @@ interface Txn {
   conf: number;
   cls: TxnClass;
   dir: Direction;
-  logo: ReactNode;
+  /** e.g. stripe.com — https://www.google.com/s2/favicons?domain=… */
+  faviconDomain: string | null;
+  /** Shown when faviconDomain is null (fictional or unknown merchant). */
+  logo?: ReactNode;
 }
 
 const TXNS: Txn[] = [
-  { m: "Stripe",            sec: "payout",        a: "+ $12,840.00", cat: "INCOME · 4010",    conf: 99, cls: "hi",      dir: "in",  logo: <StripeLogo /> },
-  { m: "Shopify",           sec: "store sales",   a: "+ $8,420.16",  cat: "INCOME · 4010",    conf: 99, cls: "hi",      dir: "in",  logo: <ShopifyLogo /> },
-  { m: "Mercury",           sec: "wire received", a: "+ $24,500.00", cat: "INCOME · 4020",    conf: 98, cls: "hi",      dir: "in",  logo: <MercuryLogo /> },
-  { m: "AWS",               sec: "us-east-1",     a: "– $842.19",    cat: "HOSTING · 5210",   conf: 97, cls: "hi-blue", dir: "out", logo: <AwsLogo /> },
-  { m: "Gusto",             sec: "payroll run",   a: "– $28,104.50", cat: "PAYROLL · 6100",   conf: 98, cls: "hi-blue", dir: "out", logo: <GustoLogo /> },
-  { m: "Google Ads",        sec: "campaign · q2", a: "– $3,280.00",  cat: "MARKETING · 6400", conf: 96, cls: "hi-blue", dir: "out", logo: <GoogleAdsLogo /> },
-  { m: "Figma",             sec: "team seats",    a: "– $180.00",    cat: "SOFTWARE · 5220",  conf: 99, cls: "hi-blue", dir: "out", logo: <FigmaLogo /> },
-  { m: "Slack",             sec: "pro annual",    a: "– $960.00",    cat: "SOFTWARE · 5220",  conf: 98, cls: "hi-blue", dir: "out", logo: <SlackLogo /> },
-  { m: "GitHub",            sec: "enterprise",    a: "– $420.00",    cat: "SOFTWARE · 5220",  conf: 97, cls: "hi-blue", dir: "out", logo: <GithubLogo /> },
-  { m: "Notion",            sec: "team plan",     a: "– $240.00",    cat: "SOFTWARE · 5220",  conf: 96, cls: "hi-blue", dir: "out", logo: <NotionLogo /> },
-  { m: "Vercel",            sec: "pro",           a: "– $180.00",    cat: "HOSTING · 5210",   conf: 98, cls: "hi-blue", dir: "out", logo: <VercelLogo /> },
-  { m: "LinkedIn",          sec: "sponsored",     a: "– $495.00",    cat: "MARKETING · 6400", conf: 93, cls: "hi-blue", dir: "out", logo: <LinkedInLogo /> },
-  { m: "Ramp",              sec: "card refund",   a: "+ $142.88",    cat: "INCOME · 4090",    conf: 97, cls: "hi",      dir: "in",  logo: <RampLogo /> },
-  { m: "Union Sq Hardware", sec: "ch.2404",       a: "– $248.17",    cat: "REVIEW · 5400",    conf: 62, cls: "warn",    dir: "out", logo: <HardwareLogo /> },
-  { m: "UNKNOWN LLC",       sec: "wire",          a: "– $4,200.00",  cat: "FLAGGED",          conf: 38, cls: "err",     dir: "out", logo: <UnknownLogo /> },
+  { m: "Stripe",            sec: "payout",         a: "+ $12,840.00", cat: "INCOME · 4010",    conf: 99, cls: "hi",      dir: "in",  faviconDomain: "stripe.com" },
+  { m: "Shopify",           sec: "store sales",    a: "+ $8,420.16",  cat: "INCOME · 4010",    conf: 99, cls: "hi",      dir: "in",  faviconDomain: "shopify.com" },
+  { m: "Mercury",           sec: "wire received",  a: "+ $24,500.00", cat: "INCOME · 4020",    conf: 98, cls: "hi",      dir: "in",  faviconDomain: "mercury.com" },
+  { m: "AWS",               sec: "us-east-1",      a: "– $842.19",    cat: "HOSTING · 5210",   conf: 97, cls: "hi-blue", dir: "out", faviconDomain: "aws.amazon.com" },
+  { m: "Gusto",             sec: "payroll run",    a: "– $28,104.50", cat: "PAYROLL · 6100",   conf: 98, cls: "hi-blue", dir: "out", faviconDomain: "gusto.com" },
+  { m: "Google Ads",        sec: "campaign · q2",  a: "– $3,280.00",  cat: "MARKETING · 6400", conf: 96, cls: "hi-blue", dir: "out", faviconDomain: "ads.google.com" },
+  { m: "Figma",             sec: "team seats",     a: "– $180.00",    cat: "SOFTWARE · 5220",  conf: 99, cls: "hi-blue", dir: "out", faviconDomain: "figma.com" },
+  { m: "Slack",             sec: "pro annual",     a: "– $960.00",    cat: "SOFTWARE · 5220",  conf: 98, cls: "hi-blue", dir: "out", faviconDomain: "slack.com" },
+  { m: "GitHub",            sec: "enterprise",     a: "– $420.00",    cat: "SOFTWARE · 5220",  conf: 97, cls: "hi-blue", dir: "out", faviconDomain: "github.com" },
+  { m: "Notion",            sec: "team plan",      a: "– $240.00",    cat: "SOFTWARE · 5220",  conf: 96, cls: "hi-blue", dir: "out", faviconDomain: "notion.so" },
+  { m: "Vercel",            sec: "pro",            a: "– $180.00",    cat: "HOSTING · 5210",   conf: 98, cls: "hi-blue", dir: "out", faviconDomain: "vercel.com" },
+  { m: "LinkedIn",          sec: "sponsored",      a: "– $495.00",    cat: "MARKETING · 6400", conf: 93, cls: "hi-blue", dir: "out", faviconDomain: "linkedin.com" },
+  { m: "Ramp",              sec: "card refund",    a: "+ $142.88",    cat: "INCOME · 4090",    conf: 97, cls: "hi",      dir: "in",  faviconDomain: "ramp.com" },
+  { m: "Union Sq Hardware", sec: "ch.2404",        a: "– $248.17",    cat: "REVIEW · 5400",    conf: 62, cls: "warn",    dir: "out", faviconDomain: null,        logo: <HardwareLogo /> },
+  { m: "UNKNOWN LLC",       sec: "wire",           a: "– $4,200.00",  cat: "FLAGGED",          conf: 38, cls: "err",     dir: "out", faviconDomain: null,        logo: <UnknownLogo /> },
 ];
 
 export function HeroVisual() {
@@ -84,7 +73,20 @@ export function HeroVisual() {
                 className={`txn ${t.cls}`}
                 style={{ animationDelay: `${Math.min(i, 6) * 0.08}s` }}
               >
-                <div className="avatar avatar-logo">{t.logo}</div>
+                <div className="avatar avatar-logo">
+                  {t.faviconDomain ? (
+                    <Image
+                      className="txn-favicon"
+                      src={faviconUrl(t.faviconDomain)}
+                      alt=""
+                      width={34}
+                      height={34}
+                      unoptimized
+                    />
+                  ) : (
+                    t.logo
+                  )}
+                </div>
                 <div className="merchant">
                   {t.m}
                   <span className="sec">{t.sec}</span>
