@@ -1509,6 +1509,33 @@ footer .ec-blue {
   gap: 8px;
 }
 
+.trust-compliance-grid {
+  gap: 18px;
+}
+
+.trust-compliance-card {
+  min-height: 120px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.trust-compliance-title {
+  font-size: 21px;
+  margin-bottom: 10px;
+}
+
+.trust-compliance-title img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.trust-compliance-status {
+  font-size: 14px;
+}
+
 .trust-status {
   display: inline-flex;
   align-items: center;

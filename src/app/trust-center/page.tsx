@@ -163,14 +163,14 @@ export default function TrustCenterPage() {
             </h2>
             <span className="trust-section-meta">Details</span>
           </div>
-          <div className="trust-grid">
+          <div className="trust-grid trust-compliance-grid">
             {COMPLIANCES.map((item) => (
-              <div className="trust-card trust-ok" key={item.name}>
-                <div className="trust-card-title trust-item-title">
-                  <Image src={item.icon} alt="" width={16} height={16} aria-hidden />
-                  {item.name}
+              <div className="trust-card trust-ok trust-compliance-card" key={item.name}>
+                <div className="trust-card-title trust-item-title trust-compliance-title">
+                  <Image src={item.icon} alt="" width={24} height={24} aria-hidden />
+                  <span>{item.name}</span>
                 </div>
-                <div className="trust-status">
+                <div className="trust-status trust-compliance-status">
                   <span className="trust-tick" aria-hidden>
                     ✓
                   </span>

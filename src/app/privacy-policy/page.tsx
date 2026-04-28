@@ -31,6 +31,10 @@ export default function PrivacyPolicyPage() {
               applies to data processed through our website and services.
             </p>
             <p>
+              Controller details: Spur Global Ventures Inc., 3200 Wilcrest Drive, Suite 575,
+              Houston, TX 77042, United States.
+            </p>
+            <p>
               Questions can be sent to{" "}
               <a href="mailto:privacy@getledge.ai" style={{ color: "var(--brand-forest-700)", fontWeight: 500 }}>
                 privacy@getledge.ai
@@ -43,15 +47,36 @@ export default function PrivacyPolicyPage() {
 
       <section className="prose-section">
         <div className="container prose-grid">
-          <h2>Data We Collect</h2>
+          <h2>Scope</h2>
           <div className="prose-body">
-            <p>We may collect:</p>
+            <p>This policy covers personal data processed when you:</p>
             <ul>
-              <li>Contact information (name, email, company, phone).</li>
-              <li>Account and usage information needed to provide the service.</li>
-              <li>Support communications and security-related event logs.</li>
-              <li>Website analytics and device/browser metadata.</li>
+              <li>Visit our website, trust center, and legal pages.</li>
+              <li>Request a demo, pricing, or security documentation.</li>
+              <li>Use the Ledge product as a customer, evaluator, or invited team member.</li>
+              <li>Contact support, legal, sales, or security teams.</li>
             </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="prose-section">
+        <div className="container prose-grid">
+          <h2>Categories of Data We Collect</h2>
+          <div className="prose-body">
+            <p>Depending on your interaction, we may collect:</p>
+            <ul>
+              <li>Identity and contact details (name, work email, company, title, phone).</li>
+              <li>Account and workspace data (firm, team membership, role, client associations).</li>
+              <li>Usage telemetry (login events, feature usage, error traces, audit activity).</li>
+              <li>Technical metadata (IP, device type, browser version, approximate geo).</li>
+              <li>Support and communication records (tickets, emails, meeting notes).</li>
+              <li>Commercial data (plan, invoices, payment metadata from billing providers).</li>
+            </ul>
+            <p>
+              We do not intentionally collect sensitive personal data unless it is required for a
+              specific legal or contractual process.
+            </p>
           </div>
         </div>
       </section>
@@ -61,10 +86,13 @@ export default function PrivacyPolicyPage() {
           <h2>How We Use Data</h2>
           <div className="prose-body">
             <ul>
-              <li>To operate, secure, and improve the Ledge platform.</li>
-              <li>To provide onboarding, support, and service communications.</li>
-              <li>To detect fraud, abuse, or unauthorized activity.</li>
-              <li>To comply with legal and contractual obligations.</li>
+              <li>Provide, maintain, and secure the Ledge service.</li>
+              <li>Authenticate users and enforce tenant/client-level access controls.</li>
+              <li>Deliver onboarding, support, product updates, and security notices.</li>
+              <li>Prevent abuse, detect threats, investigate incidents, and enforce terms.</li>
+              <li>Process billing and contract administration.</li>
+              <li>Improve product quality, reliability, and performance.</li>
+              <li>Comply with applicable laws, regulations, and legal requests.</li>
             </ul>
           </div>
         </div>
@@ -72,13 +100,28 @@ export default function PrivacyPolicyPage() {
 
       <section className="prose-section">
         <div className="container prose-grid">
-          <h2>GDPR (EEA/UK)</h2>
+          <h2>Legal Bases (GDPR/UK GDPR)</h2>
+          <div className="prose-body">
+            <p>Where GDPR applies, we rely on one or more legal bases:</p>
+            <ul>
+              <li>Performance of a contract (service delivery and account administration).</li>
+              <li>Legitimate interests (security, fraud prevention, service improvement).</li>
+              <li>Legal obligation (compliance with law and regulatory requirements).</li>
+              <li>Consent (where required, such as certain marketing communications).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="prose-section">
+        <div className="container prose-grid">
+          <h2>GDPR Rights (EEA/UK)</h2>
           <div className="prose-body">
             <p>
-              If GDPR applies, we process personal data under one or more legal bases, including
-              contract necessity, legitimate interests, legal obligation, and consent where required.
+              Subject to local law, you may request access, correction, deletion, restriction,
+              portability, and objection to processing.
             </p>
-            <p>You may have rights to access, correct, delete, restrict, or port your data.</p>
+            <p>You also have the right to lodge a complaint with your supervisory authority.</p>
             <p>
               To submit a GDPR request, email{" "}
               <a href="mailto:privacy@getledge.ai" style={{ color: "var(--brand-forest-700)", fontWeight: 500 }}>
@@ -92,18 +135,55 @@ export default function PrivacyPolicyPage() {
 
       <section className="prose-section">
         <div className="container prose-grid">
-          <h2>CCPA/CPRA (California)</h2>
+          <h2>CCPA/CPRA (California Privacy Notice)</h2>
           <div className="prose-body">
             <p>
-              California residents may have rights to know, delete, correct, and opt out of certain
-              data sharing. We do not sell personal information in the traditional sense.
+              California residents may have rights to know, access, correct, delete, and limit
+              certain uses of personal information.
+            </p>
+            <p>We do not sell personal information in the traditional sense.</p>
+            <p>
+              We may disclose data to service providers and subprocessors strictly for business
+              purposes such as hosting, analytics, support, and security monitoring.
             </p>
             <p>
-              You can request details of personal information categories and disclosures by contacting{" "}
+              You can request categories, sources, business purposes, and disclosures of personal
+              information by contacting{" "}
               <a href="mailto:privacy@getledge.ai" style={{ color: "var(--brand-forest-700)", fontWeight: 500 }}>
                 privacy@getledge.ai
               </a>
               .
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="prose-section">
+        <div className="container prose-grid">
+          <h2>Sharing & Subprocessors</h2>
+          <div className="prose-body">
+            <p>We share data only as needed with trusted subprocessors and service providers.</p>
+            <ul>
+              <li>Cloud hosting and infrastructure providers.</li>
+              <li>Authentication, analytics, and monitoring providers.</li>
+              <li>Customer support and communication tooling.</li>
+              <li>Payment and subscription processors.</li>
+            </ul>
+            <p>
+              Current subprocessor categories and vendors are listed in our Trust Center and may be
+              updated from time to time.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="prose-section">
+        <div className="container prose-grid">
+          <h2>International Transfers</h2>
+          <div className="prose-body">
+            <p>
+              Where personal data is transferred across borders, we implement appropriate safeguards
+              such as contractual protections and equivalent security controls.
             </p>
           </div>
         </div>
@@ -114,7 +194,7 @@ export default function PrivacyPolicyPage() {
         style={{ background: "var(--brand-bone)", borderTop: "1px solid var(--brand-stone)" }}
       >
         <div className="container prose-grid">
-          <h2>Data Retention & Security</h2>
+          <h2>Data Retention, Security & Updates</h2>
           <div className="prose-body">
             <p>
               We retain data only as long as needed for service delivery, legal obligations, and
@@ -122,7 +202,14 @@ export default function PrivacyPolicyPage() {
               data against unauthorized access, loss, or misuse.
             </p>
             <p>
-              Mailing address: 3200 Wilcrest Drive, Suite 575, Houston, TX 77042, United States.
+              We may update this policy periodically. Material updates will be reflected with a new
+              effective date.
+            </p>
+            <p>
+              Privacy contact:{" "}
+              <a href="mailto:privacy@getledge.ai" style={{ color: "var(--brand-forest-700)", fontWeight: 500 }}>
+                privacy@getledge.ai
+              </a>
             </p>
           </div>
         </div>

@@ -27,6 +27,8 @@ const COLS: { title: string; links: { label: string; href: string }[] }[] = [
       { label: "Compare briefs", href: "/compare" },
       { label: "Security", href: "/security" },
       { label: "Trust center", href: "/trust-center" },
+      { label: "Privacy Policy", href: "/privacy-policy" },
+      { label: "Terms of Service", href: "/terms-of-service" },
       { label: "Contact", href: "/contact" },
     ],
   },
