@@ -52,6 +52,21 @@ const PILLARS: Pillar[] = [
   },
 ];
 
+const MODEL_GOVERNANCE = [
+  {
+    title: "No cross-firm model training by default",
+    body: "Firm and client data is isolated from shared training workflows unless explicit consent is given.",
+  },
+  {
+    title: "Human-in-the-loop posting controls",
+    body: "Confidence thresholds determine whether entries auto-post, queue for reviewer approval, or route to client clarification.",
+  },
+  {
+    title: "Versioned model decisions",
+    body: "Every suggestion includes model version and rationale snapshot so teams can explain changes over time.",
+  },
+];
+
 export default function SecurityPage() {
   return (
     <>
@@ -72,6 +87,29 @@ export default function SecurityPage() {
                 <div className="tile-body">{p.body}</div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="prose-section"
+        style={{ background: "var(--bg-elev)", borderTop: "1px solid var(--line)" }}
+      >
+        <div className="container prose-grid">
+          <h2>AI governance for firm workflows</h2>
+          <div className="prose-body">
+            <p>
+              Security is not only infrastructure hardening; it is decision governance.
+              Ledge keeps controls visible so firm owners can enforce policy, not just trust automation.
+            </p>
+            <div className="tile-grid">
+              {MODEL_GOVERNANCE.map((item) => (
+                <div className="tile" key={item.title}>
+                  <div className="tile-title">{item.title}</div>
+                  <div className="tile-body">{item.body}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

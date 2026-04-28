@@ -73,8 +73,8 @@ export function Compare() {
             </h2>
           </div>
           <p className="lead">
-            Ledge sits on top of the ledger you already use, and goes further than legacy
-            rule-based tools like Dext or Keeper on the dimensions that matter for throughput.
+            Ledge sits on top of the ledger you already use, and outperforms manual-first and
+            rule-first workflows on the dimensions that matter for firm throughput.
           </p>
         </div>
 
@@ -110,6 +110,13 @@ export function Compare() {
             </tbody>
           </table>
         </div>
+        <p className="lead" style={{ marginTop: 18 }}>
+          Need side-by-side evaluation?{" "}
+          <a href="/compare" style={{ textDecoration: "underline" }}>
+            See detailed comparison briefs
+          </a>
+          .
+        </p>
       </div>
     </section>
   );

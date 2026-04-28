@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Trust center",
@@ -41,17 +42,42 @@ const RESOURCES = [
   "Business Continuity & Disaster Recovery Policy",
   "Data Classification Policy",
   "Access Control Policy",
+  "AI Model Governance Policy",
+  "AI Output Review & Escalation Policy",
   "Vulnerability Disclosure Policy",
   "Subprocessor Management Policy",
 ];
 
+const FIRM_PROOF = [
+  {
+    title: "Client boundaries enforced by design",
+    body: "Per-client access controls, firm-level tenancy boundaries, and least-privilege defaults keep client data scoped to approved team members.",
+  },
+  {
+    title: "Evidence-ready activity logs",
+    body: "Exportable logs include action, actor, timestamp, source document, and review status to support audit and quality-control workflows.",
+  },
+  {
+    title: "Human review control points",
+    body: "Confidence thresholds and reviewer gates let firms enforce when entries can auto-post versus when human approval is required.",
+  },
+];
+
+const REVIEW_PACK = [
+  "Most recent SOC 2 Type II report",
+  "Security whitepaper and architecture overview",
+  "Subprocessor list with categories and regions",
+  "Standard security questionnaire responses",
+  "DPA and privacy terms",
+];
+
 const SUBPROCESSORS = [
-  { vendor: "AWS", category: "Cloud infrastructure" },
-  { vendor: "OpenAI", category: "Model inference" },
-  { vendor: "Anthropic", category: "Model inference" },
-  { vendor: "Stripe", category: "Billing infrastructure" },
-  { vendor: "Sentry", category: "Error monitoring" },
-  { vendor: "Google Workspace", category: "Business operations" },
+  { vendor: "AWS", category: "Cloud infrastructure", logo: "/trust/aws.svg" },
+  { vendor: "OpenAI", category: "Model inference", logo: "/trust/openai.svg" },
+  { vendor: "Anthropic", category: "Model inference", logo: "/trust/anthropic.svg" },
+  { vendor: "Stripe", category: "Billing infrastructure", logo: "/trust/stripe.svg" },
+  { vendor: "Sentry", category: "Error monitoring", logo: "/trust/sentry.svg" },
+  { vendor: "Google Workspace", category: "Business operations", logo: "/trust/google-workspace.svg" },
 ];
 
 export default function TrustCenterPage() {
@@ -68,7 +94,7 @@ export default function TrustCenterPage() {
         <div className="container">
           <div className="trust-intro">
             <p>
-              Request access to full documents, reports, and control evidence for your security review.
+              Request access to full documents, reports, and control evidence for your client and internal security reviews.
             </p>
             <div className="trust-intro-cta">
               <a className="btn btn-primary" href="mailto:security@getledge.ai?subject=Trust%20Center%20Access%20Request">
@@ -81,7 +107,33 @@ export default function TrustCenterPage() {
 
       <section className="prose-section trust-muted">
         <div className="container">
-          <h2 className="trust-section-title">Compliances</h2>
+          <div className="trust-section-head">
+            <h2 className="trust-section-title trust-title-icon">
+              <Image src="/trust/icon-shield.svg" alt="" width={18} height={18} aria-hidden />
+              Why firms choose Ledge
+            </h2>
+            <span className="trust-section-meta">Operator view</span>
+          </div>
+          <div className="trust-grid">
+            {FIRM_PROOF.map((item) => (
+              <div className="trust-card" key={item.title}>
+                <div className="trust-card-title">{item.title}</div>
+                <p className="trust-muted-text">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="prose-section">
+        <div className="container">
+          <div className="trust-section-head">
+            <h2 className="trust-section-title trust-title-icon">
+              <Image src="/trust/icon-shield.svg" alt="" width={18} height={18} aria-hidden />
+              Compliances
+            </h2>
+            <span className="trust-section-meta">Details</span>
+          </div>
           <div className="trust-grid">
             {COMPLIANCES.map((item) => (
               <div className="trust-card trust-ok" key={item}>
@@ -100,7 +152,13 @@ export default function TrustCenterPage() {
 
       <section className="prose-section">
         <div className="container">
-          <h2 className="trust-section-title">Controls</h2>
+          <div className="trust-section-head">
+            <h2 className="trust-section-title trust-title-icon">
+              <Image src="/trust/icon-controls.svg" alt="" width={18} height={18} aria-hidden />
+              Controls
+            </h2>
+            <span className="trust-section-meta">Details</span>
+          </div>
           <div className="trust-grid">
             {CONTROLS.map((control) => (
               <div className="trust-card" key={control.domain}>
@@ -116,18 +174,56 @@ export default function TrustCenterPage() {
         </div>
       </section>
 
+      <section className="prose-section">
+        <div className="container">
+          <div className="trust-section-head">
+            <h2 className="trust-section-title trust-title-icon">
+              <Image src="/trust/icon-resource.svg" alt="" width={18} height={18} aria-hidden />
+              Security review pack
+            </h2>
+            <span className="trust-section-meta">Fast lane</span>
+          </div>
+          <div className="trust-card trust-gated">
+            <div className="trust-card-title">Standard evidence package</div>
+            <p className="trust-muted-text">
+              Built for vendor reviews and procurement workflows. Send your questionnaire and we will map evidence to each control domain.
+            </p>
+            <ul className="trust-list">
+              {REVIEW_PACK.map((resource) => (
+                <li key={resource}>
+                  <Image src="/trust/icon-resource.svg" alt="" width={14} height={14} aria-hidden />
+                  {resource}
+                </li>
+              ))}
+            </ul>
+            <a className="btn btn-ghost btn-sm" href="mailto:security@getledge.ai?subject=Request%20Security%20Review%20Pack">
+              Request review pack
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section className="prose-section trust-muted">
         <div className="container">
-          <h2 className="trust-section-title">Resources</h2>
+          <div className="trust-section-head">
+            <h2 className="trust-section-title trust-title-icon">
+              <Image src="/trust/icon-resource.svg" alt="" width={18} height={18} aria-hidden />
+              Resources
+            </h2>
+            <span className="trust-section-meta">Details</span>
+          </div>
+          <div className="trust-tabs">
+            <span className="trust-tab trust-tab-active">All</span>
+            <span className="trust-tab">Policies</span>
+            <span className="trust-tab">Documents</span>
+          </div>
           <div className="trust-card trust-gated">
             <div className="trust-card-title">Policy and report library</div>
             <p className="trust-muted-text">Listed below. Full files are shared after access approval.</p>
             <ul className="trust-list">
               {RESOURCES.map((resource) => (
                 <li key={resource}>
-                  <span className="trust-lock" aria-hidden>
-                    🔒
-                  </span>
+                  <Image src="/trust/icon-resource.svg" alt="" width={14} height={14} aria-hidden />
                   {resource}
                 </li>
               ))}
@@ -141,10 +237,19 @@ export default function TrustCenterPage() {
 
       <section className="prose-section">
         <div className="container">
-          <h2 className="trust-section-title">Subprocessors</h2>
+          <div className="trust-section-head">
+            <h2 className="trust-section-title trust-title-icon">
+              <Image src="/trust/icon-cloud.svg" alt="" width={18} height={18} aria-hidden />
+              Subprocessors
+            </h2>
+            <span className="trust-section-meta">Details</span>
+          </div>
           <div className="trust-grid">
             {SUBPROCESSORS.map((sp) => (
               <div className="trust-card" key={sp.vendor}>
+                <div className="trust-logo-wrap">
+                  <Image src={sp.logo} alt={`${sp.vendor} logo`} width={22} height={22} className="trust-logo" />
+                </div>
                 <div className="trust-card-title">{sp.vendor}</div>
                 <div className="trust-muted-text">{sp.category}</div>
               </div>
