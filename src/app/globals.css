@@ -1301,6 +1301,142 @@ footer .ec-blue {
 .contact-card a { color: var(--brand-forest); font-weight: 500; text-decoration: underline; text-decoration-color: var(--brand-stone); text-underline-offset: 4px; }
 .contact-card a:hover { color: var(--brand-forest-950); text-decoration-color: var(--brand-gold); }
 
+.trust-muted {
+  background: var(--brand-bone);
+  border-top: 1px solid var(--brand-stone);
+  border-bottom: 1px solid var(--brand-stone);
+}
+
+.trust-intro {
+  max-width: 840px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+@media (max-width: 860px) {
+  .trust-intro {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.trust-intro p {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.trust-section-title {
+  font-size: clamp(24px, 2.4vw, 32px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  margin-bottom: 24px;
+}
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 980px) {
+  .trust-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .trust-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.trust-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+}
+
+.trust-card-title {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+  color: var(--ink);
+}
+
+.trust-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--brand-success);
+  font-size: 13px;
+  font-family: var(--mono);
+  letter-spacing: 0.04em;
+}
+
+.trust-tick {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--brand-success) 16%, white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.trust-list {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+  color: var(--ink-2);
+  font-size: 14px;
+}
+
+.trust-gated .trust-list {
+  margin: 14px 0 20px;
+  padding-left: 0;
+  list-style: none;
+}
+
+.trust-gated .trust-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.trust-lock {
+  font-size: 14px;
+}
+
+.trust-muted-text {
+  color: var(--ink-3);
+  font-size: 14px;
+}
+
+.trust-footnote {
+  margin-top: 18px;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.trust-footnote a {
+  color: var(--brand-forest);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* =================================================================
    REVEAL ON SCROLL
    ================================================================= */
