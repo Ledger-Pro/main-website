@@ -210,15 +210,30 @@ h1, h2, h3, h4 { margin: 0; font-weight: 600; letter-spacing: -0.025em; font-fam
    NAV
    ================================================================= */
 .nav {
-  position: sticky; top: 0; z-index: 50;
-  background: color-mix(in oklab, #fff 85%, transparent);
+  position: sticky;
+  top: 14px;
+  z-index: 60;
+  padding: 0 0 12px;
+}
+.nav.scrolled { top: 10px; }
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px;
+  border-radius: 999px;
+  background: color-mix(in oklab, #fff 90%, transparent);
   backdrop-filter: saturate(1.2) blur(12px);
   -webkit-backdrop-filter: saturate(1.2) blur(12px);
-  border-bottom: 1px solid transparent;
-  transition: border-color .2s ease;
+  border: 1px solid color-mix(in oklab, var(--line) 70%, white 30%);
+  box-shadow: 0 12px 30px rgba(15, 45, 36, 0.12);
+  transition: box-shadow .2s ease, border-color .2s ease, background .2s ease, padding .2s ease;
 }
-.nav.scrolled { border-bottom-color: var(--line); }
-.nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+.nav.scrolled .nav-inner {
+  padding: 12px 20px;
+  border-color: color-mix(in oklab, var(--brand-forest-100) 65%, var(--line) 35%);
+  box-shadow: 0 14px 34px rgba(15, 45, 36, 0.18);
+}
 .brand {
   display: inline-flex; align-items: center; gap: 10px;
   font-family: var(--sans);
@@ -234,6 +249,11 @@ footer .brand { color: var(--brand-ink); }
 .nav-links a:hover { color: var(--brand-forest); }
 .nav-cta { display: flex; align-items: center; gap: 10px; }
 @media (max-width: 860px) { .nav-links { display: none; } }
+@media (max-width: 860px) {
+  .nav { top: 10px; padding-bottom: 8px; }
+  .nav-inner { padding: 10px 14px; }
+  .nav.scrolled .nav-inner { padding: 10px 14px; }
+}
 
 /* =================================================================
    HERO — Forest dark surface, Cream type, one Gold highlight word.
