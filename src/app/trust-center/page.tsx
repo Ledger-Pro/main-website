@@ -10,12 +10,12 @@ export const metadata: Metadata = {
 };
 
 const COMPLIANCES = [
-  { name: "SOC 2 Type II", status: "In progress", icon: "/trust/icon-shield.svg" },
-  { name: "ISO 27001", status: "Compliant", icon: "/trust/icon-shield.svg" },
-  { name: "GDPR", status: "Compliant", icon: "/trust/icon-shield.svg" },
-  { name: "CCPA / CPRA", status: "Compliant", icon: "/trust/icon-shield.svg" },
-  { name: "HIPAA (BAA)", status: "Compliant", icon: "/trust/icon-shield.svg" },
-  { name: "Penetration Testing", status: "Compliant", icon: "/trust/icon-controls.svg" },
+  { name: "SOC 2 Type II", status: "In progress", icon: "/trust/compliance-soc2.png" },
+  { name: "ISO 27001", status: "Compliant", icon: "/trust/compliance-iso27001.png" },
+  { name: "GDPR", status: "Compliant", icon: "/trust/compliance-gdpr.png" },
+  { name: "CCPA / CPRA", status: "Compliant", icon: "/trust/compliance-ccpa.png" },
+  { name: "HIPAA (BAA)", status: "Compliant", icon: "/trust/compliance-hipaa.png" },
+  { name: "Penetration Testing", status: "Compliant", icon: "/trust/compliance-pentest.svg" },
 ] as const;
 
 const CONTROLS = [

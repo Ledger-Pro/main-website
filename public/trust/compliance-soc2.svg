@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="g" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4F8EF7"/>
+      <stop offset="1" stop-color="#255BC7"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#g)"/>
+  <circle cx="32" cy="32" r="29" stroke="#E6F0FF" stroke-opacity=".6" stroke-width="2"/>
+  <text x="32" y="29" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="700" fill="#EAF1FF">AICPA</text>
+  <text x="32" y="40" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#FFFFFF">SOC 2</text>
+</svg>

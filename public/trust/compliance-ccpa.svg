@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="g" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#1D4ED8"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#g)"/>
+  <circle cx="32" cy="32" r="29" stroke="#D6E4FF" stroke-opacity=".7" stroke-width="2"/>
+  <path d="M20 23c7-4 16-4 24 0-3 3-5 7-5 11 0 3 1 6 3 8-6 3-13 3-19 0-2-2-3-5-3-8 0-4 0-8 0-11Z" fill="#DBEAFE" fill-opacity=".95"/>
+  <text x="32" y="19" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="800" fill="#EAF2FF">CPRA</text>
+  <text x="32" y="52" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="700" fill="#EAF2FF">CCPA</text>
+</svg>
