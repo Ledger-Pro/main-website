@@ -24,9 +24,9 @@ const COLS: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Resources",
     links: [
+      { label: "Compare briefs", href: "/compare" },
       { label: "Security", href: "/security" },
       { label: "Trust center", href: "/trust-center" },
-      { label: "API docs", href: "/api-docs" },
       { label: "Contact", href: "/contact" },
     ],
   },
@@ -61,8 +61,8 @@ export function Footer() {
         </div>
 
         <div className="foot-base">
-          <span>© {new Date().getFullYear()} Ledge, Inc.</span>
-          <span>getledge.ai · Built for bookkeepers</span>
+          <span>© {new Date().getFullYear()} Spur Global Ventures Inc.</span>
+          <span>Ledge is a brand/division of Spur Global Ventures Inc. · getledge.ai</span>
         </div>
 
         <div className="foot-lockup">

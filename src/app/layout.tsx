@@ -6,6 +6,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://getledge.ai"),
+  robots: {
+    index: false,
+    follow: false,
+  },
   title: {
     default: "Ledge — The ledger, leveled.",
     template: "%s · Ledge",

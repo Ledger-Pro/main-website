@@ -8,7 +8,6 @@ const ROUTES: { path: string; priority: number; changeFrequency: MetadataRoute.S
   { path: "/changelog", priority: 0.8, changeFrequency: "weekly" },
   { path: "/security", priority: 0.6, changeFrequency: "monthly" },
   { path: "/trust-center", priority: 0.6, changeFrequency: "monthly" },
-  { path: "/api-docs", priority: 0.7, changeFrequency: "weekly" },
   { path: "/contact", priority: 0.6, changeFrequency: "monthly" },
 ];
 

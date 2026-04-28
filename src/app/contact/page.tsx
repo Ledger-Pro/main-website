@@ -55,8 +55,13 @@ export default function ContactPage() {
               </div>
               <div className="contact-card">
                 <h3>Headquarters</h3>
-                <div>Houston, TX · United States</div>
+                <div>3200 Wilcrest Drive, Suite 575, Houston, TX 77042</div>
                 <div className="tile-body">On-site visits by appointment — reach out first.</div>
+              </div>
+              <div className="contact-card">
+                <h3>Legal entity</h3>
+                <div>Spur Global Ventures Inc.</div>
+                <div className="tile-body">Ledge operates as a brand/division of Spur.</div>
               </div>
             </div>
           </div>
