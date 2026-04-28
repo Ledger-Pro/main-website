@@ -10,42 +10,46 @@ export const metadata: Metadata = {
 };
 
 const COMPLIANCES = [
-  "SOC 2 Type II",
-  "ISO 27001",
-  "GDPR",
-  "CCPA / CPRA",
-  "HIPAA (BAA)",
-  "Penetration Testing",
-];
+  { name: "SOC 2 Type II", status: "In progress", icon: "/trust/icon-shield.svg" },
+  { name: "ISO 27001", status: "Compliant", icon: "/trust/icon-shield.svg" },
+  { name: "GDPR", status: "Compliant", icon: "/trust/icon-shield.svg" },
+  { name: "CCPA / CPRA", status: "Compliant", icon: "/trust/icon-shield.svg" },
+  { name: "HIPAA (BAA)", status: "Compliant", icon: "/trust/icon-shield.svg" },
+  { name: "Penetration Testing", status: "Compliant", icon: "/trust/icon-controls.svg" },
+] as const;
 
 const CONTROLS = [
   {
     domain: "Data security",
+    icon: "/trust/icon-shield.svg",
     points: ["Encryption at rest and in transit", "Data retention and deletion controls"],
   },
   {
     domain: "Application security",
+    icon: "/trust/icon-controls.svg",
     points: ["Secure SDLC with PR review gates", "Quarterly dependency and vuln scans"],
   },
   {
     domain: "Network security",
+    icon: "/trust/icon-cloud.svg",
     points: ["Segregated VPC and least-privilege access", "Monitoring for anomalous behavior"],
   },
   {
     domain: "Corporate security",
+    icon: "/trust/icon-resource.svg",
     points: ["Security awareness training", "Documented incident response playbooks"],
   },
 ];
 
 const RESOURCES = [
-  "Information Security Policy",
-  "Business Continuity & Disaster Recovery Policy",
-  "Data Classification Policy",
-  "Access Control Policy",
-  "AI Model Governance Policy",
-  "AI Output Review & Escalation Policy",
-  "Vulnerability Disclosure Policy",
-  "Subprocessor Management Policy",
+  { name: "Information Security Policy", icon: "/trust/icon-resource.svg" },
+  { name: "Business Continuity & Disaster Recovery Policy", icon: "/trust/icon-resource.svg" },
+  { name: "Data Classification Policy", icon: "/trust/icon-resource.svg" },
+  { name: "Access Control Policy", icon: "/trust/icon-resource.svg" },
+  { name: "AI Model Governance Policy", icon: "/trust/icon-controls.svg" },
+  { name: "AI Output Review & Escalation Policy", icon: "/trust/icon-controls.svg" },
+  { name: "Vulnerability Disclosure Policy", icon: "/trust/icon-shield.svg" },
+  { name: "Subprocessor Management Policy", icon: "/trust/icon-cloud.svg" },
 ];
 
 const FIRM_PROOF = [
@@ -136,13 +140,16 @@ export default function TrustCenterPage() {
           </div>
           <div className="trust-grid">
             {COMPLIANCES.map((item) => (
-              <div className="trust-card trust-ok" key={item}>
-                <div className="trust-card-title">{item}</div>
+              <div className="trust-card trust-ok" key={item.name}>
+                <div className="trust-card-title trust-item-title">
+                  <Image src={item.icon} alt="" width={16} height={16} aria-hidden />
+                  {item.name}
+                </div>
                 <div className="trust-status">
                   <span className="trust-tick" aria-hidden>
                     ✓
                   </span>
-                  Compliant
+                  {item.status}
                 </div>
               </div>
             ))}
@@ -162,10 +169,16 @@ export default function TrustCenterPage() {
           <div className="trust-grid">
             {CONTROLS.map((control) => (
               <div className="trust-card" key={control.domain}>
-                <div className="trust-card-title">{control.domain}</div>
+                <div className="trust-card-title trust-item-title">
+                  <Image src={control.icon} alt="" width={16} height={16} aria-hidden />
+                  {control.domain}
+                </div>
                 <ul className="trust-list">
                   {control.points.map((point) => (
-                    <li key={point}>{point}</li>
+                    <li key={point} className="trust-point-item">
+                      <Image src={control.icon} alt="" width={14} height={14} aria-hidden />
+                      {point}
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -222,9 +235,9 @@ export default function TrustCenterPage() {
             <p className="trust-muted-text">Listed below. Full files are shared after access approval.</p>
             <ul className="trust-list">
               {RESOURCES.map((resource) => (
-                <li key={resource}>
-                  <Image src="/trust/icon-resource.svg" alt="" width={14} height={14} aria-hidden />
-                  {resource}
+                <li key={resource.name}>
+                  <Image src={resource.icon} alt="" width={14} height={14} aria-hidden />
+                  {resource.name}
                 </li>
               ))}
             </ul>

@@ -1418,6 +1418,12 @@ footer .ec-blue {
   color: var(--ink);
 }
 
+.trust-item-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .trust-status {
   display: inline-flex;
   align-items: center;
@@ -1447,6 +1453,12 @@ footer .ec-blue {
   gap: 7px;
   color: var(--ink-2);
   font-size: 13px;
+}
+
+.trust-point-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 .trust-gated .trust-list {
