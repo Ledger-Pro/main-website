@@ -94,16 +94,41 @@ export default function TrustCenterPage() {
         lead="Built for security reviews. See our compliance posture, controls, subprocessors, and policy library in one place."
       />
 
-      <section className="prose-section">
+      <section className="prose-section trust-overview-wrap">
         <div className="container">
-          <div className="trust-intro">
-            <p>
-              Request access to full documents, reports, and control evidence for your client and internal security reviews.
-            </p>
-            <div className="trust-intro-cta">
+          <div className="trust-overview-panel">
+            <div className="trust-overview-head">
+              <div className="trust-overview-brand">
+                <Image src="/favicon.svg" alt="Ledge logo" width={28} height={28} />
+                <span>Ledge Trust Center</span>
+              </div>
+              <div className="trust-overview-founded">Founded in 2023</div>
+            </div>
+            <div className="trust-overview-copy">
+              <p>
+                Ledge recognizes that the confidentiality, integrity, and availability of financial
+                information are critical for the firms and clients we support.
+              </p>
+              <p>
+                We provide clear visibility into our controls, compliance posture, and operating
+                practices so your team can complete reviews quickly and confidently.
+              </p>
+              <p>
+                This trust center summarizes how we identify risk, enforce security safeguards, and
+                continuously improve.
+              </p>
+            </div>
+            <div className="trust-overview-actions">
               <a className="btn btn-primary" href="mailto:security@getledge.ai?subject=Trust%20Center%20Access%20Request">
                 Request access
               </a>
+              <div className="trust-overview-links">
+                <Link href="/privacy-policy">Privacy Policy</Link>
+                <span aria-hidden>|</span>
+                <Link href="/terms-of-service">Terms of Service</Link>
+                <span aria-hidden>|</span>
+                <Link href="/contact">Contact us</Link>
+              </div>
             </div>
           </div>
         </div>

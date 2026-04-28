@@ -1307,6 +1307,81 @@ footer .ec-blue {
   border-bottom: 1px solid var(--brand-stone);
 }
 
+.trust-overview-wrap {
+  background:
+    linear-gradient(180deg, color-mix(in oklab, var(--brand-bone) 60%, #d8dde6) 0%, var(--brand-bone) 55%, #fff 55%);
+}
+
+.trust-overview-panel {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 28px 60px -40px rgba(15, 45, 36, 0.35);
+  padding: 28px;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.trust-overview-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.trust-overview-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--sans-display);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.trust-overview-founded {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+}
+
+.trust-overview-copy {
+  display: grid;
+  gap: 10px;
+  color: var(--ink-2);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.trust-overview-copy p {
+  margin: 0;
+}
+
+.trust-overview-actions {
+  margin-top: 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.trust-overview-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-3);
+  font-size: 14px;
+}
+
+.trust-overview-links a {
+  color: var(--brand-forest);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .trust-intro {
   max-width: 840px;
   margin: 0 auto;
@@ -1322,6 +1397,16 @@ footer .ec-blue {
 
 @media (max-width: 860px) {
   .trust-intro {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .trust-overview-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .trust-overview-actions {
     flex-direction: column;
     align-items: flex-start;
   }
