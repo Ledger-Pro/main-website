@@ -101,6 +101,10 @@
    ================================================================= */
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+html {
+  /* Hash links land below the fixed floating nav */
+  scroll-padding-top: clamp(88px, 11vw, 112px);
+}
 body {
   background: var(--bg);
   color: var(--ink);
@@ -210,12 +214,15 @@ h1, h2, h3, h4 { margin: 0; font-weight: 600; letter-spacing: -0.025em; font-fam
    NAV
    ================================================================= */
 .nav {
-  position: sticky;
-  top: 14px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 12px;
   z-index: 60;
-  padding: 0 0 12px;
+  /* Slim vertical padding — bar floats over page content (hero / page heroes). */
+  padding: 10px 0 10px;
 }
-.nav.scrolled { top: 10px; }
+.nav.scrolled { top: 8px; }
 .nav-inner {
   display: flex;
   align-items: center;
@@ -250,7 +257,7 @@ footer .brand { color: var(--brand-ink); }
 .nav-cta { display: flex; align-items: center; gap: 10px; }
 @media (max-width: 860px) { .nav-links { display: none; } }
 @media (max-width: 860px) {
-  .nav { top: 10px; padding-bottom: 8px; }
+  .nav { top: 8px; padding: 8px 0 8px; }
   .nav-inner { padding: 10px 14px; }
   .nav.scrolled .nav-inner { padding: 10px 14px; }
 }
@@ -260,7 +267,8 @@ footer .brand { color: var(--brand-ink); }
    Source of truth: docs/brand/DESIGN.md §8.7 (marketing hero).
    ================================================================= */
 .hero {
-  padding-top: clamp(64px, 7vw, 96px);
+  /* Taller top: forest fills viewport under the fixed nav; copy clears the pill */
+  padding-top: clamp(108px, 14vw, 148px);
   padding-bottom: var(--section-py);
   position: relative;
   overflow: hidden;

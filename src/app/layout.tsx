@@ -58,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body>
         <Nav />
-        {children}
+        <main className="site-main">{children}</main>
         <Footer />
       </body>
     </html>
