@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { geistSans, geistMono, inter } from "@/lib/fonts";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
+import { CrispChat } from "@/components/crisp-chat";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -60,6 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <main className="site-main">{children}</main>
         <Footer />
+        <CrispChat />
       </body>
     </html>
   );
