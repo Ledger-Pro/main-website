@@ -1,6 +1,8 @@
 {
-  "name": "@ledgerai/main-website",
+  "name": "ledge-main-website",
   "version": "0.1.0",
+  "description": "Ledge — public marketing site (Next.js)",
+  "author": "Ledge <hello@getledge.ai>",
   "private": true,
   "scripts": {
     "dev": "next dev --port 3001",

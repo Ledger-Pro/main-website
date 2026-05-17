@@ -24,7 +24,7 @@ export async function bookDemo(
 
   // TODO: forward to CRM / email / app-backend. Example:
   //   await fetch(process.env.LEADS_WEBHOOK_URL!, { method: "POST", body: JSON.stringify(parsed.data) });
-  console.log("[ledgerai:lead]", parsed.data);
+  console.log("[ledge:lead]", parsed.data);
 
   return { ok: true };
 }

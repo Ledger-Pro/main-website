@@ -1,6 +1,6 @@
-# LedgerAI Marketing Site — Agent Guide
+# Ledge Marketing Site — Agent Guide
 
-This is the public marketing site for LedgerAI, built with **Next.js 16 (App Router)** and **React 19**. It is separate from `app-frontend/` (Angular customer app) and `app-backend/` (NestJS API).
+This is the public marketing site for Ledge, built with **Next.js 16 (App Router)** and **React 19**. It is separate from `app-frontend/` (Angular customer app) and `app-backend/` (NestJS API).
 
 ## Commands
 

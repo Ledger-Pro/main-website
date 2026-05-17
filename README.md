@@ -1,6 +1,6 @@
-# LedgerAI Marketing Site
+# Ledge Marketing Site
 
-The public marketing site for [LedgerAI](https://ledgerai.com) — built with
+The public marketing site for [Ledge](https://getledge.ai) — built with
 **Next.js 16** (App Router, Turbopack) and **React 19**.
 
 Runs independently from `app-frontend/` (Angular customer app) and `app-backend/` (NestJS API).
