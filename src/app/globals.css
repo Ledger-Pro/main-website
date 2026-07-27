@@ -14,7 +14,7 @@
 :root {
   /* Brand core */
   --brand-forest:     #0F2D24;
-  --brand-cream:      #F1ECE0;
+  --brand-cream:      #F1EFE2;
   --brand-gold:       #E5A934;
   --brand-ink:        #0F0F0E;
 
@@ -229,7 +229,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: 600; letter-spacing: -0.025em; font-fam
   justify-content: space-between;
   padding: 14px 22px;
   border-radius: 999px;
-  background: color-mix(in oklab, #fff 90%, transparent);
+  background: color-mix(in oklab, var(--brand-cream) 90%, transparent);
   backdrop-filter: saturate(1.2) blur(12px);
   -webkit-backdrop-filter: saturate(1.2) blur(12px);
   border: 1px solid color-mix(in oklab, var(--line) 70%, white 30%);
@@ -250,7 +250,15 @@ h1, h2, h3, h4 { margin: 0; font-weight: 600; letter-spacing: -0.025em; font-fam
   text-transform: lowercase;
   color: var(--brand-ink);
 }
-.brand .mark { width: 28px; height: auto; flex-shrink: 0; object-fit: contain; }
+.brand .mark,
+.brand .brand-lockup {
+  height: 32px;
+  width: auto;
+  max-width: none;
+  flex-shrink: 0;
+  object-fit: contain;
+  display: block;
+}
 footer .brand { color: var(--brand-ink); }
 .nav-links { display: flex; gap: 32px; font-size: 14px; color: var(--brand-charcoal); }
 .nav-links a:hover { color: var(--brand-forest); }
@@ -337,7 +345,7 @@ footer .brand { color: var(--brand-ink); }
   border: 1px solid var(--line-2);
   border-radius: 999px;
   font-size: 13px; color: var(--ink-2);
-  background: #fff;
+  background: var(--brand-cream);
   margin-bottom: 28px;
   box-shadow: 0 2px 6px -2px rgba(10, 27, 85, 0.08);
 }
@@ -432,7 +440,7 @@ footer .brand { color: var(--brand-ink); }
   padding: 14px 16px 16px;
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: #fff;
+  background: var(--brand-cream);
   opacity: 0;
   transform: translateY(10px);
   animation: txnIn .5s cubic-bezier(.2,.7,.2,1) forwards;
@@ -461,7 +469,7 @@ footer .brand { color: var(--brand-ink); }
 .txn .avatar.avatar-logo .txn-favicon {
   display: block; width: 34px; height: 34px; border-radius: 9px;
   object-fit: cover;
-  background: #fff;
+  background: var(--brand-cream);
   box-sizing: border-box;
   border: 1px solid var(--line);
   flex-shrink: 0;
@@ -636,7 +644,7 @@ section { padding: var(--section-py) 0; position: relative; }
 }
 @media (max-width: 860px) { .problem-grid { grid-template-columns: 1fr; } }
 .problem-cell {
-  background: #fff;
+  background: var(--brand-cream);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 32px;
@@ -691,7 +699,7 @@ section { padding: var(--section-py) 0; position: relative; }
 @media (max-width: 560px) { .pipe-grid { grid-template-columns: 1fr; } }
 
 .pipe-step {
-  background: #fff;
+  background: var(--brand-cream);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 24px;
@@ -739,7 +747,7 @@ section { padding: var(--section-py) 0; position: relative; }
   border-radius: 8px;
   display: grid; place-items: center;
   flex-shrink: 0;
-  background: #fff;
+  background: var(--brand-cream);
   border: 1px solid var(--line);
   box-shadow: 0 2px 6px -2px rgba(10, 27, 85, 0.12);
   overflow: hidden;
@@ -767,7 +775,7 @@ section { padding: var(--section-py) 0; position: relative; }
 }
 .feat-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; position: relative; }
 .feat {
-  background: #fff;
+  background: var(--brand-cream);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 28px;
@@ -1155,7 +1163,7 @@ details.q .a {
 .cta-block input:focus, .cta-block select:focus { border-color: var(--brand-gold); }
 .cta-block select {
   appearance: none;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%23F1ECE0' stroke-opacity='0.6' fill='none' stroke-width='1.5'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%23F1EFE2' stroke-opacity='0.6' fill='none' stroke-width='1.5'/></svg>");
   background-repeat: no-repeat;
   background-position: right 14px center;
 }
@@ -1263,7 +1271,7 @@ footer .ec-blue {
 }
 @media (max-width: 860px) { .tile-grid { grid-template-columns: 1fr; } }
 .tile {
-  background: #fff;
+  background: var(--brand-cream);
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 28px;
@@ -1314,7 +1322,7 @@ footer .ec-blue {
 @media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } }
 .contact-list { display: grid; gap: 16px; }
 .contact-card {
-  background: #fff;
+  background: var(--brand-cream);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 28px;
@@ -1337,11 +1345,11 @@ footer .ec-blue {
 
 .trust-overview-wrap {
   background:
-    linear-gradient(180deg, color-mix(in oklab, var(--brand-bone) 60%, #d8dde6) 0%, var(--brand-bone) 55%, #fff 55%);
+    linear-gradient(180deg, color-mix(in oklab, var(--brand-bone) 60%, #d8dde6) 0%, var(--brand-bone) 55%, var(--brand-cream) 55%);
 }
 
 .trust-overview-panel {
-  background: #fff;
+  background: var(--brand-cream);
   border: 1px solid var(--line);
   border-radius: 18px;
   box-shadow: 0 28px 60px -40px rgba(15, 45, 36, 0.35);
@@ -1413,7 +1421,7 @@ footer .ec-blue {
 .trust-intro {
   max-width: 840px;
   margin: 0 auto;
-  background: #fff;
+  background: var(--brand-cream);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 28px;
@@ -1489,7 +1497,7 @@ footer .ec-blue {
   font-size: 11px;
   letter-spacing: 0.04em;
   color: var(--ink-3);
-  background: #fff;
+  background: var(--brand-cream);
 }
 
 .trust-tab-active {
@@ -1517,7 +1525,7 @@ footer .ec-blue {
 }
 
 .trust-card {
-  background: #fff;
+  background: var(--brand-cream);
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 18px;
@@ -1578,7 +1586,7 @@ footer .ec-blue {
   width: 18px;
   height: 18px;
   border-radius: 999px;
-  background: color-mix(in oklab, var(--brand-success) 16%, white);
+  background: color-mix(in oklab, var(--brand-success) 16%, var(--brand-cream));
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1623,7 +1631,7 @@ footer .ec-blue {
   height: 34px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #fff;
+  background: var(--brand-cream);
   display: inline-flex;
   align-items: center;
   justify-content: center;

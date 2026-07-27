@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { BrandMark } from "./icons/brand-mark";
+import { BrandLockup } from "./icons/brand-lockup";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -17,9 +17,8 @@ export function Nav() {
   return (
     <nav className={`nav${scrolled ? " scrolled" : ""}`} id="nav">
       <div className="container nav-inner">
-        <Link className="brand" href="/">
-          <BrandMark className="mark" />
-          ledge
+        <Link className="brand" href="/" aria-label="ledge home">
+          <BrandLockup className="brand-lockup" height={32} />
         </Link>
         <div className="nav-links">
           <Link href="/#how">How it works</Link>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BrandMark } from "./icons/brand-mark";
+import { BrandLockup } from "./icons/brand-lockup";
 
 const COLS: { title: string; links: { label: string; href: string }[] }[] = [
   {
@@ -40,9 +40,8 @@ export function Footer() {
       <div className="container">
         <div className="foot-grid">
           <div className="foot-col foot-brand">
-            <Link className="brand" href="/">
-              <BrandMark className="mark" />
-              ledge
+            <Link className="brand" href="/" aria-label="ledge home">
+              <BrandLockup className="brand-lockup" height={32} />
             </Link>
             <div className="d">
               AI-native bookkeeping for firms — not instead of them.
