@@ -99,7 +99,12 @@ export default function TrustCenterPage() {
           <div className="trust-overview-panel">
             <div className="trust-overview-head">
               <div className="trust-overview-brand">
-                <Image src="/favicon.svg" alt="Ledge logo" width={28} height={28} />
+                <Image
+                  src="/brand/ledge-logo-icon-dark-green.png"
+                  alt="Ledge logo"
+                  width={28}
+                  height={19}
+                />
                 <span>Ledge Trust Center</span>
               </div>
               <div className="trust-overview-founded">Founded in 2023</div>

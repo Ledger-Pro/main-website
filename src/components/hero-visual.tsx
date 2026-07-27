@@ -57,10 +57,13 @@ export function HeroVisual() {
         <div className="viz-panel">
           <div className="viz-head">
             <div className="viz-head-l">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                <rect x="1" y="1" width="18" height="18" rx="5" fill="#0F2D24" />
-                <rect x="7" y="7" width="6" height="6" fill="#E5A934" />
-              </svg>
+              <img
+                src="/brand/ledge-logo-icon-dark-green.png"
+                alt=""
+                width={20}
+                height={13}
+                style={{ objectFit: "contain" }}
+              />
               <h4>Ledger — April 2026</h4>
             </div>
             <span className="sub">Live · 1,284 txns</span>

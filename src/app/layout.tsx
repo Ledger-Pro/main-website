@@ -41,7 +41,11 @@ export const metadata: Metadata = {
     description: "AI bookkeeping for firms — not instead of them.",
   },
   icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
   },
 };
 
