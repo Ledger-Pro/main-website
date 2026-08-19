@@ -20,7 +20,7 @@ export function HowItWorks() {
   return (
     <section id="how">
       <div className="container">
-        <div className="section-head">
+        <Reveal className="section-head">
           <div>
             <div className="eyebrow">How it works</div>
             <h2 className="h2" style={{ marginTop: 16, maxWidth: "16ch" }}>
@@ -31,7 +31,7 @@ export function HowItWorks() {
             Ledge reads the same data you do — bank feeds, receipts, invoices — and runs it
             through a supervised pipeline with a human check at exactly the point where it matters.
           </p>
-        </div>
+        </Reveal>
 
         <Reveal className="pipe-grid" stagger>
           <div className="pipe-step">

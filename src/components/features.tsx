@@ -92,7 +92,7 @@ export function Features() {
     <section className="features-sec" id="features">
       <div className="eclipse ec-blue" />
       <div className="container">
-        <div className="section-head">
+        <Reveal className="section-head">
           <div>
             <div className="eyebrow">Features</div>
             <h2 className="h2" style={{ marginTop: 16, maxWidth: "16ch" }}>
@@ -103,7 +103,7 @@ export function Features() {
             Every feature is designed to remove a specific manual step — not to be flashy. Turn on
             what you need, roll it across your entire book of business in a day.
           </p>
-        </div>
+        </Reveal>
 
         <Reveal className="feat-grid" stagger>
           {FEATURES.map((f, i) => (

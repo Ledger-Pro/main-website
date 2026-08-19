@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { Reveal } from "./reveal";
 
 interface CdBar {
   name: string;
@@ -77,7 +78,7 @@ export function Confidence() {
   return (
     <section id="confidence">
       <div className="container">
-        <div className="section-head">
+        <Reveal className="section-head">
           <div>
             <div className="eyebrow">Confidence scoring</div>
             <h2 className="h2" style={{ marginTop: 16, maxWidth: "18ch" }}>
@@ -89,7 +90,7 @@ export function Confidence() {
             a score and the factors that produced it. When the model isn&apos;t sure, we tell
             you — so your time goes to the handful of entries that actually need judgment.
           </p>
-        </div>
+        </Reveal>
 
         <div className="cd-grid">
           <div className="cd-list">

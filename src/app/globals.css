@@ -69,6 +69,10 @@
 
   --section-py: clamp(80px, 10vw, 140px);
   --container:  1240px;
+
+  /* Motion */
+  --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 @theme inline {
@@ -104,6 +108,9 @@ html, body { margin: 0; padding: 0; }
 html {
   /* Hash links land below the fixed floating nav */
   scroll-padding-top: clamp(88px, 11vw, 112px);
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
 }
 body {
   background: var(--bg);
@@ -368,6 +375,33 @@ footer .brand { color: var(--brand-ink); }
   box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand-teal-500) 25%, transparent);
 }
 
+/* Orchestrated page-load entrance — first-time-view moment, so a longer
+   marketing timing is appropriate. Reading order: pill -> headline -> sub
+   -> CTAs -> meta -> visual. */
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-pill, .hero .display, .hero-sub, .hero-cta, .hero-meta, .hero-visual {
+  animation: heroIn .7s var(--ease-out) both;
+}
+.hero-pill    { animation-delay: 0ms; }
+.hero .display { animation-delay: 80ms; }
+.hero-sub     { animation-delay: 160ms; }
+.hero-cta     { animation-delay: 240ms; }
+.hero-meta    { animation-delay: 300ms; }
+.hero-visual  { animation-delay: 180ms; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-pill, .hero .display, .hero-sub, .hero-cta, .hero-meta, .hero-visual {
+    animation: heroIn .4s ease both;
+    animation-name: heroInFade;
+  }
+  @keyframes heroInFade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+}
+
 /* =================================================================
    HERO VISUAL
    ================================================================= */
@@ -449,7 +483,7 @@ footer .brand { color: var(--brand-ink); }
 .txn.hi      { border-left: 3px solid var(--brand-success); }
 .txn.warn    { border-left: 3px solid var(--brand-warning); }
 .txn.err     { border-left: 3px solid var(--brand-error); }
-.txn.hi-blue { border-left: 3px solid var(--brand-neon); }
+.txn.hi-blue { border-left: 3px solid var(--brand-neon-950); }
 .txn .merchant { font-size: 14px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; }
 .txn .merchant .sec { color: var(--ink-4); font-weight: 400; font-size: 12px; margin-left: 8px; }
 .txn .amount { font-family: var(--mono); font-size: 13px; color: var(--ink-2); font-weight: 500; letter-spacing: -0.005em; }
@@ -645,16 +679,22 @@ section { padding: var(--section-py) 0; position: relative; }
 @media (max-width: 860px) { .problem-grid { grid-template-columns: 1fr; } }
 .problem-cell {
   background: var(--brand-cream);
-  border: 1px solid var(--line);
+  border: 1px solid color-mix(in oklab, var(--brand-stone) 45%, var(--brand-slate) 55%);
   border-radius: 16px;
   padding: 32px;
   display: flex; flex-direction: column; gap: 14px;
   min-height: 260px;
   position: relative;
   overflow: hidden;
-  transition: transform .3s ease, box-shadow .3s ease;
+  transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out), border-color .3s ease;
 }
-.problem-cell:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -20px rgba(8, 68, 79, 0.18); }
+.problem-cell:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow:
+    0 2px 4px -2px rgba(8, 68, 79, 0.16),
+    0 32px 56px -16px rgba(8, 68, 79, 0.32);
+  border-color: var(--brand-teal-500);
+}
 .problem-cell::before {
   content: ""; position: absolute; top: -80px; right: -80px;
   width: 200px; height: 200px; border-radius: 50%;
@@ -700,19 +740,21 @@ section { padding: var(--section-py) 0; position: relative; }
 
 .pipe-step {
   background: var(--brand-cream);
-  border: 1px solid var(--line);
+  border: 1px solid color-mix(in oklab, var(--brand-stone) 45%, var(--brand-slate) 55%);
   border-radius: 16px;
   padding: 24px;
   display: flex; flex-direction: column; gap: 14px;
   min-height: 300px;
   position: relative;
   overflow: hidden;
-  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out), border-color .3s ease;
 }
 .pipe-step:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px -20px rgba(8, 68, 79, 0.2);
-  border-color: var(--brand-teal-100);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow:
+    0 2px 4px -2px rgba(8, 68, 79, 0.18),
+    0 32px 56px -16px rgba(8, 68, 79, 0.34);
+  border-color: var(--brand-teal-500);
 }
 .pipe-step .n {
   font-family: var(--mono); font-size: 11px;
@@ -1230,7 +1272,7 @@ footer .ec-blue {
   height: 0.36em;
   background: var(--brand-neon);
   align-self: center;
-  margin-bottom: 0.06em;
+  transform: translateY(-0.225em);
 }
 
 /* =================================================================
@@ -1272,13 +1314,19 @@ footer .ec-blue {
 @media (max-width: 860px) { .tile-grid { grid-template-columns: 1fr; } }
 .tile {
   background: var(--brand-cream);
-  border: 1px solid var(--line);
+  border: 1px solid color-mix(in oklab, var(--brand-stone) 45%, var(--brand-slate) 55%);
   border-radius: 14px;
   padding: 28px;
   display: flex; flex-direction: column; gap: 12px;
-  transition: transform .2s ease, box-shadow .2s ease;
+  transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out), border-color .3s ease;
 }
-.tile:hover { transform: translateY(-3px); box-shadow: 0 16px 32px -16px rgba(8, 68, 79, 0.18); }
+.tile:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow:
+    0 2px 4px -2px rgba(8, 68, 79, 0.16),
+    0 32px 56px -16px rgba(8, 68, 79, 0.3);
+  border-color: var(--brand-teal-500);
+}
 .tile .tile-kicker {
   font-family: var(--mono); font-size: 11px;
   color: var(--brand-teal-700); letter-spacing: 0.1em;
@@ -1657,8 +1705,31 @@ footer .ec-blue {
 /* =================================================================
    REVEAL ON SCROLL
    ================================================================= */
-.reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
-.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal {
+  opacity: 0;
+  transform: translateY(32px) scale(0.96);
+  filter: blur(8px);
+  transition: opacity .85s var(--ease-out), transform .85s var(--ease-out), filter .85s var(--ease-out);
+  will-change: transform, opacity, filter;
+}
+.reveal.in { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+
+/* Stagger mode puts `.reveal` directly on cards that also have their own
+   hover transition (.pipe-step, .problem-cell). `transition` is a shorthand —
+   two rules of equal specificity don't merge, the later one wins outright —
+   so without this, .reveal's entrance transition silently ate the card's
+   hover transition. This combined, higher-specificity rule restores both:
+   a snappy transform/shadow/border for hover, alongside the slower
+   opacity/filter used only by the scroll-in entrance. */
+.reveal.pipe-step,
+.reveal.problem-cell {
+  transition:
+    opacity .85s var(--ease-out),
+    transform .35s var(--ease-out),
+    filter .85s var(--ease-out),
+    box-shadow .35s var(--ease-out),
+    border-color .3s ease;
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

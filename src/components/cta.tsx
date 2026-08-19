@@ -1,10 +1,11 @@
 import { DemoForm } from "./demo-form";
+import { Reveal } from "./reveal";
 
 export function Cta() {
   return (
     <section id="demo">
       <div className="container">
-        <div className="cta-block">
+        <Reveal className="cta-block">
           <div>
             <h2>
               <span>See your </span>
@@ -20,7 +21,7 @@ export function Cta() {
           </div>
 
           <DemoForm />
-        </div>
+        </Reveal>
       </div>
     </section>
   );

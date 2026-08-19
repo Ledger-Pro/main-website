@@ -1,3 +1,5 @@
+import { Reveal } from "./reveal";
+
 type Variant = "yes" | "no" | "mid";
 
 interface Cell {
@@ -65,7 +67,7 @@ export function Compare() {
     <section className="compare-sec" id="compare">
       <div className="eclipse ec-amber" />
       <div className="container">
-        <div className="section-head">
+        <Reveal className="section-head">
           <div>
             <div className="eyebrow">Compare</div>
             <h2 className="h2" style={{ marginTop: 16, maxWidth: "18ch" }}>
@@ -76,9 +78,9 @@ export function Compare() {
             Ledge sits on top of the ledger you already use, and outperforms manual-first and
             rule-first workflows on the dimensions that matter for firm throughput.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="compare">
+        <Reveal className="compare">
           <table>
             <thead>
               <tr>
@@ -109,7 +111,7 @@ export function Compare() {
               ))}
             </tbody>
           </table>
-        </div>
+        </Reveal>
         <p className="lead" style={{ marginTop: 18 }}>
           Need side-by-side evaluation?{" "}
           <a href="/compare" style={{ textDecoration: "underline" }}>

@@ -1,3 +1,5 @@
+import { Reveal } from "./reveal";
+
 const QUESTIONS: { q: string; a: string }[] = [
   {
     q: "Do my clients have to switch off QuickBooks or Xero?",
@@ -32,7 +34,7 @@ export function Faq() {
       style={{ background: "var(--brand-bone)", borderTop: "1px solid var(--brand-stone)" }}
     >
       <div className="container">
-        <div className="faq-grid">
+        <Reveal className="faq-grid">
           <div>
             <div className="eyebrow">FAQ</div>
             <h2 className="h2" style={{ marginTop: 16, maxWidth: "14ch" }}>
@@ -53,7 +55,7 @@ export function Faq() {
               </details>
             ))}
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

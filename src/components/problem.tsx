@@ -26,7 +26,7 @@ export function Problem() {
     <section className="problem" id="problem">
       <div className="eclipse ec-violet" />
       <div className="container">
-        <div className="section-head">
+        <Reveal className="section-head">
           <div>
             <div className="eyebrow">Why now</div>
             <h2 className="h2" style={{ marginTop: 16, maxWidth: "14ch" }}>
@@ -37,7 +37,7 @@ export function Problem() {
             Firms are taking on more clients than ever, but the work per client hasn&apos;t shrunk.
             The bottleneck is the same three things, every month.
           </p>
-        </div>
+        </Reveal>
 
         <Reveal className="problem-grid" stagger>
           {PROBLEMS.map((p) => (

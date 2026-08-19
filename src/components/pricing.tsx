@@ -1,4 +1,5 @@
 import { ArrowRight } from "./icons/arrow";
+import { Reveal } from "./reveal";
 
 function Check() {
   return (
@@ -26,7 +27,7 @@ export function Pricing() {
   return (
     <section id="pricing">
       <div className="container">
-        <div className="section-head">
+        <Reveal className="section-head">
           <div>
             <div className="eyebrow">Pricing</div>
             <h2 className="h2" style={{ marginTop: 16, maxWidth: "16ch" }}>
@@ -37,9 +38,9 @@ export function Pricing() {
             We quote by book of business — number of clients, transaction volume, and the depth of
             integration. No per-user nickel-and-diming.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="pricing">
+        <Reveal className="pricing">
           <div>
             <div className="t">
               Built for the firm&apos;s <span className="ital">whole</span> book, not a single
@@ -67,7 +68,7 @@ export function Pricing() {
             </div>
             <div className="meta">— Managing partner · 34-client firm · name on file during pilot</div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
