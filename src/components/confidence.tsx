@@ -48,7 +48,7 @@ export function Confidence() {
     const fills = root.querySelectorAll<HTMLElement>(".cd-bar .fill");
     const targets = new Map<HTMLElement, string>();
     fills.forEach((el) => {
-      targets.set(el, el.style.width);
+      targets.set(el, `${el.dataset.targetWidth}%`);
       el.style.width = "0%";
     });
 
@@ -140,7 +140,7 @@ export function Confidence() {
                     <div className="name">{b.name}</div>
                     <div className="desc">{b.desc}</div>
                     <div className="cd-bar">
-                      <div className="fill" style={{ width: `${b.width}%` }} />
+                      <div className="fill" data-target-width={b.width} style={{ width: `${b.width}%` }} />
                     </div>
                   </div>
                   <div className="num">{b.num}</div>

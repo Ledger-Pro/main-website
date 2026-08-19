@@ -4,8 +4,8 @@ import { HeroVisual } from "./hero-visual";
 export function Hero() {
   return (
     <header className="hero">
-      <div className="eclipse ec-forest-1" />
-      <div className="eclipse ec-forest-2" />
+      <div className="eclipse ec-teal-1" />
+      <div className="eclipse ec-teal-2" />
 
       <div className="container hero-grid">
         <div className="hero-copy">

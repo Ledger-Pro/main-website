@@ -3,10 +3,10 @@ import { ArrowRight } from "./icons/arrow";
 function Check() {
   return (
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-      <circle cx="9" cy="9" r="9" fill="#D8E5DF" />
+      <circle cx="9" cy="9" r="9" fill="var(--brand-teal-100)" />
       <path
         d="M5 9l3 3 5-6"
-        stroke="#0F2D24"
+        stroke="var(--brand-teal)"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

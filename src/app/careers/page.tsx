@@ -34,7 +34,7 @@ export default function CareersPage() {
             </p>
             <p>
               Send a short note with what you&apos;ve built to{" "}
-              <a href="mailto:careers@getledge.ai" style={{ color: "var(--brand-forest-700)", fontWeight: 500 }}>
+              <a href="mailto:careers@getledge.ai" style={{ color: "var(--brand-teal-700)", fontWeight: 500 }}>
                 careers@getledge.ai
               </a>
               . We reply within a week, always.
