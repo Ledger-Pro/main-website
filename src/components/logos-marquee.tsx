@@ -9,8 +9,8 @@ interface BrandLogo {
 
 /* Per docs/brand/DESIGN.md §5.5: real partner logos use partner colors;
    fictional/placeholder marks render in a single neutral so they read as
-   stand-ins, not real brands. We use Forest 700 uniformly. */
-const FICTIONAL_MARK_COLOR = "#1F5443";
+   stand-ins, not real brands. We use Teal 700 uniformly. */
+const FICTIONAL_MARK_COLOR = "var(--brand-teal-700)";
 
 const LOGOS: BrandLogo[] = [
   { name: "Keystone", icon: "square" },
@@ -30,7 +30,7 @@ function LogoIcon({ type }: { type: IconType }) {
       return (
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
           <rect x="2" y="2" width="18" height="18" rx="4" fill={color} />
-          <rect x="6" y="6" width="10" height="10" rx="2" fill="#FAFAF7" />
+          <rect x="6" y="6" width="10" height="10" rx="2" fill="var(--brand-bone)" />
         </svg>
       );
     case "triangle":
@@ -43,7 +43,7 @@ function LogoIcon({ type }: { type: IconType }) {
       return (
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
           <circle cx="11" cy="11" r="9" fill={color} />
-          <circle cx="11" cy="11" r="4" fill="#FAFAF7" />
+          <circle cx="11" cy="11" r="4" fill="var(--brand-bone)" />
         </svg>
       );
     case "diamond":

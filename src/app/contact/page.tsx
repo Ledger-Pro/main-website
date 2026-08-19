@@ -73,7 +73,7 @@ export default function ContactPage() {
             <div
               style={{
                 background:
-                  "radial-gradient(ellipse at 0% 100%, color-mix(in oklab, var(--brand-forest-500) 35%, transparent), transparent 55%), linear-gradient(135deg, var(--brand-forest-950), var(--brand-forest))",
+                  "radial-gradient(ellipse at 0% 100%, color-mix(in oklab, var(--brand-teal-500) 35%, transparent), transparent 55%), linear-gradient(135deg, var(--brand-teal-950), var(--brand-teal))",
                 color: "var(--brand-cream)",
                 borderRadius: 18,
                 padding: 28,

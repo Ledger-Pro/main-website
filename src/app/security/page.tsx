@@ -133,7 +133,7 @@ export default function SecurityPage() {
             </p>
             <p>
               To request the full security whitepaper, SOC 2 report, or a mutual NDA, email{" "}
-              <a href="mailto:security@getledge.ai" style={{ color: "var(--brand-forest-700)", fontWeight: 500 }}>
+              <a href="mailto:security@getledge.ai" style={{ color: "var(--brand-teal-700)", fontWeight: 500 }}>
                 security@getledge.ai
               </a>
               .

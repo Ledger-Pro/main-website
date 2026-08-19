@@ -188,8 +188,8 @@ export function MercuryLogo() {
 export function UnknownLogo() {
   /* Flagged / unknown merchant — flat Error per brand semantic palette. */
   return (
-    <Tile bg="#B23A2D">
-      <span style={{ color: "#FAFAF7", fontSize: 15, fontWeight: 700 }}>?</span>
+    <Tile bg="var(--brand-error)">
+      <span style={{ color: "var(--brand-bone)", fontSize: 15, fontWeight: 700 }}>?</span>
     </Tile>
   );
 }
@@ -197,8 +197,8 @@ export function UnknownLogo() {
 export function HardwareLogo() {
   /* Review-queue placeholder — flat Warning per brand semantic palette. */
   return (
-    <Tile bg="#C7901F">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="#FAFAF7" aria-hidden="true">
+    <Tile bg="var(--brand-warning)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--brand-bone)" aria-hidden="true">
         <path d="M21 8h-3V5a2 2 0 0 0-2-2h-2.17A3 3 0 0 0 11 2a3 3 0 0 0-2.83 1H6a2 2 0 0 0-2 2v3H3v13h18V8zM11 4a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM6 5h2.17A3 3 0 0 0 11 7a3 3 0 0 0 2.83-2H16v3H6V5zm13 14H5V10h14v9z" />
       </svg>
     </Tile>

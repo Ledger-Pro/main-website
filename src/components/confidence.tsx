@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { Reveal } from "./reveal";
 
 interface CdBar {
   name: string;
@@ -48,7 +49,7 @@ export function Confidence() {
     const fills = root.querySelectorAll<HTMLElement>(".cd-bar .fill");
     const targets = new Map<HTMLElement, string>();
     fills.forEach((el) => {
-      targets.set(el, el.style.width);
+      targets.set(el, `${el.dataset.targetWidth}%`);
       el.style.width = "0%";
     });
 
@@ -77,7 +78,7 @@ export function Confidence() {
   return (
     <section id="confidence">
       <div className="container">
-        <div className="section-head">
+        <Reveal className="section-head">
           <div>
             <div className="eyebrow">Confidence scoring</div>
             <h2 className="h2" style={{ marginTop: 16, maxWidth: "18ch" }}>
@@ -89,7 +90,7 @@ export function Confidence() {
             a score and the factors that produced it. When the model isn&apos;t sure, we tell
             you — so your time goes to the handful of entries that actually need judgment.
           </p>
-        </div>
+        </Reveal>
 
         <div className="cd-grid">
           <div className="cd-list">
@@ -140,7 +141,7 @@ export function Confidence() {
                     <div className="name">{b.name}</div>
                     <div className="desc">{b.desc}</div>
                     <div className="cd-bar">
-                      <div className="fill" style={{ width: `${b.width}%` }} />
+                      <div className="fill" data-target-width={b.width} style={{ width: `${b.width}%` }} />
                     </div>
                   </div>
                   <div className="num">{b.num}</div>

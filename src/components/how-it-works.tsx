@@ -20,7 +20,7 @@ export function HowItWorks() {
   return (
     <section id="how">
       <div className="container">
-        <div className="section-head">
+        <Reveal className="section-head">
           <div>
             <div className="eyebrow">How it works</div>
             <h2 className="h2" style={{ marginTop: 16, maxWidth: "16ch" }}>
@@ -31,7 +31,7 @@ export function HowItWorks() {
             Ledge reads the same data you do — bank feeds, receipts, invoices — and runs it
             through a supervised pipeline with a human check at exactly the point where it matters.
           </p>
-        </div>
+        </Reveal>
 
         <Reveal className="pipe-grid" stagger>
           <div className="pipe-step">
@@ -106,24 +106,24 @@ export function HowItWorks() {
             <div className="ill">
               <svg width="100%" height="72" viewBox="0 0 220 72" fill="none" aria-hidden="true">
                 <defs>
-                  {/* Within-family Forest tonal — no multi-hue. */}
+                  {/* Within-family Teal tonal — no multi-hue. */}
                   <linearGradient id="recLine" x1="0" x2="1">
-                    <stop offset="0" stopColor="#1F5443" />
-                    <stop offset="1" stopColor="#3F8770" />
+                    <stop offset="0" stopColor="var(--brand-teal-700)" />
+                    <stop offset="1" stopColor="var(--brand-teal-500)" />
                   </linearGradient>
                 </defs>
-                <rect x="4" y="10" width="70" height="20" rx="4" fill="#D8E5DF" stroke="#1F5443" strokeOpacity=".3" />
-                <rect x="4" y="42" width="70" height="20" rx="4" fill="#D8E5DF" stroke="#1F5443" strokeOpacity=".3" />
-                <rect x="146" y="10" width="70" height="20" rx="4" fill="#FBEFD2" stroke="#B98221" strokeOpacity=".35" />
-                <rect x="146" y="42" width="70" height="20" rx="4" fill="#FBEFD2" stroke="#B98221" strokeOpacity=".35" />
-                <text x="39" y="24" textAnchor="middle" fill="#0F2D24" fontFamily="ui-monospace" fontWeight="600" fontSize="9">LEDGER</text>
-                <text x="39" y="56" textAnchor="middle" fill="#0F2D24" fontFamily="ui-monospace" fontWeight="600" fontSize="9">LEDGER</text>
-                <text x="181" y="24" textAnchor="middle" fill="#6B4D14" fontFamily="ui-monospace" fontWeight="600" fontSize="9">BANK</text>
-                <text x="181" y="56" textAnchor="middle" fill="#6B4D14" fontFamily="ui-monospace" fontWeight="600" fontSize="9">BANK</text>
+                <rect x="4" y="10" width="70" height="20" rx="4" fill="var(--brand-teal-100)" stroke="var(--brand-teal-700)" strokeOpacity=".3" />
+                <rect x="4" y="42" width="70" height="20" rx="4" fill="var(--brand-teal-100)" stroke="var(--brand-teal-700)" strokeOpacity=".3" />
+                <rect x="146" y="10" width="70" height="20" rx="4" fill="var(--brand-neon-100)" stroke="var(--brand-neon-700)" strokeOpacity=".35" />
+                <rect x="146" y="42" width="70" height="20" rx="4" fill="var(--brand-neon-100)" stroke="var(--brand-neon-700)" strokeOpacity=".35" />
+                <text x="39" y="24" textAnchor="middle" fill="var(--brand-teal)" fontFamily="ui-monospace" fontWeight="600" fontSize="9">LEDGER</text>
+                <text x="39" y="56" textAnchor="middle" fill="var(--brand-teal)" fontFamily="ui-monospace" fontWeight="600" fontSize="9">LEDGER</text>
+                <text x="181" y="24" textAnchor="middle" fill="var(--brand-neon-950)" fontFamily="ui-monospace" fontWeight="600" fontSize="9">BANK</text>
+                <text x="181" y="56" textAnchor="middle" fill="var(--brand-neon-950)" fontFamily="ui-monospace" fontWeight="600" fontSize="9">BANK</text>
                 <path d="M74 20 C 100 20, 120 20, 146 20" stroke="url(#recLine)" strokeWidth="1.6" fill="none" />
                 <path d="M74 52 C 100 52, 120 52, 146 52" stroke="url(#recLine)" strokeWidth="1.6" fill="none" />
-                <circle cx="110" cy="20" r="3.5" fill="#2A6D58" />
-                <circle cx="110" cy="52" r="3.5" fill="#2A6D58" />
+                <circle cx="110" cy="20" r="3.5" fill="var(--brand-success)" />
+                <circle cx="110" cy="52" r="3.5" fill="var(--brand-success)" />
               </svg>
             </div>
           </div>
@@ -139,14 +139,14 @@ export function HowItWorks() {
             </div>
             <div className="ill">
               <svg width="100%" height="72" viewBox="0 0 220 72" fill="none" aria-hidden="true">
-                <rect x="8" y="6" width="120" height="60" rx="6" fill="#FAFAF7" stroke="#B5B0A6" />
-                <rect x="16" y="14" width="60" height="5" rx="1.5" fill="#0F2D24" />
-                <rect x="16" y="24" width="90" height="3" rx="1" fill="#B5B0A6" />
-                <rect x="16" y="32" width="80" height="3" rx="1" fill="#B5B0A6" />
-                <rect x="16" y="40" width="70" height="3" rx="1" fill="#B5B0A6" />
-                <rect x="16" y="50" width="50" height="8" rx="2" fill="#E5A934" />
-                <rect x="138" y="6" width="70" height="60" rx="6" fill="#D8E5DF" stroke="#B5B0A6" />
-                <path d="M150 30 L165 42 L195 18" stroke="#0F2D24" strokeWidth="2.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                <rect x="8" y="6" width="120" height="60" rx="6" fill="var(--brand-bone)" stroke="var(--brand-stone)" />
+                <rect x="16" y="14" width="60" height="5" rx="1.5" fill="var(--brand-teal)" />
+                <rect x="16" y="24" width="90" height="3" rx="1" fill="var(--brand-stone)" />
+                <rect x="16" y="32" width="80" height="3" rx="1" fill="var(--brand-stone)" />
+                <rect x="16" y="40" width="70" height="3" rx="1" fill="var(--brand-stone)" />
+                <rect x="16" y="50" width="50" height="8" rx="2" fill="var(--brand-neon)" />
+                <rect x="138" y="6" width="70" height="60" rx="6" fill="var(--brand-teal-100)" stroke="var(--brand-stone)" />
+                <path d="M150 30 L165 42 L195 18" stroke="var(--brand-teal)" strokeWidth="2.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
           </div>

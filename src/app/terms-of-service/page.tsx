@@ -68,7 +68,7 @@ export default function TermsOfServicePage() {
             </p>
             <p>
               Privacy handling is further described in our{" "}
-              <a href="/privacy-policy" style={{ color: "var(--brand-forest-700)", fontWeight: 500 }}>
+              <a href="/privacy-policy" style={{ color: "var(--brand-teal-700)", fontWeight: 500 }}>
                 Privacy Policy
               </a>
               .
@@ -186,7 +186,7 @@ export default function TermsOfServicePage() {
           <div className="prose-body">
             <p>
               Questions about these terms:{" "}
-              <a href="mailto:legal@getledge.ai" style={{ color: "var(--brand-forest-700)", fontWeight: 500 }}>
+              <a href="mailto:legal@getledge.ai" style={{ color: "var(--brand-teal-700)", fontWeight: 500 }}>
                 legal@getledge.ai
               </a>
             </p>

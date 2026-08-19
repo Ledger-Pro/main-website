@@ -1,12 +1,13 @@
 import { ArrowRight } from "./icons/arrow";
+import { Reveal } from "./reveal";
 
 function Check() {
   return (
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-      <circle cx="9" cy="9" r="9" fill="#D8E5DF" />
+      <circle cx="9" cy="9" r="9" fill="var(--brand-teal-100)" />
       <path
         d="M5 9l3 3 5-6"
-        stroke="#0F2D24"
+        stroke="var(--brand-teal)"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -26,7 +27,7 @@ export function Pricing() {
   return (
     <section id="pricing">
       <div className="container">
-        <div className="section-head">
+        <Reveal className="section-head">
           <div>
             <div className="eyebrow">Pricing</div>
             <h2 className="h2" style={{ marginTop: 16, maxWidth: "16ch" }}>
@@ -37,9 +38,9 @@ export function Pricing() {
             We quote by book of business — number of clients, transaction volume, and the depth of
             integration. No per-user nickel-and-diming.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="pricing">
+        <Reveal className="pricing">
           <div>
             <div className="t">
               Built for the firm&apos;s <span className="ital">whole</span> book, not a single
@@ -67,7 +68,7 @@ export function Pricing() {
             </div>
             <div className="meta">— Managing partner · 34-client firm · name on file during pilot</div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

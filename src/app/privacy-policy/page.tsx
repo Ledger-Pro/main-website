@@ -36,7 +36,7 @@ export default function PrivacyPolicyPage() {
             </p>
             <p>
               Questions can be sent to{" "}
-              <a href="mailto:privacy@getledge.ai" style={{ color: "var(--brand-forest-700)", fontWeight: 500 }}>
+              <a href="mailto:privacy@getledge.ai" style={{ color: "var(--brand-teal-700)", fontWeight: 500 }}>
                 privacy@getledge.ai
               </a>
               .
@@ -124,7 +124,7 @@ export default function PrivacyPolicyPage() {
             <p>You also have the right to lodge a complaint with your supervisory authority.</p>
             <p>
               To submit a GDPR request, email{" "}
-              <a href="mailto:privacy@getledge.ai" style={{ color: "var(--brand-forest-700)", fontWeight: 500 }}>
+              <a href="mailto:privacy@getledge.ai" style={{ color: "var(--brand-teal-700)", fontWeight: 500 }}>
                 privacy@getledge.ai
               </a>
               .
@@ -149,7 +149,7 @@ export default function PrivacyPolicyPage() {
             <p>
               You can request categories, sources, business purposes, and disclosures of personal
               information by contacting{" "}
-              <a href="mailto:privacy@getledge.ai" style={{ color: "var(--brand-forest-700)", fontWeight: 500 }}>
+              <a href="mailto:privacy@getledge.ai" style={{ color: "var(--brand-teal-700)", fontWeight: 500 }}>
                 privacy@getledge.ai
               </a>
               .
@@ -207,7 +207,7 @@ export default function PrivacyPolicyPage() {
             </p>
             <p>
               Privacy contact:{" "}
-              <a href="mailto:privacy@getledge.ai" style={{ color: "var(--brand-forest-700)", fontWeight: 500 }}>
+              <a href="mailto:privacy@getledge.ai" style={{ color: "var(--brand-teal-700)", fontWeight: 500 }}>
                 privacy@getledge.ai
               </a>
             </p>

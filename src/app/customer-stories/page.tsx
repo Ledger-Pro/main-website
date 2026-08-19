@@ -150,7 +150,7 @@ export default function CustomerStoriesPage() {
                         fontSize: 22,
                         fontWeight: 500,
                         letterSpacing: "-0.02em",
-                        color: "var(--brand-forest)",
+                        color: "var(--brand-teal)",
                         fontVariantNumeric: "tabular-nums",
                       }}
                     >
